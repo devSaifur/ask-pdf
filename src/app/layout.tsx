@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { cn } from '~/lib/utils'
 import { GeistSans } from 'geist/font/sans'
+import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
   title: 'Ask PDF',
@@ -14,7 +16,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={GeistSans.className}>{children}</body>
+      <body
+        className={cn(
+          'h-screen w-full bg-zinc-900 text-white antialiased',
+          GeistSans,
+        )}
+      >
+        <Toaster />
+        {children}
+      </body>
     </html>
   )
 }
