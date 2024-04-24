@@ -1,0 +1,8 @@
+{
+  "singleQuote": true,
+  "semi": false,
+  "plugins": [
+    "prettier-plugin-tailwindcss",
+    "@ianvs/prettier-plugin-sort-imports"
+  ]
+}
