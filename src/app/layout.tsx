@@ -16,12 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          'h-screen w-full bg-zinc-900 text-white antialiased',
-          GeistSans,
-        )}
-      >
+      <body className={cn('grainy h-screen antialiased', GeistSans.className)}>
         <Toaster />
         {children}
       </body>

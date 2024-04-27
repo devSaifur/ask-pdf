@@ -56,7 +56,9 @@ interface FileUploaderProps extends React.HTMLAttributes<HTMLDivElement> {
    * ```
    * @example accept={["image/png", "image/jpeg"]}
    */
-  accept?: DropzoneProps['accept']
+  accept?: {
+    'application/pdf': string[]
+  }
 
   /**
    * Maximum file size for the uploader.
@@ -91,13 +93,13 @@ interface FileUploaderProps extends React.HTMLAttributes<HTMLDivElement> {
   disabled?: boolean
 }
 
-export function FileUploader(props: FileUploaderProps) {
+export function PDFUploader(props: FileUploaderProps) {
   const {
     value: valueProp,
     onValueChange,
     onUpload,
     progresses,
-    accept = { 'image/*': [] },
+    accept = { 'application/pdf': [] },
     maxSize = 1024 * 1024 * 4,
     maxFiles = 1,
     multiple = false,
