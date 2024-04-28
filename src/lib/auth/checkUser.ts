@@ -1,5 +1,5 @@
 type User = {
-  id: number
+  id: string
   name: string
   email: string
 }
@@ -12,9 +12,9 @@ export async function checkUser(): Promise<User | null> {
     setTimeout(
       () =>
         resolve({
-          id: 1,
-          name: 'John Doe',
-          email: 'johndoe@example.com',
+          id: 'ofj9ftiiu2fh818xco8fl3mx',
+          name: 'Frank Auer',
+          email: 'Kristofer.Swift@yahoo.com',
         }),
       500,
     ),

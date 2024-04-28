@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Navbar from '~/components/navbar'
+import Providers from '~/components/providers'
 import { cn } from '~/lib/utils'
 import { GeistSans } from 'geist/font/sans'
 import { Toaster } from 'sonner'
@@ -17,13 +18,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={cn('grainy min-h-screen antialiased', GeistSans.className)}
-      >
-        <Toaster />
-        <Navbar />
-        {children}
-      </body>
+      <Providers>
+        <body
+          className={cn('grainy min-h-screen antialiased', GeistSans.className)}
+        >
+          <Toaster />
+          <Navbar />
+          {children}
+        </body>
+      </Providers>
     </html>
   )
 }

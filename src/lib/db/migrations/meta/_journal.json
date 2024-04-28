@@ -8,6 +8,13 @@
       "when": 1714299620136,
       "tag": "0000_kind_katie_power",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1714303282176,
+      "tag": "0001_spooky_golden_guardian",
+      "breakpoints": true
     }
   ]
 }
