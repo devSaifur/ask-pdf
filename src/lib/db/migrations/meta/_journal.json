@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1714299620136,
+      "tag": "0000_kind_katie_power",
+      "breakpoints": true
+    }
+  ]
+}
