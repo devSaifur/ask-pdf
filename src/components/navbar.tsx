@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import { buttonVariants } from './ui/button'
 import MaxWidthWrapper from './ui/max-width-wrapper'
+import Link from 'next/link'
 
 export default function Navbar() {
   return (
@@ -28,7 +28,7 @@ export default function Navbar() {
                 Sign in
               </Link>
               <Link
-                href="/sign-up"
+                href="/documents"
                 className={buttonVariants({ variant: 'default' })}
               >
                 Get Started

@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from './ui/button'
 import {
   ChatBubbleIcon,
   PlusIcon,
@@ -7,12 +8,12 @@ import {
   TrashIcon,
 } from '@radix-ui/react-icons'
 import { useMutation } from '@tanstack/react-query'
-import { deleteFileAction } from '~/actions/fileDeleteAction'
-import { TFile } from '~/lib/db/schema'
 import { format } from 'date-fns'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Button } from './ui/button'
+import { toast } from 'sonner'
+import { deleteFileAction } from '~/actions/fileDeleteAction'
+import { TFile } from '~/lib/db/schema'
 
 export default function Files({ files }: { files: TFile[] }) {
   const router = useRouter()
@@ -21,6 +22,9 @@ export default function Files({ files }: { files: TFile[] }) {
     mutationFn: deleteFileAction,
     onSuccess: () => {
       router.refresh()
+    },
+    onError: () => {
+      toast.error('Something went wrong while deleting the file')
     },
   })
 

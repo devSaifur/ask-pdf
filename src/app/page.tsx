@@ -1,8 +1,8 @@
 import { ArrowRightIcon } from '@radix-ui/react-icons'
-import { buttonVariants } from '~/components/ui/button'
-import MaxWidthWrapper from '~/components/ui/max-width-wrapper'
 import Image from 'next/image'
 import Link from 'next/link'
+import { buttonVariants } from '~/components/ui/button'
+import MaxWidthWrapper from '~/components/ui/max-width-wrapper'
 
 export default function Home() {
   return (
@@ -26,7 +26,7 @@ export default function Home() {
             size: 'lg',
             className: 'mt-5',
           })}
-          href="/dashboard"
+          href="/documents"
           target="_blank"
         >
           Get started <ArrowRightIcon className="ml-2 size-5" />

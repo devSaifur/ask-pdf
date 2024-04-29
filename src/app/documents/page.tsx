@@ -1,8 +1,8 @@
+import { redirect } from 'next/navigation'
 import Files from '~/components/files'
 import UploadButton from '~/components/upload-button'
 import { checkUser } from '~/lib/auth/checkUser'
 import { getFiles } from '~/lib/data/queries'
-import { redirect } from 'next/navigation'
 
 export default async function Documents() {
   const user = await checkUser()
