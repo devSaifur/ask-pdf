@@ -76,9 +76,12 @@ export const usersRelation = relations(users, ({ many }) => ({
 }))
 
 export const files = sqliteTable('file', {
-  id: integer('id', { mode: 'number' }).primaryKey({ autoIncrement: true }),
+  id: text('id')
+    .primaryKey()
+    .$defaultFn(() => createId()),
   name: text('name', { length: 256 }).notNull(),
   url: text('url', { length: 256 }).notNull(),
+  key: text('key', { length: 256 }).notNull(),
   createdById: text('createdById', { length: 255 })
     .notNull()
     .references(() => users.id),
@@ -91,6 +94,7 @@ export const files = sqliteTable('file', {
 })
 
 export type TFile = typeof files.$inferSelect
+export type TFileInsert = typeof files.$inferInsert
 
 export const filesRelation = relations(files, ({ one }) => ({
   user: one(users, { fields: [files.createdById], references: [users.id] }),

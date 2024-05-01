@@ -1,6 +1,6 @@
-import { faker } from '@faker-js/faker'
 import { db } from '.'
 import { files, users } from './schema'
+import { faker } from '@faker-js/faker'
 
 async function runSeed() {
   console.log('⏳ Running seed...')
@@ -33,6 +33,7 @@ async function seedFiles() {
       name: faker.system.fileName(),
       createdById: 'ofj9ftiiu2fh818xco8fl3mx', // this needs to be a user id in database
       url: faker.internet.url(),
+      key: faker.system.fileName(),
     })
   }
 }

@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: { docId: string } }) {
     redirect(`/sign-in?origin=documents/${docId}`)
   }
 
-  const file = await getFileById({ fileId: Number(docId), userId: user.id })
+  const file = await getFileById({ fileId: docId, userId: user.id })
 
   if (!file) {
     notFound()
