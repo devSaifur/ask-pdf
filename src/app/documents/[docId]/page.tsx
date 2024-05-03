@@ -29,7 +29,7 @@ export default async function Page({ params }: { params: { docId: string } }) {
         </div>
 
         <div className="flex-[0.75] shrink-0 border-t border-gray-200 lg:w-96 lg:border-l lg:border-t-0">
-          <ChatWrapper fileId={docId} userId={user.id} />
+          <ChatWrapper fileId={docId} />
         </div>
       </div>
     </div>

@@ -25,7 +25,7 @@ export async function getFileById({
   })
 }
 
-export async function getFileByUrl({
+export async function getFileByKey({
   key,
   userId,
 }: {
@@ -38,9 +38,24 @@ export async function getFileByUrl({
 }
 
 export async function addFile(file: TFileInsert) {
-  await db.insert(files).values(file)
+  const [createdFile] = await db.insert(files).values(file).returning()
+  return createdFile
 }
 
 export async function createMessage(value: TMessageInsert) {
   await db.insert(messages).values(value)
+}
+
+export async function updateFileOnSuccess(fileId: string) {
+  await db
+    .update(files)
+    .set({ uploadStatus: 'success' })
+    .where(eq(files.id, fileId))
+}
+
+export async function updateFileOnError(fileId: string) {
+  await db
+    .update(files)
+    .set({ uploadStatus: 'failed' })
+    .where(eq(files.id, fileId))
 }

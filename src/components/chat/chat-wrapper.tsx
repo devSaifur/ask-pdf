@@ -1,26 +1,30 @@
+'use client'
+
 import { buttonVariants } from '../ui/button'
 import { Icons } from '../ui/icons'
 import ChatInput from './chat-input'
 import Messages from './messages'
 import { ChevronLeftIcon, CrossCircledIcon } from '@radix-ui/react-icons'
+import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
-import { getFileById } from '~/lib/data/queries'
+import { getFileByIdAction } from '~/actions/fileActions'
 
 interface ChatWrapperProps {
   fileId: string
-  userId: string
 }
 
-export default async function ChatWrapper({
-  fileId,
-  userId,
-}: ChatWrapperProps) {
-  const file = await getFileById({ fileId, userId })
+export default function ChatWrapper({ fileId }: ChatWrapperProps) {
+  const { data: file } = useQuery({
+    queryKey: ['file'],
+    queryFn: () => getFileByIdAction(fileId),
+    refetchInterval: ({ state }) =>
+      state.data?.uploadStatus === 'success' ||
+      state.data?.uploadStatus === 'failed'
+        ? false
+        : 500,
+  })
 
-  if (!file) {
-    notFound()
-  }
+  if (!file) return null
 
   const Loading = () => (
     <div className="relative flex min-h-full flex-col justify-between gap-2 divide-y divide-zinc-200 bg-zinc-50">

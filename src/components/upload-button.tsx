@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import Dropzone from 'react-dropzone'
 import { toast } from 'sonner'
-import { getFileAction } from '~/actions/fileGetAction'
+import { getFileByKeyAction } from '~/actions/fileActions'
 import { useUploadThing } from '~/lib/uploadthing'
 
 const UploadDropzone = () => {
@@ -22,7 +22,7 @@ const UploadDropzone = () => {
 
   const { mutate: startPooling } = useMutation({
     mutationKey: ['upload'],
-    mutationFn: getFileAction,
+    mutationFn: getFileByKeyAction,
     retry: true,
     retryDelay: 1000,
     onSuccess: (file) => {

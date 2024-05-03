@@ -12,7 +12,7 @@ import { format } from 'date-fns'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import { deleteFileAction } from '~/actions/fileDeleteAction'
+import { deleteFileAction } from '~/actions/fileActions'
 import { TFile } from '~/lib/db/schema'
 
 export default function Files({ files }: { files: TFile[] }) {
