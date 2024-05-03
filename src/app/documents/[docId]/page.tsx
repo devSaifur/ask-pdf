@@ -1,5 +1,5 @@
 import { notFound, redirect } from 'next/navigation'
-import ChatWrapper from '~/components/chat-wrapper'
+import ChatWrapper from '~/components/chat/chat-wrapper'
 import PdfRenderer from '~/components/pdf-renderer'
 import { checkUser } from '~/lib/auth/checkUser'
 import { getFileById } from '~/lib/data/queries'
@@ -29,7 +29,7 @@ export default async function Page({ params }: { params: { docId: string } }) {
         </div>
 
         <div className="flex-[0.75] shrink-0 border-t border-gray-200 lg:w-96 lg:border-l lg:border-t-0">
-          <ChatWrapper />
+          <ChatWrapper fileId={docId} userId={user.id} />
         </div>
       </div>
     </div>

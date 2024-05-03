@@ -1,7 +1,7 @@
 'use server'
 
 import { db } from '../db'
-import { TFileInsert, files } from '../db/schema'
+import { TFileInsert, TMessageInsert, files, messages } from '../db/schema'
 import { and, eq } from 'drizzle-orm'
 import 'server-only'
 
@@ -39,4 +39,8 @@ export async function getFileByUrl({
 
 export async function addFile(file: TFileInsert) {
   await db.insert(files).values(file)
+}
+
+export async function createMessage(value: TMessageInsert) {
+  await db.insert(messages).values(value)
 }

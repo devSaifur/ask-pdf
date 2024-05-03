@@ -73,6 +73,7 @@ export const users = sqliteTable('user', {
 
 export const usersRelation = relations(users, ({ many }) => ({
   files: many(files),
+  messages: many(messages),
 }))
 
 export const files = sqliteTable('file', {
@@ -82,7 +83,7 @@ export const files = sqliteTable('file', {
   name: text('name', { length: 256 }).notNull(),
   url: text('url', { length: 256 }).notNull(),
   key: text('key', { length: 256 }).notNull(),
-  createdById: text('createdById', { length: 255 })
+  createdById: text('createdById', { length: 25 })
     .notNull()
     .references(() => users.id),
   createdAt: text('created_at')
@@ -96,6 +97,28 @@ export const files = sqliteTable('file', {
 export type TFile = typeof files.$inferSelect
 export type TFileInsert = typeof files.$inferInsert
 
-export const filesRelation = relations(files, ({ one }) => ({
+export const filesRelation = relations(files, ({ one, many }) => ({
   user: one(users, { fields: [files.createdById], references: [users.id] }),
+  messages: many(messages),
+}))
+
+export const messages = sqliteTable('message', {
+  id: text('id')
+    .primaryKey()
+    .$defaultFn(() => createId()),
+  text: text('text').notNull(),
+  isUserMessage: integer('isUserMessage', { mode: 'boolean' }).notNull(),
+  userId: text('createdById', { length: 25 })
+    .notNull()
+    .references(() => users.id),
+  fileId: text('fileId', { length: 25 }).references(() => files.id),
+  createdAt: text('created_at')
+    .default(sql`(CURRENT_TIMESTAMP)`)
+    .notNull(),
+})
+
+export type TMessageInsert = typeof messages.$inferInsert
+
+export const messagesRelation = relations(messages, ({ one }) => ({
+  user: one(users, { fields: [messages.userId], references: [users.id] }),
 }))
