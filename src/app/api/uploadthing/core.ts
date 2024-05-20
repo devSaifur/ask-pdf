@@ -1,6 +1,6 @@
+import { PDFLoader } from '@langchain/community/document_loaders/fs/pdf'
 import { UpstashVectorStore } from '@langchain/community/vectorstores/upstash'
-import { OpenAIEmbeddings } from '@langchain/openai'
-import { PDFLoader } from 'langchain/document_loaders/fs/pdf'
+import { GoogleGenerativeAIEmbeddings } from '@langchain/google-genai'
 import { createUploadthing, type FileRouter } from 'uploadthing/next'
 import { UploadThingError } from 'uploadthing/server'
 import { env } from '~/env'
@@ -48,8 +48,8 @@ export const ourFileRouter = {
 
         // vector and index entire document
 
-        const embeddings = new OpenAIEmbeddings({
-          openAIApiKey: env.OPENAI_API_KEY,
+        const embeddings = new GoogleGenerativeAIEmbeddings({
+          apiKey: env.GOOGLE_API_KEY,
         })
 
         const UpstashVector = new UpstashVectorStore(embeddings, { index })

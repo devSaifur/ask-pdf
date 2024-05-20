@@ -121,4 +121,5 @@ export type TMessageInsert = typeof messages.$inferInsert
 
 export const messagesRelation = relations(messages, ({ one }) => ({
   user: one(users, { fields: [messages.userId], references: [users.id] }),
+  file: one(files, { fields: [messages.fileId], references: [files.id] }),
 }))

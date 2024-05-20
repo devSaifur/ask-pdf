@@ -1,6 +1,5 @@
 import { db } from '.'
-import { files, users } from './schema'
-import { faker } from '@faker-js/faker'
+import { users } from './schema'
 
 async function runSeed() {
   console.log('⏳ Running seed...')
@@ -8,8 +7,6 @@ async function runSeed() {
   const start = Date.now()
 
   await seedUsers()
-
-  //   await seedFiles()
 
   const end = Date.now()
 
@@ -19,23 +16,11 @@ async function runSeed() {
 }
 
 async function seedUsers() {
-  for (let i = 0; i < 10; i++) {
-    await db.insert(users).values({
-      name: faker.person.fullName(),
-      email: faker.internet.email(),
-    })
-  }
-}
-
-async function seedFiles() {
-  for (let i = 0; i < 10; i++) {
-    await db.insert(files).values({
-      name: faker.system.fileName(),
-      createdById: 'ofj9ftiiu2fh818xco8fl3mx', // this needs to be a user id in database
-      url: faker.internet.url(),
-      key: faker.system.fileName(),
-    })
-  }
+  await db.insert(users).values({
+    id: 'ofj9ftiiu2fh818xco8fl3mx',
+    name: 'Frank Auer',
+    email: 'Kristofer.Swift@yahoo.com',
+  })
 }
 
 runSeed().catch((err) => {

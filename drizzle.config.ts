@@ -1,11 +1,11 @@
+import { defineConfig } from 'drizzle-kit'
 import { env } from '~/env'
-import { type Config } from 'drizzle-kit'
 
-export default {
+export default defineConfig({
   schema: './src/lib/db/schema.ts',
   out: './src/lib/db/migrations',
-  driver: 'libsql',
+  dialect: 'sqlite',
   dbCredentials: {
     url: env.DATABASE_URL,
   },
-} satisfies Config
+})
