@@ -8,13 +8,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu'
+import { Icons } from './ui/icons'
 import { Input } from './ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   ChevronDownIcon,
   ChevronUpIcon,
   MagnifyingGlassIcon,
-  ReloadIcon,
   RotateCounterClockwiseIcon,
 } from '@radix-ui/react-icons'
 import { useState } from 'react'
@@ -163,7 +163,7 @@ export default function PdfRenderer({ url }: { url: string }) {
               file={url}
               loading={
                 <div className="flex justify-center">
-                  <ReloadIcon className="my-24 size-6 animate-spin" />
+                  <Icons.loader className="my-24 size-6 animate-spin" />
                 </div>
               }
               onLoadError={() => {
@@ -191,7 +191,7 @@ export default function PdfRenderer({ url }: { url: string }) {
                 key={'@' + scale}
                 loading={
                   <div className="flex justify-center">
-                    <ReloadIcon className="my-24 size-6 animate-spin" />
+                    <Icons.loader className="my-24 size-6 animate-spin" />
                   </div>
                 }
                 onLoadSuccess={() => setRenderedScale(scale)}

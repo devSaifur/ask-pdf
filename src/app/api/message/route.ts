@@ -1,6 +1,10 @@
-import { NextRequest } from 'next/server'
+import { UpstashVectorStore } from '@langchain/community/vectorstores/upstash'
+import { GoogleGenerativeAIEmbeddings } from '@langchain/google-genai'
+import type { NextRequest } from 'next/server'
+import { env } from '~/env'
 import { checkUser } from '~/lib/auth/checkUser'
-import { createMessage, getFileById } from '~/lib/data/queries'
+import { createMessage, getFileById, getPrevMessage } from '~/lib/data/queries'
+import { index } from '~/lib/upstashVector'
 import { SendMessageValidator } from '~/lib/validators'
 
 export async function POST(req: NextRequest) {
@@ -32,4 +36,19 @@ export async function POST(req: NextRequest) {
     userId: user.id,
     fileId,
   })
+
+  const embeddings = new GoogleGenerativeAIEmbeddings({
+    apiKey: env.GOOGLE_API_KEY,
+  })
+
+  const UpstashVector = new UpstashVectorStore(embeddings, { index })
+
+  const results = await UpstashVector.similaritySearch(message, 4)
+
+  const prevMessage = await getPrevMessage(fileId)
+
+  const formattedPrevMessage = prevMessage.map((msg) => ({
+    role: msg.isUserMessage ? 'user' : 'assistant',
+    content: msg.text,
+  }))
 }

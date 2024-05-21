@@ -1,7 +1,7 @@
 import { PDFLoader } from '@langchain/community/document_loaders/fs/pdf'
 import { UpstashVectorStore } from '@langchain/community/vectorstores/upstash'
 import { GoogleGenerativeAIEmbeddings } from '@langchain/google-genai'
-import { createUploadthing, type FileRouter } from 'uploadthing/next'
+import { type FileRouter, createUploadthing } from 'uploadthing/next'
 import { UploadThingError } from 'uploadthing/server'
 import { env } from '~/env'
 import { checkUser } from '~/lib/auth/checkUser'
@@ -54,10 +54,12 @@ export const ourFileRouter = {
 
         const UpstashVector = new UpstashVectorStore(embeddings, { index })
 
-        await UpstashVector.addDocuments(pageLevelDocs).catch((err) => {
-          console.error(err)
-          console.log({ error: 'Something went wrong while indexing the file' })
+        const documents = pageLevelDocs.map((doc) => {
+          doc.metadata = { fileId: createdFile.id }
+          return doc
         })
+
+        await UpstashVector.addDocuments(documents)
 
         await updateFileOnSuccess(createdFile.id)
 

@@ -1,9 +1,6 @@
 'use client'
 
-import { Button } from './ui/button'
-import { Dialog, DialogContent, DialogTrigger } from './ui/dialog'
-import { Progress } from './ui/progress'
-import { FileIcon, ReloadIcon, UploadIcon } from '@radix-ui/react-icons'
+import { FileIcon, UploadIcon } from '@radix-ui/react-icons'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -11,6 +8,11 @@ import Dropzone from 'react-dropzone'
 import { toast } from 'sonner'
 import { getFileByKeyAction } from '~/actions/fileActions'
 import { useUploadThing } from '~/lib/uploadthing'
+
+import { Button } from './ui/button'
+import { Dialog, DialogContent, DialogTrigger } from './ui/dialog'
+import { Icons } from './ui/icons'
+import { Progress } from './ui/progress'
 
 const UploadDropzone = () => {
   const router = useRouter()
@@ -126,7 +128,7 @@ const UploadDropzone = () => {
                   />
                   {uploadProgress === 100 && (
                     <div className="flex items-center justify-center gap-1 pt-2 text-center text-sm text-zinc-700">
-                      <ReloadIcon className="size-3 animate-spin" />{' '}
+                      <Icons.loader className="size-3 animate-spin" />{' '}
                       Redirecting..
                     </div>
                   )}

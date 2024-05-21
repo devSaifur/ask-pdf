@@ -1,9 +1,10 @@
 'use server'
 
+import { and, asc, eq } from 'drizzle-orm'
+import 'server-only'
+
 import { db } from '../db'
 import { TFileInsert, TMessageInsert, files, messages } from '../db/schema'
-import { and, eq } from 'drizzle-orm'
-import 'server-only'
 
 export async function getFiles(userId: string) {
   return await db.query.files.findMany({ where: eq(files.createdById, userId) })
@@ -44,6 +45,14 @@ export async function addFile(file: TFileInsert) {
 
 export async function createMessage(value: TMessageInsert) {
   await db.insert(messages).values(value)
+}
+
+export async function getPrevMessage(fileId: string) {
+  return await db.query.messages.findMany({
+    where: eq(messages.fileId, fileId),
+    orderBy: asc(messages.createdAt),
+    limit: 6,
+  })
 }
 
 export async function updateFileOnSuccess(fileId: string) {
