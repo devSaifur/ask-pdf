@@ -1,16 +1,16 @@
 import { UpstashVectorStore } from '@langchain/community/vectorstores/upstash'
 import { GoogleGenerativeAIEmbeddings } from '@langchain/google-genai'
+import { GoogleGenerativeAIStream, StreamingTextResponse } from 'ai'
 import type { NextRequest } from 'next/server'
 import { env } from '~/env'
 import { checkUser } from '~/lib/auth/checkUser'
 import { createMessage, getFileById, getPrevMessage } from '~/lib/data/queries'
+import { gemini } from '~/lib/gemini'
 import { index } from '~/lib/upstashVector'
 import { SendMessageValidator } from '~/lib/validators'
 
 export async function POST(req: NextRequest) {
   const body = await req.json()
-
-  // check user is authenticated or not
 
   const user = await checkUser()
 
@@ -51,4 +51,53 @@ export async function POST(req: NextRequest) {
     role: msg.isUserMessage ? 'user' : 'assistant',
     content: msg.text,
   }))
+
+  const chat = gemini.startChat({
+    history: [
+      {
+        role: 'user',
+        parts: [
+          {
+            text: `Use the following pieces of context (or previous conversation if needed) to answer the users question in markdown format. \nIf you don't know the answer, just say that you don't know, don't try to make up an answer.
+
+            \n----------------\n
+
+            PREVIOUS CONVERSATION: ${formattedPrevMessage.map((message) => {
+              if (message.role === 'user') return `User: ${message.content}\n`
+              return `Model: ${message.content}\n`
+            })}
+  
+            \n----------------\n
+  
+            CONTEXT: ${results.map((r) => r.pageContent).join('\n\n')}
+  
+            USER INPUT: ${message}`,
+          },
+        ],
+      },
+      {
+        role: 'model',
+        parts: [
+          {
+            text: 'Use the following pieces of context (or previous conversation if needed) to answer the users question in markdown format.',
+          },
+        ],
+      },
+    ],
+  })
+
+  const response = await chat.sendMessageStream(message)
+
+  const stream = GoogleGenerativeAIStream(response, {
+    async onCompletion(response) {
+      await createMessage({
+        text: response,
+        isUserMessage: false,
+        userId: user.id,
+        fileId,
+      })
+    },
+  })
+
+  return new StreamingTextResponse(stream)
 }

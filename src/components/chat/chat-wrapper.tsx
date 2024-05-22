@@ -1,13 +1,15 @@
 'use client'
 
-import { buttonVariants } from '../ui/button'
-import { Icons } from '../ui/icons'
-import ChatInput from './chat-input'
-import Messages from './messages'
 import { ChevronLeftIcon, CrossCircledIcon } from '@radix-ui/react-icons'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import { getFileByIdAction } from '~/actions/fileActions'
+
+import { buttonVariants } from '../ui/button'
+import { Icons } from '../ui/icons'
+import { ChatContextProvider } from './chat-context'
+import ChatInput from './chat-input'
+import Messages from './messages'
 
 interface ChatWrapperProps {
   fileId: string
@@ -93,13 +95,15 @@ export default function ChatWrapper({ fileId }: ChatWrapperProps) {
   )
 
   const Success = () => (
-    <div className="relative flex min-h-full flex-col justify-between gap-2 divide-y divide-zinc-200 bg-zinc-50">
-      <div className="mb-28 flex flex-1 flex-col justify-between">
-        <Messages />
-      </div>
+    <ChatContextProvider fileId={file.id}>
+      <div className="relative flex min-h-full flex-col justify-between gap-2 divide-y divide-zinc-200 bg-zinc-50">
+        <div className="mb-28 flex flex-1 flex-col justify-between">
+          <Messages />
+        </div>
 
-      <ChatInput />
-    </div>
+        <ChatInput />
+      </div>
+    </ChatContextProvider>
   )
 
   if (file.uploadStatus === 'pending') return <Loading />
