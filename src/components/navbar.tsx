@@ -1,6 +1,7 @@
+import Link from 'next/link'
+
 import { buttonVariants } from './ui/button'
 import MaxWidthWrapper from './ui/max-width-wrapper'
-import Link from 'next/link'
 
 export default function Navbar() {
   return (

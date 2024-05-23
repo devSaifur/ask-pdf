@@ -38,7 +38,8 @@ export default function ChatInput({ isDisabled }: { isDisabled?: boolean }) {
               />
 
               <Button
-                onClick={() => {
+                onMouseDown={(e) => {
+                  e.preventDefault()
                   addMessage()
                   textareaRef.current?.focus()
                 }}

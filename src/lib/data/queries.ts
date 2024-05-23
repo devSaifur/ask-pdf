@@ -1,13 +1,13 @@
 'use server'
 
-import { and, asc, eq } from 'drizzle-orm'
+import { and, asc, eq, gt } from 'drizzle-orm'
 import 'server-only'
 
 import { db } from '../db'
 import { TFileInsert, TMessageInsert, files, messages } from '../db/schema'
 
 export async function getFiles(userId: string) {
-  return await db.query.files.findMany({ where: eq(files.createdById, userId) })
+  return await db.select().from(files).where(eq(files.createdById, userId))
 }
 
 export async function deleteFile(fileId: string) {
@@ -48,11 +48,12 @@ export async function createMessage(value: TMessageInsert) {
 }
 
 export async function getPrevMessage(fileId: string) {
-  return await db.query.messages.findMany({
-    where: eq(messages.fileId, fileId),
-    orderBy: asc(messages.createdAt),
-    limit: 6,
-  })
+  return await db
+    .select()
+    .from(messages)
+    .where(eq(messages.fileId, fileId))
+    .limit(6)
+    .orderBy(asc(messages.createdAt))
 }
 
 export async function updateFileOnSuccess(fileId: string) {
@@ -67,4 +68,29 @@ export async function updateFileOnError(fileId: string) {
     .update(files)
     .set({ uploadStatus: 'failed' })
     .where(eq(files.id, fileId))
+}
+
+export async function getFileMessages({
+  fileId,
+  cursor,
+  limit,
+}: {
+  fileId: string
+  cursor?: string | null
+  limit?: number
+}) {
+  return await db.query.messages.findMany({
+    where: and(
+      eq(messages.fileId, fileId),
+      cursor ? gt(messages.id, cursor) : undefined,
+    ),
+    orderBy: asc(messages.createdAt),
+    columns: {
+      id: true,
+      isUserMessage: true,
+      createdAt: true,
+      text: true,
+    },
+    limit,
+  })
 }
