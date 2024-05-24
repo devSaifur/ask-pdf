@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
         role: 'user',
         parts: [
           {
-            text: `Use the following pieces of context (or previous conversation if needed) to answer the users question in markdown format. \nIf you don't know the answer, just say that you don't know, don't try to make up an answer.
+            text: `Use the following pieces of context (or previous conversation if needed) to answer the users question in markdown format. \nIf you don't know the answer, just say that you don't know, don't try to make up an answer. Just help the user to the question related to the context, and you are unable to to answer outside of the context. 
 
             \n----------------\n
 

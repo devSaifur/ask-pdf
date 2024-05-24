@@ -4,7 +4,7 @@ import { checkUser } from '~/lib/auth/checkUser'
 import { getFileById, getFileMessages } from '~/lib/data/queries'
 import { FileMessagesValidator } from '~/lib/validators'
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   const user = await checkUser()
 
   if (!user || !user.id) {
@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
 
   const body = await req.json()
 
-  const { fileId, cursor, limit } = FileMessagesValidator.parse(body)
+  const { fileId, limit } = FileMessagesValidator.parse(body)
 
   try {
     const file = await getFileById({ fileId, userId: user.id })
@@ -26,21 +26,25 @@ export async function GET(req: NextRequest) {
       })
     }
 
+    const cursor = Number(req.nextUrl.searchParams.get('cursor'))
+
     const ensureLimit = limit ? limit : INFINITE_QUERY_LIMIT
 
     const messages = await getFileMessages({
       fileId,
+      limit: ensureLimit + 1,
       cursor,
-      limit: ensureLimit,
     })
+
+    console.log({ messages })
 
     let nextCursor: typeof cursor | undefined = undefined
 
     if (messages.length > ensureLimit) {
-      const nextItem = messages.pop()
+      const nextItem = messages.shift()
+      console.log({ nextItem })
       nextCursor = nextItem?.id
     }
-
     return new Response(JSON.stringify({ messages, nextCursor }), {
       status: 200,
     })

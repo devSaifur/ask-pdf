@@ -17,7 +17,6 @@ async function runSeed() {
 
 async function seedUsers() {
   await db.insert(users).values({
-    id: 'ofj9ftiiu2fh818xco8fl3mx',
     name: 'Frank Auer',
     email: 'Kristofer.Swift@yahoo.com',
   })

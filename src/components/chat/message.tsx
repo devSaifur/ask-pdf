@@ -49,7 +49,7 @@ export const Message = forwardRef<HTMLDivElement, MessageProps>(
               'inline-block rounded-lg px-4 py-2',
               message.isUserMessage
                 ? 'bg-blue-600 text-white'
-                : 'bg-gray-200 text-gray-900',
+                : 'bg-gray-300/75 text-gray-900',
               !isNextMessageSamePerson &&
                 message.isUserMessage &&
                 'rounded-br-none',
@@ -74,7 +74,7 @@ export const Message = forwardRef<HTMLDivElement, MessageProps>(
                   message.isUserMessage ? 'text-blue-300' : 'text-zinc-500',
                 )}
               >
-                {format(new Date(message.createdAt), 'MMM yyy')}
+                {format(message.createdAt, 'HH:mm')}
               </div>
             )}
           </div>

@@ -14,9 +14,9 @@ export default function Messages({ fileId }: { fileId: string }) {
 
   const { data, fetchNextPage, isPending } = useInfiniteQuery({
     queryKey: ['projects'],
-    queryFn: async () => {
-      const res = await fetch('/api/file-message', {
-        method: 'GET',
+    queryFn: async ({ pageParam }) => {
+      const res = await fetch('/api/file-message?cursor=' + pageParam, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -24,7 +24,7 @@ export default function Messages({ fileId }: { fileId: string }) {
       })
       return res.json()
     },
-    initialPageParam: 1,
+    initialPageParam: '',
     getNextPageParam: (lastPage) => lastPage?.nextCursor,
   })
 

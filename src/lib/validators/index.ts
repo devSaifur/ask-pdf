@@ -9,7 +9,6 @@ export type TSendMessageValidator = z.infer<typeof SendMessageValidator>
 
 export const FileMessagesValidator = z.object({
   limit: z.number().min(1).max(100).nullish(),
-  cursor: z.string().nullish(),
   fileId: z.string().min(1),
 })
 

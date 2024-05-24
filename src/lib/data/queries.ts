@@ -1,6 +1,6 @@
 'use server'
 
-import { and, asc, eq, gt } from 'drizzle-orm'
+import { and, asc, desc, eq, gt } from 'drizzle-orm'
 import 'server-only'
 
 import { db } from '../db'
@@ -52,7 +52,7 @@ export async function getPrevMessage(fileId: string) {
     .select()
     .from(messages)
     .where(eq(messages.fileId, fileId))
-    .limit(6)
+    .limit(10)
     .orderBy(asc(messages.createdAt))
 }
 
@@ -72,25 +72,54 @@ export async function updateFileOnError(fileId: string) {
 
 export async function getFileMessages({
   fileId,
+  limit,
+  cursor,
+}: {
+  fileId: string
+  limit: number
+  cursor?: number
+}) {
+  return await db
+    .select({
+      id: messages.id,
+      text: messages.text,
+      isUserMessage: messages.isUserMessage,
+      createdAt: messages.createdAt,
+    })
+    .from(messages)
+    .where(
+      and(
+        eq(messages.fileId, fileId),
+        cursor ? gt(messages.id, cursor) : undefined,
+      ),
+    )
+    .limit(cursor ? 1 : limit)
+    .orderBy(desc(messages.id))
+}
+
+export async function getFileMessagesByCursor({
+  fileId,
   cursor,
   limit,
 }: {
   fileId: string
-  cursor?: string | null
-  limit?: number
+  cursor?: number
+  limit: number
 }) {
-  return await db.query.messages.findMany({
-    where: and(
-      eq(messages.fileId, fileId),
-      cursor ? gt(messages.id, cursor) : undefined,
-    ),
-    orderBy: asc(messages.createdAt),
-    columns: {
-      id: true,
-      isUserMessage: true,
-      createdAt: true,
-      text: true,
-    },
-    limit,
-  })
+  return await db
+    .select({
+      id: messages.id,
+      text: messages.text,
+      isUserMessage: messages.isUserMessage,
+      createdAt: messages.createdAt,
+    })
+    .from(messages)
+    .where(
+      and(
+        eq(messages.fileId, fileId),
+        cursor ? gt(messages.id, cursor) : undefined,
+      ),
+    )
+    .orderBy(desc(messages.id))
+    .limit(limit)
 }
