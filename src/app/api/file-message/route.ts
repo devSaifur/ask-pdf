@@ -36,15 +36,13 @@ export async function POST(req: NextRequest) {
       cursor,
     })
 
-    console.log({ messages })
-
     let nextCursor: typeof cursor | undefined = undefined
 
     if (messages.length > ensureLimit) {
-      const nextItem = messages.shift()
-      console.log({ nextItem })
+      const nextItem = messages.pop()
       nextCursor = nextItem?.id
     }
+
     return new Response(JSON.stringify({ messages, nextCursor }), {
       status: 200,
     })

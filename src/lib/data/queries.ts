@@ -1,6 +1,6 @@
 'use server'
 
-import { and, asc, desc, eq, gt } from 'drizzle-orm'
+import { and, asc, desc, eq, lte } from 'drizzle-orm'
 import 'server-only'
 
 import { db } from '../db'
@@ -90,36 +90,9 @@ export async function getFileMessages({
     .where(
       and(
         eq(messages.fileId, fileId),
-        cursor ? gt(messages.id, cursor) : undefined,
+        cursor ? lte(messages.id, cursor) : undefined,
       ),
     )
-    .limit(cursor ? 1 : limit)
-    .orderBy(desc(messages.id))
-}
-
-export async function getFileMessagesByCursor({
-  fileId,
-  cursor,
-  limit,
-}: {
-  fileId: string
-  cursor?: number
-  limit: number
-}) {
-  return await db
-    .select({
-      id: messages.id,
-      text: messages.text,
-      isUserMessage: messages.isUserMessage,
-      createdAt: messages.createdAt,
-    })
-    .from(messages)
-    .where(
-      and(
-        eq(messages.fileId, fileId),
-        cursor ? gt(messages.id, cursor) : undefined,
-      ),
-    )
-    .orderBy(desc(messages.id))
     .limit(limit)
+    .orderBy(desc(messages.id))
 }
