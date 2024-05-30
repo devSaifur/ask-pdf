@@ -1,4 +1,5 @@
 import { notFound, redirect } from 'next/navigation'
+
 import ChatWrapper from '~/components/chat/chat-wrapper'
 import PdfRenderer from '~/components/pdf-renderer'
 import { checkUser } from '~/lib/auth/checkUser'

@@ -1,6 +1,7 @@
 import { EnvelopeOpenIcon } from '@radix-ui/react-icons'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { useContext, useEffect, useRef } from 'react'
+
 import { INFINITE_QUERY_LIMIT } from '~/config'
 import { useIntersection } from '~/hooks/use-intersection'
 
@@ -13,7 +14,7 @@ export default function Messages({ fileId }: { fileId: string }) {
   const { isPending: isAiThinking } = useContext(ChatContext)
 
   const { data, fetchNextPage, isPending } = useInfiniteQuery({
-    queryKey: ['projects'],
+    queryKey: ['messages'],
     queryFn: async ({ pageParam }) => {
       const res = await fetch('/api/file-message?cursor=' + pageParam, {
         method: 'POST',
