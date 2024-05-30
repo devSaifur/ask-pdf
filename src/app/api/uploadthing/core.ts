@@ -1,10 +1,11 @@
 import { PDFLoader } from '@langchain/community/document_loaders/fs/pdf'
 import { UpstashVectorStore } from '@langchain/community/vectorstores/upstash'
 import { GoogleGenerativeAIEmbeddings } from '@langchain/google-genai'
+import { getSession } from 'next-auth/react'
 import { type FileRouter, createUploadthing } from 'uploadthing/next'
 import { UploadThingError } from 'uploadthing/server'
+
 import { env } from '~/env'
-import { checkUser } from '~/lib/auth/checkUser'
 import {
   addFile,
   updateFileOnError,
@@ -17,11 +18,12 @@ const f = createUploadthing()
 export const ourFileRouter = {
   pdfUploader: f({ pdf: { maxFileSize: '4MB' } })
     .middleware(async () => {
-      const user = await checkUser()
+      const session = await getSession()
 
-      if (!user?.id) throw new UploadThingError('Unauthorized')
+      if (!session?.user || !session.user.id)
+        throw new UploadThingError('Unauthorized')
 
-      return { userId: user.id }
+      return { userId: session.user.id }
     })
     .onUploadComplete(async ({ metadata, file }) => {
       console.log('Upload complete for userId:', metadata.userId)

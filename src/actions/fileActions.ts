@@ -1,18 +1,19 @@
 'use server'
 
 import 'server-only'
-import { checkUser } from '~/lib/auth/checkUser'
+
+import getSession from '~/lib/auth/getSession'
 import { deleteFile, getFileById, getFileByKey } from '~/lib/data/queries'
 
 export async function getFileByKeyAction(key: string) {
-  const user = await checkUser()
+  const session = await getSession()
 
-  if (!user || !user.id) {
+  if (!session?.user?.id) {
     throw new Error('Unauthorized')
   }
 
   try {
-    return await getFileByKey({ key, userId: user.id })
+    return await getFileByKey({ key, userId: session.user.id })
   } catch (err) {
     throw err
   }
@@ -27,14 +28,14 @@ export async function deleteFileAction(id: string) {
 }
 
 export async function getFileByIdAction(id: string) {
-  const user = await checkUser()
+  const session = await getSession()
 
-  if (!user || !user.id) {
+  if (!session?.user?.id) {
     throw new Error('Unauthorized')
   }
 
   try {
-    return await getFileById({ fileId: id, userId: user.id })
+    return await getFileById({ fileId: id, userId: session.user.id })
   } catch (err) {
     throw err
   }

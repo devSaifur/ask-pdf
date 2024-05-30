@@ -4,16 +4,12 @@ import { forwardRef } from 'react'
 import ReactMarkdown from 'react-markdown'
 
 import { cn } from '~/lib/utils'
+import type { ExtendedMessage } from '~/types'
 
 import { Icons } from '../ui/icons'
 
 interface MessageProps {
-  message: {
-    id: 'loading-message' | string
-    text: string | React.JSX.Element
-    isUserMessage: boolean
-    createdAt: string
-  }
+  message: ExtendedMessage
   isNextMessageSamePerson: boolean
 }
 

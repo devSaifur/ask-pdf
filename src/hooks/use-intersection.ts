@@ -25,7 +25,7 @@ export function useIntersection<T extends HTMLElement = any>(
 
       observer.current.observe(element)
     },
-    [options?.rootMargin, options?.root, options?.threshold],
+    [options],
   )
 
   return { ref, entry }

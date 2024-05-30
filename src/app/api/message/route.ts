@@ -1,18 +1,18 @@
 import { UpstashVectorStore } from '@langchain/community/vectorstores/upstash'
 import { GoogleGenerativeAIEmbeddings } from '@langchain/google-genai'
 import { GoogleGenerativeAIStream, StreamingTextResponse } from 'ai'
-import type { NextRequest } from 'next/server'
+
 import { env } from '~/env'
-import { checkUser } from '~/lib/auth/checkUser'
+import { auth } from '~/lib/auth'
 import { createMessage, getFileById, getPrevMessage } from '~/lib/data/queries'
 import { gemini } from '~/lib/gemini'
 import { index } from '~/lib/upstashVector'
 import { SendMessageValidator } from '~/lib/validators'
 
-export async function POST(req: NextRequest) {
+export const POST = auth(async function POST(req) {
   const body = await req.json()
 
-  const user = await checkUser()
+  const user = req.auth?.user
 
   if (!user || !user.id) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
@@ -93,11 +93,11 @@ export async function POST(req: NextRequest) {
       await createMessage({
         text: response,
         isUserMessage: false,
-        userId: user.id,
+        userId: user.id as string,
         fileId,
       })
     },
   })
 
   return new StreamingTextResponse(stream)
-}
+})

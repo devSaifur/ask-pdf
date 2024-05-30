@@ -1,17 +1,18 @@
 import { redirect } from 'next/navigation'
+
 import Files from '~/components/files'
 import UploadButton from '~/components/upload-button'
-import { checkUser } from '~/lib/auth/checkUser'
+import getSession from '~/lib/auth/getSession'
 import { getFiles } from '~/lib/data/queries'
 
 export default async function Documents() {
-  const user = await checkUser()
+  const session = await getSession()
 
-  if (!user || !user.id) {
+  if (!session?.user?.id) {
     redirect('/sign-in?origin=documents')
   }
 
-  const files = await getFiles(user.id)
+  const files = await getFiles(session.user.id)
 
   return (
     <main className="mx-auto max-w-7xl md:p-10">

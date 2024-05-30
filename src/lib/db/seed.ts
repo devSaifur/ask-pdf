@@ -1,3 +1,5 @@
+import { createId } from '@paralleldrive/cuid2'
+
 import { db } from '.'
 import { users } from './schema'
 
@@ -17,6 +19,7 @@ async function runSeed() {
 
 async function seedUsers() {
   await db.insert(users).values({
+    id: createId(),
     name: 'Frank Auer',
     email: 'Kristofer.Swift@yahoo.com',
   })

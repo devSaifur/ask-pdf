@@ -2,19 +2,19 @@ import { notFound, redirect } from 'next/navigation'
 
 import ChatWrapper from '~/components/chat/chat-wrapper'
 import PdfRenderer from '~/components/pdf-renderer'
-import { checkUser } from '~/lib/auth/checkUser'
+import getSession from '~/lib/auth/getSession'
 import { getFileById } from '~/lib/data/queries'
 
 export default async function Page({ params }: { params: { docId: string } }) {
   const { docId } = params
 
-  const user = await checkUser()
+  const session = await getSession()
 
-  if (!user || !user.id) {
+  if (!session?.user?.id) {
     redirect(`/sign-in?origin=documents/${docId}`)
   }
 
-  const file = await getFileById({ fileId: docId, userId: user.id })
+  const file = await getFileById({ fileId: docId, userId: session.user.id })
 
   if (!file) {
     notFound()

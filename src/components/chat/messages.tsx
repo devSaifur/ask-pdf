@@ -1,7 +1,7 @@
 import { EnvelopeOpenIcon } from '@radix-ui/react-icons'
-import { useInfiniteQuery } from '@tanstack/react-query'
 import { useContext, useEffect, useRef } from 'react'
 
+import { trpc } from '~/app/_trpc/client'
 import { INFINITE_QUERY_LIMIT } from '~/config'
 import { useIntersection } from '~/hooks/use-intersection'
 
@@ -13,21 +13,16 @@ import { Message } from './message'
 export default function Messages({ fileId }: { fileId: string }) {
   const { isPending: isAiThinking } = useContext(ChatContext)
 
-  const { data, fetchNextPage, isPending } = useInfiniteQuery({
-    queryKey: ['messages'],
-    queryFn: async ({ pageParam }) => {
-      const res = await fetch('/api/file-message?cursor=' + pageParam, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ fileId, limit: INFINITE_QUERY_LIMIT }),
-      })
-      return res.json()
-    },
-    initialPageParam: '',
-    getNextPageParam: (lastPage) => lastPage?.nextCursor,
-  })
+  const { data, fetchNextPage, isLoading } =
+    trpc.getFileMessages.useInfiniteQuery(
+      {
+        fileId,
+        limit: INFINITE_QUERY_LIMIT,
+      },
+      {
+        getNextPageParam: (lastPage) => lastPage?.nextCursor,
+      },
+    )
 
   const messages = data?.pages.flatMap((page) => page.messages)
 
@@ -86,7 +81,7 @@ export default function Messages({ fileId }: { fileId: string }) {
               />
             )
         })
-      ) : isPending ? (
+      ) : isLoading ? (
         <div className="flex w-full flex-col gap-2">
           <Skeleton className="h-16" />
           <Skeleton className="h-16" />
