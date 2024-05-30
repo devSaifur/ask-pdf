@@ -1,3 +1,5 @@
+'use client'
+
 import { EnvelopeOpenIcon } from '@radix-ui/react-icons'
 import { useContext, useEffect, useRef } from 'react'
 

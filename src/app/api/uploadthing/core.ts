@@ -1,11 +1,11 @@
 import { PDFLoader } from '@langchain/community/document_loaders/fs/pdf'
 import { UpstashVectorStore } from '@langchain/community/vectorstores/upstash'
 import { GoogleGenerativeAIEmbeddings } from '@langchain/google-genai'
-import { getSession } from 'next-auth/react'
 import { type FileRouter, createUploadthing } from 'uploadthing/next'
 import { UploadThingError } from 'uploadthing/server'
 
 import { env } from '~/env'
+import getSession from '~/lib/auth/getSession'
 import {
   addFile,
   updateFileOnError,
@@ -20,8 +20,9 @@ export const ourFileRouter = {
     .middleware(async () => {
       const session = await getSession()
 
-      if (!session?.user || !session.user.id)
+      if (!session?.user || !session.user.id) {
         throw new UploadThingError('Unauthorized')
+      }
 
       return { userId: session.user.id }
     })

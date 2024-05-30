@@ -162,8 +162,8 @@ export default function UploadButton() {
         }
       }}
     >
-      <DialogTrigger asChild>
-        <Button onClick={() => setIsOpen(true)}>Upload PDF</Button>
+      <DialogTrigger onClick={() => setIsOpen(true)} asChild>
+        <Button>Upload PDF</Button>
       </DialogTrigger>
 
       <DialogContent>

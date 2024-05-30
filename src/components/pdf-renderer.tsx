@@ -1,15 +1,5 @@
 'use client'
 
-import PdfFullscreen from './pdf-fullscreen'
-import { Button } from './ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from './ui/dropdown-menu'
-import { Icons } from './ui/icons'
-import { Input } from './ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   ChevronDownIcon,
@@ -26,12 +16,21 @@ import { useResizeDetector } from 'react-resize-detector'
 import SimpleBar from 'simplebar-react'
 import { toast } from 'sonner'
 import { z } from 'zod'
+
 import { cn } from '~/lib/utils'
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.js',
-  import.meta.url,
-).toString()
+import PdfFullscreen from './pdf-fullscreen'
+import { Button } from './ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu'
+import { Icons } from './ui/icons'
+import { Input } from './ui/input'
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
 
 export default function PdfRenderer({ url }: { url: string }) {
   const [numPages, setNumPages] = useState<number>()

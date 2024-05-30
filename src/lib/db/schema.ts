@@ -96,6 +96,7 @@ export const authenticators = pgTable(
     }),
   }),
 )
+
 export const usersRelation = relations(users, ({ many }) => ({
   files: many(files),
   messages: many(messages),
