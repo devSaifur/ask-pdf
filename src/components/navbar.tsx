@@ -1,9 +1,12 @@
 import Link from 'next/link'
 
+import SignInBtn from '~/app/(auth)/sign-in/sign-in-btn'
+import { signIn } from '~/lib/auth'
+
 import { buttonVariants } from './ui/button'
 import MaxWidthWrapper from './ui/max-width-wrapper'
 
-export default function Navbar() {
+export default async function Navbar() {
   return (
     <nav className="sticky inset-x-0 top-0 z-30 h-14 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
       <MaxWidthWrapper>
@@ -22,12 +25,14 @@ export default function Navbar() {
               >
                 Pricing
               </Link>
-              <Link
-                href="/sign-in"
-                className={buttonVariants({ variant: 'ghost' })}
+              <form
+                action={async () => {
+                  'use server'
+                  await signIn('google', { redirectTo: '/' })
+                }}
               >
-                Sign in
-              </Link>
+                <SignInBtn />
+              </form>
               <Link
                 href="/documents"
                 className={buttonVariants({ variant: 'default' })}

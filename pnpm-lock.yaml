@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@auth/drizzle-adapter':
+        specifier: ^1.1.0
+        version: 1.1.0
       '@google/generative-ai':
         specifier: ^0.12.0
         version: 0.12.0
@@ -16,10 +19,10 @@ importers:
         version: 3.4.2(react-hook-form@7.51.5(react@18.3.1))
       '@langchain/community':
         specifier: ^0.2.4
-        version: 0.2.4(@upstash/vector@1.1.1)(axios@0.19.2)(ignore@5.3.1)(lodash@4.17.21)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0)
+        version: 0.2.4(@upstash/vector@1.1.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0)
       '@langchain/google-genai':
-        specifier: ^0.0.14
-        version: 0.0.14(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
+        specifier: ^0.0.16
+        version: 0.0.16(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)(zod@3.23.8)
       '@libsql/client':
         specifier: ^0.6.0
         version: 0.6.0
@@ -214,6 +217,9 @@ packages:
         optional: true
       nodemailer:
         optional: true
+
+  '@auth/drizzle-adapter@1.1.0':
+    resolution: {integrity: sha512-ZC83ne3Ulkxh2II2T5qazgrqc1AmWbbPzs3oR+C93DMlIV8DPIgEaw4cmbV/kesO9xO+Gt7HpkctmOa2B26A1Q==}
 
   '@babel/code-frame@7.24.6':
     resolution: {integrity: sha512-ZJhac6FkEd1yhG2AHOmfcXG4ceoLltoCVJjN5XsWN9BifBQr+cHJbWi0h68HZuSORq+3WtJ2z0hwF2NG1b5kcA==}
@@ -1124,8 +1130,8 @@ packages:
     resolution: {integrity: sha512-mVuFHSLpPQ4yOHNXeoSA3LnmIMuFmUiit5rvbYcPZqM6SrB2zCNN2nD4Ty5+3H5X4tYItDoSqsTuUNUQySXRQw==}
     engines: {node: '>=18'}
 
-  '@langchain/google-genai@0.0.14':
-    resolution: {integrity: sha512-logV+S9wnEgZ2zG8y3id8ET/3nIeZLtiNsVtS1NMtqSUDLECCxVAf6fPHRpn1YarRjz3vqdHc7xya2xKemQeqA==}
+  '@langchain/google-genai@0.0.16':
+    resolution: {integrity: sha512-aUHEeY7sTwxNqj7L5scvnOhNLOKPVSvf7HR6p1Y3M7BPyU63fXP7faB+qyuHmibtKU8pj+ApoXPpjRflYKSv4w==}
     engines: {node: '>=18'}
 
   '@langchain/openai@0.0.34':
@@ -1949,10 +1955,6 @@ packages:
     resolution: {integrity: sha512-M0JtH+hlOL5pLQwHOLNYZaXuhqmvS8oExsqB1SBYgA4Dk7u/xx+YdGHXaK5pyUfed5mYXdlYiphWq3G8cRi5JQ==}
     engines: {node: '>=4'}
 
-  axios@0.19.2:
-    resolution: {integrity: sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==}
-    deprecated: Critical security vulnerability fixed in v0.21.1. For more information, see https://github.com/axios/axios/pull/3410
-
   axobject-query@3.2.1:
     resolution: {integrity: sha512-jsyHu61e6N4Vbz/v18DHwWYKK0bSWLqn47eeDSKPB7m8tqMHF9YJ+mhIk2lVteyZrY8tnSj/jHOv4YiTCuCJgg==}
 
@@ -2172,14 +2174,6 @@ packages:
 
   date-fns@3.6.0:
     resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
-
-  debug@3.1.0:
-    resolution: {integrity: sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
 
   debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
@@ -2636,10 +2630,6 @@ packages:
 
   flatted@3.3.1:
     resolution: {integrity: sha512-X8cqMLLie7KsNUDSdzeN8FYK9rEt4Dt67OsG/DNGnYTSDBG4uFAJFBnUeiV+zCVAvwFy56IjM9sH51jVaEhNxw==}
-
-  follow-redirects@1.5.10:
-    resolution: {integrity: sha512-0V5l4Cizzvqt5D44aTXbFZz+FtyXV1vrDN6qrelxtfYQKW0KO0W2T/hkE8xvGa/540LkZlkaUjO4ailYTFtHVQ==}
-    engines: {node: '>=4.0'}
 
   for-each@0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
@@ -3249,6 +3239,7 @@ packages:
 
   libsql@0.3.18:
     resolution: {integrity: sha512-lvhKr7WV3NLWRbXkjn/MeKqXOAqWKU0PX9QYrvDh7fneukapj+iUQ4qgJASrQyxcCrEsClXCQiiK5W6OoYPAlA==}
+    cpu: [x64, arm64, wasm32]
     os: [darwin, linux, win32]
 
   lilconfig@2.1.0:
@@ -3489,9 +3480,6 @@ packages:
 
   ml-tree-similarity@1.0.0:
     resolution: {integrity: sha512-XJUyYqjSuUQkNQHMscr6tcjldsOoAekxADTplt40QKfwW6nd++1wHWV9AArl0Zvw/TIHgNaZZNvr8QGvE8wLRg==}
-
-  ms@2.0.0:
-    resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
 
   ms@2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
@@ -4617,6 +4605,14 @@ snapshots:
       preact: 10.11.3
       preact-render-to-string: 5.2.3(preact@10.11.3)
 
+  '@auth/drizzle-adapter@1.1.0':
+    dependencies:
+      '@auth/core': 0.31.0
+    transitivePeerDependencies:
+      - '@simplewebauthn/browser'
+      - '@simplewebauthn/server'
+      - nodemailer
+
   '@babel/code-frame@7.24.6':
     dependencies:
       '@babel/highlight': 7.24.6
@@ -5017,16 +5013,16 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@langchain/community@0.2.4(@upstash/vector@1.1.1)(axios@0.19.2)(ignore@5.3.1)(lodash@4.17.21)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0)':
+  '@langchain/community@0.2.4(@upstash/vector@1.1.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0)':
     dependencies:
-      '@langchain/core': 0.2.3(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
-      '@langchain/openai': 0.0.34(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))
+      '@langchain/core': 0.2.3(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
+      '@langchain/openai': 0.0.34(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))
       binary-extensions: 2.3.0
       expr-eval: 2.0.2
       flat: 5.0.2
       js-yaml: 4.1.0
-      langchain: 0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0)
-      langsmith: 0.1.30(@langchain/core@0.2.3(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2))(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
+      langchain: 0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0)
+      langsmith: 0.1.30(@langchain/core@0.2.3(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2))(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
       uuid: 9.0.1
       zod: 3.23.8
       zod-to-json-schema: 3.23.0(zod@3.23.8)
@@ -5046,13 +5042,13 @@ snapshots:
       - peggy
       - pyodide
 
-  '@langchain/core@0.2.3(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)':
+  '@langchain/core@0.2.3(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)':
     dependencies:
       ansi-styles: 5.2.0
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.12
-      langsmith: 0.1.30(@langchain/core@0.2.3(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2))(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
+      langsmith: 0.1.30(@langchain/core@0.2.3(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2))(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
       ml-distance: 4.0.1
       mustache: 4.2.0
       p-queue: 6.6.2
@@ -5064,17 +5060,19 @@ snapshots:
       - langchain
       - openai
 
-  '@langchain/google-genai@0.0.14(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)':
+  '@langchain/google-genai@0.0.16(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)(zod@3.23.8)':
     dependencies:
       '@google/generative-ai': 0.7.1
-      '@langchain/core': 0.2.3(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
+      '@langchain/core': 0.2.3(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
+      zod-to-json-schema: 3.23.0(zod@3.23.8)
     transitivePeerDependencies:
       - langchain
       - openai
+      - zod
 
-  '@langchain/openai@0.0.34(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))':
+  '@langchain/openai@0.0.34(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))':
     dependencies:
-      '@langchain/core': 0.2.3(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
+      '@langchain/core': 0.2.3(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
       js-tiktoken: 1.0.12
       openai: 4.47.2
       zod: 3.23.8
@@ -5083,9 +5081,9 @@ snapshots:
       - encoding
       - langchain
 
-  '@langchain/textsplitters@0.0.2(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)':
+  '@langchain/textsplitters@0.0.2(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)':
     dependencies:
-      '@langchain/core': 0.2.3(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
+      '@langchain/core': 0.2.3(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
       js-tiktoken: 1.0.12
     transitivePeerDependencies:
       - langchain
@@ -5954,13 +5952,6 @@ snapshots:
 
   axe-core@4.7.0: {}
 
-  axios@0.19.2:
-    dependencies:
-      follow-redirects: 1.5.10
-    transitivePeerDependencies:
-      - supports-color
-    optional: true
-
   axobject-query@3.2.1:
     dependencies:
       dequal: 2.0.3
@@ -6179,11 +6170,6 @@ snapshots:
       is-data-view: 1.0.1
 
   date-fns@3.6.0: {}
-
-  debug@3.1.0:
-    dependencies:
-      ms: 2.0.0
-    optional: true
 
   debug@3.2.7:
     dependencies:
@@ -6760,13 +6746,6 @@ snapshots:
 
   flatted@3.3.1: {}
 
-  follow-redirects@1.5.10:
-    dependencies:
-      debug: 3.1.0
-    transitivePeerDependencies:
-      - supports-color
-    optional: true
-
   for-each@0.3.3:
     dependencies:
       is-callable: 1.2.7
@@ -7220,17 +7199,17 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0):
+  langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0):
     dependencies:
-      '@langchain/core': 0.2.3(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
-      '@langchain/openai': 0.0.34(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))
-      '@langchain/textsplitters': 0.0.2(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
+      '@langchain/core': 0.2.3(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
+      '@langchain/openai': 0.0.34(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))
+      '@langchain/textsplitters': 0.0.2(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
       binary-extensions: 2.3.0
       js-tiktoken: 1.0.12
       js-yaml: 4.1.0
       jsonpointer: 5.0.1
       langchainhub: 0.0.11
-      langsmith: 0.1.30(@langchain/core@0.2.3(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2))(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
+      langsmith: 0.1.30(@langchain/core@0.2.3(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2))(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
       ml-distance: 4.0.1
       openapi-types: 12.1.3
       p-retry: 4.6.2
@@ -7239,7 +7218,6 @@ snapshots:
       zod: 3.23.8
       zod-to-json-schema: 3.23.0(zod@3.23.8)
     optionalDependencies:
-      axios: 0.19.2
       ignore: 5.3.1
       pdf-parse: 1.1.1
       ws: 8.17.0
@@ -7249,7 +7227,7 @@ snapshots:
 
   langchainhub@0.0.11: {}
 
-  langsmith@0.1.30(@langchain/core@0.2.3(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2))(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2):
+  langsmith@0.1.30(@langchain/core@0.2.3(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2))(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2):
     dependencies:
       '@types/uuid': 9.0.8
       commander: 10.0.1
@@ -7257,8 +7235,8 @@ snapshots:
       p-retry: 4.6.2
       uuid: 9.0.1
     optionalDependencies:
-      '@langchain/core': 0.2.3(langchain@0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
-      langchain: 0.2.3(axios@0.19.2)(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0)
+      '@langchain/core': 0.2.3(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.47.2)
+      langchain: 0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)(ws@8.17.0)
       openai: 4.47.2
 
   language-subtag-registry@0.3.23: {}
@@ -7646,9 +7624,6 @@ snapshots:
     dependencies:
       binary-search: 1.3.6
       num-sort: 2.1.0
-
-  ms@2.0.0:
-    optional: true
 
   ms@2.1.2: {}
 

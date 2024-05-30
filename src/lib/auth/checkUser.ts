@@ -1,9 +1,3 @@
-import NextAuth from 'next-auth'
-
-export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [],
-})
-
 type User = {
   id: string
   name: string
