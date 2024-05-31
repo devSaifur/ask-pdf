@@ -40,4 +40,5 @@ export const appRouter = router({
       return { messages, nextCursor }
     }),
 })
+
 export type AppRouter = typeof appRouter
