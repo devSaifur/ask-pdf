@@ -10,7 +10,7 @@ import { ChatContext } from './chat-context'
 export default function ChatInput({ isDisabled }: { isDisabled?: boolean }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  const { isPending, addMessage, handleInputChange, message } =
+  const { isLoading, addMessage, handleInputChange, message } =
     useContext(ChatContext)
 
   return (
@@ -45,7 +45,7 @@ export default function ChatInput({ isDisabled }: { isDisabled?: boolean }) {
                   textareaRef.current?.focus()
                 }}
                 type="submit"
-                disabled={isPending || isDisabled}
+                disabled={isLoading || isDisabled}
                 className="absolute bottom-1.5 right-[8px]"
                 aria-label="send message"
               >

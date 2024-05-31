@@ -13,7 +13,7 @@ import { ChatContext } from './chat-context'
 import { Message } from './message'
 
 export default function Messages({ fileId }: { fileId: string }) {
-  const { isPending: isAiThinking } = useContext(ChatContext)
+  const { isLoading: isAiThinking } = useContext(ChatContext)
 
   const { data, fetchNextPage, isLoading } =
     trpc.getFileMessages.useInfiniteQuery(
