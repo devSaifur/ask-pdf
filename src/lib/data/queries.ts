@@ -47,11 +47,11 @@ export async function createMessage(value: TMessageInsert) {
   await db.insert(messages).values(value)
 }
 
-export async function getPrevMessage(fileId: string) {
+export async function getPrevMessage(fileId: string, userId: string) {
   return await db
     .select()
     .from(messages)
-    .where(eq(messages.fileId, fileId))
+    .where(and(eq(messages.fileId, fileId), eq(messages.userId, userId)))
     .limit(10)
     .orderBy(asc(messages.createdAt))
 }

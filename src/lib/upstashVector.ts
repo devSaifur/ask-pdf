@@ -1,4 +1,5 @@
 import { Index } from '@upstash/vector'
+
 import { env } from '~/env'
 
 export const index = new Index({

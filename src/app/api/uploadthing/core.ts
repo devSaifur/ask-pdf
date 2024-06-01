@@ -55,14 +55,12 @@ export const ourFileRouter = {
           apiKey: env.GOOGLE_API_KEY,
         })
 
-        const UpstashVector = new UpstashVectorStore(embeddings, { index })
-
-        const documents = pageLevelDocs.map((doc) => {
-          doc.metadata = { fileId: createdFile.id }
-          return doc
+        const UpstashVector = new UpstashVectorStore(embeddings, {
+          index,
+          namespace: createdFile.id,
         })
 
-        await UpstashVector.addDocuments(documents)
+        await UpstashVector.addDocuments(pageLevelDocs)
 
         await updateFileOnSuccess(createdFile.id)
 

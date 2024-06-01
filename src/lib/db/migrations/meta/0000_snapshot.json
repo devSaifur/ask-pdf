@@ -1,7 +1,5 @@
 {
-  "id": "d2027146-d387-4584-884b-8de7ab3ee964",
-  "prevId": "00000000-0000-0000-0000-000000000000",
-  "version": "6",
+  "version": "7",
   "dialect": "postgresql",
   "tables": {
     "public.account": {
@@ -80,15 +78,15 @@
         "account_userId_user_id_fk": {
           "name": "account_userId_user_id_fk",
           "tableFrom": "account",
-          "tableTo": "user",
           "columnsFrom": [
             "userId"
           ],
+          "tableTo": "user",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "cascade"
         }
       },
       "compositePrimaryKeys": {
@@ -160,15 +158,15 @@
         "authenticator_userId_user_id_fk": {
           "name": "authenticator_userId_user_id_fk",
           "tableFrom": "authenticator",
-          "tableTo": "user",
           "columnsFrom": [
             "userId"
           ],
+          "tableTo": "user",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "cascade"
         }
       },
       "compositePrimaryKeys": {
@@ -183,10 +181,10 @@
       "uniqueConstraints": {
         "authenticator_credentialID_unique": {
           "name": "authenticator_credentialID_unique",
-          "nullsNotDistinct": false,
           "columns": [
             "credentialID"
-          ]
+          ],
+          "nullsNotDistinct": false
         }
       }
     },
@@ -245,15 +243,15 @@
         "file_createdById_user_id_fk": {
           "name": "file_createdById_user_id_fk",
           "tableFrom": "file",
-          "tableTo": "user",
           "columnsFrom": [
             "createdById"
           ],
+          "tableTo": "user",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -306,28 +304,28 @@
         "message_createdById_user_id_fk": {
           "name": "message_createdById_user_id_fk",
           "tableFrom": "message",
-          "tableTo": "user",
           "columnsFrom": [
             "createdById"
           ],
+          "tableTo": "user",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         },
         "message_fileId_file_id_fk": {
           "name": "message_fileId_file_id_fk",
           "tableFrom": "message",
-          "tableTo": "file",
           "columnsFrom": [
             "fileId"
           ],
+          "tableTo": "file",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -361,15 +359,15 @@
         "session_userId_user_id_fk": {
           "name": "session_userId_user_id_fk",
           "tableFrom": "session",
-          "tableTo": "user",
           "columnsFrom": [
             "userId"
           ],
+          "tableTo": "user",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "cascade"
         }
       },
       "compositePrimaryKeys": {},
@@ -440,24 +438,24 @@
       "uniqueConstraints": {
         "user_stripe_customer_id_unique": {
           "name": "user_stripe_customer_id_unique",
-          "nullsNotDistinct": false,
           "columns": [
             "stripe_customer_id"
-          ]
+          ],
+          "nullsNotDistinct": false
         },
         "user_stripe_subscription_id_unique": {
           "name": "user_stripe_subscription_id_unique",
-          "nullsNotDistinct": false,
           "columns": [
             "stripe_subscription_id"
-          ]
+          ],
+          "nullsNotDistinct": false
         },
         "user_stripe_price_id_unique": {
           "name": "user_stripe_price_id_unique",
-          "nullsNotDistinct": false,
           "columns": [
             "stripe_price_id"
-          ]
+          ],
+          "nullsNotDistinct": false
         }
       }
     },
@@ -512,8 +510,10 @@
   },
   "schemas": {},
   "_meta": {
-    "columns": {},
     "schemas": {},
-    "tables": {}
-  }
+    "tables": {},
+    "columns": {}
+  },
+  "id": "d2027146-d387-4584-884b-8de7ab3ee964",
+  "prevId": "00000000-0000-0000-0000-000000000000"
 }

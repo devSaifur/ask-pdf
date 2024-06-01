@@ -41,11 +41,14 @@ export const POST = auth(async function POST(req) {
     apiKey: env.GOOGLE_API_KEY,
   })
 
-  const UpstashVector = new UpstashVectorStore(embeddings, { index })
+  const UpstashVector = new UpstashVectorStore(embeddings, {
+    index,
+    namespace: fileId,
+  })
 
   const results = await UpstashVector.similaritySearch(message, 4)
 
-  const prevMessage = await getPrevMessage(fileId)
+  const prevMessage = await getPrevMessage(fileId, user.id)
 
   const formattedPrevMessage = prevMessage.map((msg) => ({
     role: msg.isUserMessage ? 'user' : 'assistant',

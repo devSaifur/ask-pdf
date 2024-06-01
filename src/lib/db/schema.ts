@@ -138,7 +138,9 @@ export const messages = pgTable('message', {
   userId: text('createdById')
     .notNull()
     .references(() => users.id),
-  fileId: varchar('fileId', { length: 50 }).references(() => files.id),
+  fileId: varchar('fileId', { length: 50 }).references(() => files.id, {
+    onDelete: 'cascade',
+  }),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 })
 

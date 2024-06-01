@@ -82,7 +82,7 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
           latestPage.messages = [
             {
               createdAt: new Date().toISOString(),
-              id: oldData.pages.length + 1,
+              id: oldData.pages.length + 2,
               isUserMessage: true,
               text: message,
             },
