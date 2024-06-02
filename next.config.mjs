@@ -5,6 +5,13 @@ const nextConfig = {
     config.resolve.alias.canvas = false
     return config
   },
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'lh3.googleusercontent.com',
+      },
+    ],
+  },
 }
 
 export default nextConfig
