@@ -130,7 +130,7 @@ const UploadDropzone = () => {
                   {uploadProgress === 100 && (
                     <div className="flex items-center justify-center gap-1 pt-2 text-center text-sm text-zinc-700">
                       <Icons.loader className="size-3 animate-spin" />{' '}
-                      Redirecting..
+                      Redirecting, please wait...
                     </div>
                   )}
                 </div>

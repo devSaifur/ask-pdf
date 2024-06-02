@@ -3,10 +3,7 @@ import { cn } from '~/lib/utils'
 export default function MaxWidthWrapper({
   children,
   className,
-}: {
-  children: React.ReactNode
-  className?: string
-}) {
+}: React.ComponentPropsWithoutRef<'div'>) {
   return (
     <div
       className={cn(

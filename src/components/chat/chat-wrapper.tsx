@@ -3,6 +3,7 @@
 import { ChevronLeftIcon, CrossCircledIcon } from '@radix-ui/react-icons'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
+
 import { getFileByIdAction } from '~/actions/fileActions'
 
 import { buttonVariants } from '../ui/button'

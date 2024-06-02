@@ -12,17 +12,17 @@ importers:
         specifier: ^0.0.17
         version: 0.0.17(zod@3.23.8)
       '@auth/drizzle-adapter':
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^1.2.0
+        version: 1.2.0
       '@hookform/resolvers':
         specifier: ^3.4.2
         version: 3.4.2(react-hook-form@7.51.5(react@18.3.1))
       '@langchain/community':
-        specifier: ^0.2.4
-        version: 0.2.4(@neondatabase/serverless@0.9.3)(@upstash/vector@1.1.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.47.2)(pdf-parse@1.1.1)
+        specifier: ^0.2.5
+        version: 0.2.5(@neondatabase/serverless@0.9.3)(@upstash/vector@1.1.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.47.3)(pdf-parse@1.1.1)
       '@langchain/google-genai':
         specifier: ^0.0.16
-        version: 0.0.16(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2)(zod@3.23.8)
+        version: 0.0.16(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3)(zod@3.23.8)
       '@neondatabase/serverless':
         specifier: ^0.9.3
         version: 0.9.3
@@ -67,7 +67,7 @@ importers:
         version: 1.1.1
       ai:
         specifier: ^3.1.22
-        version: 3.1.22(openai@4.47.2)(react@18.3.1)(solid-js@1.8.17)(svelte@4.2.17)(vue@3.4.27(typescript@5.4.5))(zod@3.23.8)
+        version: 3.1.22(openai@4.47.3)(react@18.3.1)(solid-js@1.8.17)(svelte@4.2.17)(vue@3.4.27(typescript@5.4.5))(zod@3.23.8)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -149,10 +149,10 @@ importers:
         version: 0.5.13(tailwindcss@3.4.3)
       '@trivago/prettier-plugin-sort-imports':
         specifier: ^4.3.0
-        version: 4.3.0(@vue/compiler-sfc@3.4.27)(prettier@3.2.5)
+        version: 4.3.0(@vue/compiler-sfc@3.4.27)(prettier@3.3.0)
       '@types/node':
-        specifier: ^20.12.13
-        version: 20.12.13
+        specifier: ^20.13.0
+        version: 20.13.0
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.3
@@ -172,11 +172,11 @@ importers:
         specifier: ^8.4.38
         version: 8.4.38
       prettier:
-        specifier: ^3.2.5
-        version: 3.2.5
+        specifier: ^3.3.0
+        version: 3.3.0
       prettier-plugin-tailwindcss:
         specifier: ^0.6.1
-        version: 0.6.1(@trivago/prettier-plugin-sort-imports@4.3.0(@vue/compiler-sfc@3.4.27)(prettier@3.2.5))(prettier@3.2.5)
+        version: 0.6.1(@trivago/prettier-plugin-sort-imports@4.3.0(@vue/compiler-sfc@3.4.27)(prettier@3.3.0))(prettier@3.3.0)
       tailwindcss:
         specifier: ^3.4.3
         version: 3.4.3
@@ -227,8 +227,22 @@ packages:
       nodemailer:
         optional: true
 
-  '@auth/drizzle-adapter@1.1.0':
-    resolution: {integrity: sha512-ZC83ne3Ulkxh2II2T5qazgrqc1AmWbbPzs3oR+C93DMlIV8DPIgEaw4cmbV/kesO9xO+Gt7HpkctmOa2B26A1Q==}
+  '@auth/core@0.32.0':
+    resolution: {integrity: sha512-3+ssTScBd+1fd0/fscAyQN1tSygXzuhysuVVzB942ggU4mdfiTbv36P0ccVnExKWYJKvu3E2r3/zxXCCAmTOrg==}
+    peerDependencies:
+      '@simplewebauthn/browser': ^9.0.1
+      '@simplewebauthn/server': ^9.0.2
+      nodemailer: ^6.8.0
+    peerDependenciesMeta:
+      '@simplewebauthn/browser':
+        optional: true
+      '@simplewebauthn/server':
+        optional: true
+      nodemailer:
+        optional: true
+
+  '@auth/drizzle-adapter@1.2.0':
+    resolution: {integrity: sha512-95LHWlgtR4rQeHy4bACiVgTZdWkkEpVXYJim1IqbF1Hy0MnnMalmfGuIlNcOi64+6iC17j5FkDsMchqGwvj2Dg==}
 
   '@babel/code-frame@7.24.6':
     resolution: {integrity: sha512-ZJhac6FkEd1yhG2AHOmfcXG4ceoLltoCVJjN5XsWN9BifBQr+cHJbWi0h68HZuSORq+3WtJ2z0hwF2NG1b5kcA==}
@@ -768,8 +782,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@langchain/community@0.2.4':
-    resolution: {integrity: sha512-rwrPNQLyIe84TPqPYbYOfDA4G/ba1rdj7OtZg63dQmxIvNDOmUCh4xIQac2iuRUnM3o4Ben0Faa9qz+V5oPgIA==}
+  '@langchain/community@0.2.5':
+    resolution: {integrity: sha512-epaUxGJo6DGEDo52LtaN+2Md4SsSE8b6TqAdO9POfxMVPfTnfDJv3d7DrgBL2XRKQRcHndo2YRfiRjHIOXcSzQ==}
     engines: {node: '>=18'}
     peerDependencies:
       '@aws-crypto/sha256-js': ^5.0.0
@@ -843,6 +857,7 @@ packages:
       cohere-ai: '*'
       convex: ^1.3.1
       couchbase: ^4.3.0
+      crypto-js: ^4.2.0
       d3-dsv: ^2.0.0
       discord.js: ^14.14.1
       dria: ^0.0.3
@@ -1034,6 +1049,8 @@ packages:
         optional: true
       couchbase:
         optional: true
+      crypto-js:
+        optional: true
       d3-dsv:
         optional: true
       discord.js:
@@ -1141,6 +1158,10 @@ packages:
 
   '@langchain/openai@0.0.34':
     resolution: {integrity: sha512-M+CW4oXle5fdoz2T2SwdOef8pl3/1XmUx1vjn2mXUVM/128aO0l23FMF0SNBsAbRV6P+p/TuzjodchJbi0Ht/A==}
+    engines: {node: '>=18'}
+
+  '@langchain/openai@0.1.1':
+    resolution: {integrity: sha512-0M7GOA7+dPMQATn8UrYBUp0tWxBJjsJEdRPf+MhDD4jdK70qfC6tBbB/lrT0HchVnz5GFE7az4EUtSh8LiUgzA==}
     engines: {node: '>=18'}
 
   '@langchain/textsplitters@0.0.2':
@@ -1633,8 +1654,8 @@ packages:
   '@types/node@18.19.33':
     resolution: {integrity: sha512-NR9+KrpSajr2qBVp/Yt5TU/rp+b5Mayi3+OlMlcg2cVCfRmcG5PWZ7S4+MG9PZ5gWBoc9Pd0BKSRViuBCRPu0A==}
 
-  '@types/node@20.12.13':
-    resolution: {integrity: sha512-gBGeanV41c1L171rR7wjbMiEpEI/l5XFQdLLfhr/REwpgDy/4U8y89+i8kRiLzDyZdOkXh+cRaTetUnCYutoXA==}
+  '@types/node@20.13.0':
+    resolution: {integrity: sha512-FM6AOb3khNkNIXPnHFDYaHerSv8uN22C91z098AnGccVu+Pcdhi+pNUFDi0iLmPIsVE0JBD0KVS7mzUYt4nRzQ==}
 
   '@types/pg@8.11.6':
     resolution: {integrity: sha512-/2WmmBXHLsfRqzfHW7BNZ8SbYzE8OSk7i3WjFYvfgRHj7S1xj+16Je5fUKv3lVdVzk/zn9TXOqf+avFCFIE0yQ==}
@@ -1977,8 +1998,8 @@ packages:
   can-use-dom@0.1.0:
     resolution: {integrity: sha512-ceOhN1DL7Y4O6M0j9ICgmTYziV89WMd96SvSl0REd8PMgrY0B/WBOPoed5S1KUmJqXgUXh8gzSe6E3ae27upsQ==}
 
-  caniuse-lite@1.0.30001625:
-    resolution: {integrity: sha512-4KE9N2gcRH+HQhpeiRZXd+1niLB/XNLAhSy4z7fI8EzcbcPoAqjNInxVHTiTwWfTIV4w096XG8OtCOCQQKPv3w==}
+  caniuse-lite@1.0.30001626:
+    resolution: {integrity: sha512-JRW7kAH8PFJzoPCJhLSHgDgKg5348hsQ68aqb+slnzuB5QFERv846oA/mRChmlLAOdEDeOkRn3ynb1gSFnjt3w==}
 
   canvas@2.11.2:
     resolution: {integrity: sha512-ItanGBMrmRV7Py2Z+Xhs7cT+FNt5K0vPL4p9EZ/UX/Mu7hFbkxSjKF2KVtPwX7UYWp7dRKnrTvReflgrItJbdw==}
@@ -3492,8 +3513,8 @@ packages:
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
 
-  openai@4.47.2:
-    resolution: {integrity: sha512-E3Wq9mYdDSLajmcJm9RO/lCegTKrQ7ilAkMbhob4UgGhTjHwIHI+mXNDNPl5+sGIUp2iVUkpoi772FjYa7JlqA==}
+  openai@4.47.3:
+    resolution: {integrity: sha512-470d4ibH5kizXflCzgur22GpM4nOjrg7WQ9jTOa3dNKEn248oBy4+pjOyfcFR4V4YUn/YlDNjp6h83PbviCCKQ==}
     hasBin: true
 
   openapi-types@12.1.3:
@@ -3738,8 +3759,8 @@ packages:
       prettier-plugin-svelte:
         optional: true
 
-  prettier@3.2.5:
-    resolution: {integrity: sha512-3/GWa9aOC0YeD7LUfvOG2NiDyhOWRvt1k+rcKhOuYnMY24iiCphgneUfJDyFXd6rZCAnuLBv6UeAULtrhT/F4A==}
+  prettier@3.3.0:
+    resolution: {integrity: sha512-J9odKxERhCQ10OC2yb93583f6UnYutOeiV5i0zEDS7UGTdUt0u+y8erxl3lBKvwo/JHyyoEdXjwp4dke9oyZ/g==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -4415,8 +4436,8 @@ packages:
   yallist@4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
 
-  yaml@2.4.2:
-    resolution: {integrity: sha512-B3VqDZ+JAg1nZpaEmWtTXUlBneoGx6CPM9b0TENK6aoSu5t73dItudwdgmi6tHlIZZId4dZ9skcAQ2UbcyAeVA==}
+  yaml@2.4.3:
+    resolution: {integrity: sha512-sntgmxj8o7DE7g/Qi60cqpLBA3HG3STcDA0kO+WfB05jEKhZMbY7umNm2rBpQvsmZ16/lPXCJGW2672dgOUkrg==}
     engines: {node: '>= 14'}
     hasBin: true
 
@@ -4478,9 +4499,19 @@ snapshots:
       preact: 10.11.3
       preact-render-to-string: 5.2.3(preact@10.11.3)
 
-  '@auth/drizzle-adapter@1.1.0':
+  '@auth/core@0.32.0':
     dependencies:
-      '@auth/core': 0.31.0
+      '@panva/hkdf': 1.1.1
+      '@types/cookie': 0.6.0
+      cookie: 0.6.0
+      jose: 5.3.0
+      oauth4webapi: 2.10.4
+      preact: 10.11.3
+      preact-render-to-string: 5.2.3(preact@10.11.3)
+
+  '@auth/drizzle-adapter@1.2.0':
+    dependencies:
+      '@auth/core': 0.32.0
     transitivePeerDependencies:
       - '@simplewebauthn/browser'
       - '@simplewebauthn/server'
@@ -4884,16 +4915,16 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@langchain/community@0.2.4(@neondatabase/serverless@0.9.3)(@upstash/vector@1.1.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.47.2)(pdf-parse@1.1.1)':
+  '@langchain/community@0.2.5(@neondatabase/serverless@0.9.3)(@upstash/vector@1.1.1)(ignore@5.3.1)(lodash@4.17.21)(openai@4.47.3)(pdf-parse@1.1.1)':
     dependencies:
-      '@langchain/core': 0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2)
-      '@langchain/openai': 0.0.34(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))
+      '@langchain/core': 0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3)
+      '@langchain/openai': 0.1.1(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))
       binary-extensions: 2.3.0
       expr-eval: 2.0.2
       flat: 5.0.2
       js-yaml: 4.1.0
-      langchain: 0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)
-      langsmith: 0.1.30(@langchain/core@0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2))(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2)
+      langchain: 0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1)
+      langsmith: 0.1.30(@langchain/core@0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3))(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3)
       uuid: 9.0.1
       zod: 3.23.8
       zod-to-json-schema: 3.23.0(zod@3.23.8)
@@ -4913,13 +4944,13 @@ snapshots:
       - peggy
       - pyodide
 
-  '@langchain/core@0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2)':
+  '@langchain/core@0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3)':
     dependencies:
       ansi-styles: 5.2.0
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.12
-      langsmith: 0.1.30(@langchain/core@0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2))(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2)
+      langsmith: 0.1.30(@langchain/core@0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3))(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3)
       ml-distance: 4.0.1
       mustache: 4.2.0
       p-queue: 6.6.2
@@ -4931,30 +4962,41 @@ snapshots:
       - langchain
       - openai
 
-  '@langchain/google-genai@0.0.16(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2)(zod@3.23.8)':
+  '@langchain/google-genai@0.0.16(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3)(zod@3.23.8)':
     dependencies:
       '@google/generative-ai': 0.7.1
-      '@langchain/core': 0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2)
+      '@langchain/core': 0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3)
       zod-to-json-schema: 3.23.0(zod@3.23.8)
     transitivePeerDependencies:
       - langchain
       - openai
       - zod
 
-  '@langchain/openai@0.0.34(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))':
+  '@langchain/openai@0.0.34(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))':
     dependencies:
-      '@langchain/core': 0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2)
+      '@langchain/core': 0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3)
       js-tiktoken: 1.0.12
-      openai: 4.47.2
+      openai: 4.47.3
       zod: 3.23.8
       zod-to-json-schema: 3.23.0(zod@3.23.8)
     transitivePeerDependencies:
       - encoding
       - langchain
 
-  '@langchain/textsplitters@0.0.2(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2)':
+  '@langchain/openai@0.1.1(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))':
     dependencies:
-      '@langchain/core': 0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2)
+      '@langchain/core': 0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3)
+      js-tiktoken: 1.0.12
+      openai: 4.47.3
+      zod: 3.23.8
+      zod-to-json-schema: 3.23.0(zod@3.23.8)
+    transitivePeerDependencies:
+      - encoding
+      - langchain
+
+  '@langchain/textsplitters@0.0.2(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3)':
+    dependencies:
+      '@langchain/core': 0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3)
       js-tiktoken: 1.0.12
     transitivePeerDependencies:
       - langchain
@@ -5369,7 +5411,7 @@ snapshots:
       '@tanstack/query-core': 5.40.0
       react: 18.3.1
 
-  '@trivago/prettier-plugin-sort-imports@4.3.0(@vue/compiler-sfc@3.4.27)(prettier@3.2.5)':
+  '@trivago/prettier-plugin-sort-imports@4.3.0(@vue/compiler-sfc@3.4.27)(prettier@3.3.0)':
     dependencies:
       '@babel/generator': 7.17.7
       '@babel/parser': 7.24.6
@@ -5377,7 +5419,7 @@ snapshots:
       '@babel/types': 7.17.0
       javascript-natural-sort: 0.7.1
       lodash: 4.17.21
-      prettier: 3.2.5
+      prettier: 3.3.0
     optionalDependencies:
       '@vue/compiler-sfc': 3.4.27
     transitivePeerDependencies:
@@ -5431,20 +5473,20 @@ snapshots:
 
   '@types/node-fetch@2.6.11':
     dependencies:
-      '@types/node': 20.12.13
+      '@types/node': 20.13.0
       form-data: 4.0.0
 
   '@types/node@18.19.33':
     dependencies:
       undici-types: 5.26.5
 
-  '@types/node@20.12.13':
+  '@types/node@20.13.0':
     dependencies:
       undici-types: 5.26.5
 
   '@types/pg@8.11.6':
     dependencies:
-      '@types/node': 20.12.13
+      '@types/node': 20.13.0
       pg-protocol: 1.6.1
       pg-types: 4.0.2
 
@@ -5620,7 +5662,7 @@ snapshots:
     dependencies:
       humanize-ms: 1.2.1
 
-  ai@3.1.22(openai@4.47.2)(react@18.3.1)(solid-js@1.8.17)(svelte@4.2.17)(vue@3.4.27(typescript@5.4.5))(zod@3.23.8):
+  ai@3.1.22(openai@4.47.3)(react@18.3.1)(solid-js@1.8.17)(svelte@4.2.17)(vue@3.4.27(typescript@5.4.5))(zod@3.23.8):
     dependencies:
       '@ai-sdk/provider': 0.0.8
       '@ai-sdk/provider-utils': 0.0.11(zod@3.23.8)
@@ -5636,7 +5678,7 @@ snapshots:
       swrv: 1.0.4(vue@3.4.27(typescript@5.4.5))
       zod-to-json-schema: 3.22.5(zod@3.23.8)
     optionalDependencies:
-      openai: 4.47.2
+      openai: 4.47.3
       react: 18.3.1
       solid-js: 1.8.17
       svelte: 4.2.17
@@ -5833,7 +5875,7 @@ snapshots:
 
   can-use-dom@0.1.0: {}
 
-  caniuse-lite@1.0.30001625: {}
+  caniuse-lite@1.0.30001626: {}
 
   canvas@2.11.2:
     dependencies:
@@ -6918,22 +6960,22 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1):
+  langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1):
     dependencies:
-      '@langchain/core': 0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2)
-      '@langchain/openai': 0.0.34(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))
-      '@langchain/textsplitters': 0.0.2(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2)
+      '@langchain/core': 0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3)
+      '@langchain/openai': 0.0.34(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))
+      '@langchain/textsplitters': 0.0.2(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3)
       binary-extensions: 2.3.0
       js-tiktoken: 1.0.12
       js-yaml: 4.1.0
       jsonpointer: 5.0.1
       langchainhub: 0.0.11
-      langsmith: 0.1.30(@langchain/core@0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2))(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2)
+      langsmith: 0.1.30(@langchain/core@0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3))(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3)
       ml-distance: 4.0.1
       openapi-types: 12.1.3
       p-retry: 4.6.2
       uuid: 9.0.1
-      yaml: 2.4.2
+      yaml: 2.4.3
       zod: 3.23.8
       zod-to-json-schema: 3.23.0(zod@3.23.8)
     optionalDependencies:
@@ -6945,7 +6987,7 @@ snapshots:
 
   langchainhub@0.0.11: {}
 
-  langsmith@0.1.30(@langchain/core@0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2))(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2):
+  langsmith@0.1.30(@langchain/core@0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3))(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3):
     dependencies:
       '@types/uuid': 9.0.8
       commander: 10.0.1
@@ -6953,9 +6995,9 @@ snapshots:
       p-retry: 4.6.2
       uuid: 9.0.1
     optionalDependencies:
-      '@langchain/core': 0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1))(openai@4.47.2)
-      langchain: 0.2.3(ignore@5.3.1)(openai@4.47.2)(pdf-parse@1.1.1)
-      openai: 4.47.2
+      '@langchain/core': 0.2.5(langchain@0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1))(openai@4.47.3)
+      langchain: 0.2.3(ignore@5.3.1)(openai@4.47.3)(pdf-parse@1.1.1)
+      openai: 4.47.3
 
   language-subtag-registry@0.3.23: {}
 
@@ -7346,7 +7388,7 @@ snapshots:
       '@next/env': 14.2.3
       '@swc/helpers': 0.5.5
       busboy: 1.6.0
-      caniuse-lite: 1.0.30001625
+      caniuse-lite: 1.0.30001626
       graceful-fs: 4.2.11
       postcss: 8.4.31
       react: 18.3.1
@@ -7445,7 +7487,7 @@ snapshots:
     dependencies:
       wrappy: 1.0.2
 
-  openai@4.47.2:
+  openai@4.47.3:
     dependencies:
       '@types/node': 18.19.33
       '@types/node-fetch': 2.6.11
@@ -7588,7 +7630,7 @@ snapshots:
   postcss-load-config@4.0.2(postcss@8.4.38):
     dependencies:
       lilconfig: 3.1.1
-      yaml: 2.4.2
+      yaml: 2.4.3
     optionalDependencies:
       postcss: 8.4.38
 
@@ -7642,13 +7684,13 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-tailwindcss@0.6.1(@trivago/prettier-plugin-sort-imports@4.3.0(@vue/compiler-sfc@3.4.27)(prettier@3.2.5))(prettier@3.2.5):
+  prettier-plugin-tailwindcss@0.6.1(@trivago/prettier-plugin-sort-imports@4.3.0(@vue/compiler-sfc@3.4.27)(prettier@3.3.0))(prettier@3.3.0):
     dependencies:
-      prettier: 3.2.5
+      prettier: 3.3.0
     optionalDependencies:
-      '@trivago/prettier-plugin-sort-imports': 4.3.0(@vue/compiler-sfc@3.4.27)(prettier@3.2.5)
+      '@trivago/prettier-plugin-sort-imports': 4.3.0(@vue/compiler-sfc@3.4.27)(prettier@3.3.0)
 
-  prettier@3.2.5: {}
+  prettier@3.3.0: {}
 
   pretty-format@3.8.0: {}
 
@@ -8470,7 +8512,7 @@ snapshots:
   yallist@4.0.0:
     optional: true
 
-  yaml@2.4.2: {}
+  yaml@2.4.3: {}
 
   yocto-queue@0.1.0: {}
 

@@ -9,7 +9,7 @@ export default function SignInBtn() {
 
   return (
     <Button type="submit" variant="ghost" disabled={pending}>
-      Sign in
+      {pending ? 'Signing in...' : 'Sign in'}
     </Button>
   )
 }
