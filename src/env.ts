@@ -12,6 +12,7 @@ export const env = createEnv({
     AUTH_SECRET: z.string().min(1),
     AUTH_GOOGLE_ID: z.string().min(1),
     AUTH_GOOGLE_SECRET: z.string().min(1),
+    STRIPE_SECRET_KEY: z.string().min(1),
   },
   client: {},
   runtimeEnv: {
@@ -24,5 +25,6 @@ export const env = createEnv({
     AUTH_SECRET: process.env.AUTH_SECRET,
     AUTH_GOOGLE_ID: process.env.AUTH_GOOGLE_ID,
     AUTH_GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET,
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
   },
 })
