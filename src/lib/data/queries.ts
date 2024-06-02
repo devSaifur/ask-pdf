@@ -4,7 +4,13 @@ import { and, asc, desc, eq, lte } from 'drizzle-orm'
 import 'server-only'
 
 import { db } from '../db'
-import { TFileInsert, TMessageInsert, files, messages } from '../db/schema'
+import {
+  TFileInsert,
+  TMessageInsert,
+  files,
+  messages,
+  users,
+} from '../db/schema'
 
 export async function getFiles(userId: string) {
   return await db.select().from(files).where(eq(files.createdById, userId))
@@ -95,4 +101,10 @@ export async function getFileMessages({
     )
     .limit(limit)
     .orderBy(desc(messages.id))
+}
+
+export async function getUserById(userId: string) {
+  return await db.query.users.findFirst({
+    where: eq(users.id, userId),
+  })
 }

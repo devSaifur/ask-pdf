@@ -150,7 +150,7 @@ const UploadDropzone = () => {
   )
 }
 
-export default function UploadButton() {
+export default function UploadBtn() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
