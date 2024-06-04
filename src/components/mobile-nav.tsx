@@ -17,7 +17,7 @@ export default function MobileNav({ isAuth }: { isAuth: boolean }) {
 
   useEffect(() => {
     if (isOpen) toggleOpen()
-  }, [pathname])
+  }, [isOpen])
 
   const closeOnCurrent = (href: string) => {
     if (pathname === href) {
@@ -39,25 +39,14 @@ export default function MobileNav({ isAuth }: { isAuth: boolean }) {
               <>
                 <li>
                   <Link
-                    onClick={() => closeOnCurrent('/sign-up')}
+                    onClick={() => closeOnCurrent('/api/auth/sign-in')}
                     className="flex w-full items-center font-semibold text-green-600"
-                    href="/sign-up"
+                    href="/api/auth/sign-in"
                   >
-                    Get started
+                    Sign in
                     <ArrowRightIcon className="ml-2 size-5" />
                   </Link>
                 </li>
-                <li className="my-3 h-px w-full bg-gray-300" />
-                <li>
-                  <Link
-                    onClick={() => closeOnCurrent('/sign-in')}
-                    className="flex w-full items-center font-semibold"
-                    href="/sign-in"
-                  >
-                    Sign in
-                  </Link>
-                </li>
-                <li className="my-3 h-px w-full bg-gray-300" />
                 <li>
                   <Link
                     onClick={() => closeOnCurrent('/pricing')}
@@ -83,7 +72,8 @@ export default function MobileNav({ isAuth }: { isAuth: boolean }) {
                 <li>
                   <Button
                     onClick={() => signOut()}
-                    className="flex w-full items-center font-semibold"
+                    variant="destructive"
+                    className="items-start font-semibold"
                   >
                     Sign out
                   </Button>

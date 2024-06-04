@@ -9,7 +9,7 @@ export default async function Documents() {
   const session = await getSession()
 
   if (!session?.user?.id) {
-    redirect('/sign-in?origin=documents')
+    redirect('/api/auth/sign-in?callbackUrl=/documents')
   }
 
   const files = await getFiles(session.user.id)

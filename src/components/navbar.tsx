@@ -1,10 +1,8 @@
 import Link from 'next/link'
 
-import { signIn } from '~/lib/auth'
 import getSession from '~/lib/auth/getSession'
 
 import AccountNav from './account-nav'
-import LoginBtn from './login-btn'
 import MobileNav from './mobile-nav'
 import { buttonVariants } from './ui/button'
 import MaxWidthWrapper from './ui/max-width-wrapper'
@@ -30,19 +28,18 @@ export default async function Navbar() {
                   href="/pricing"
                   className={buttonVariants({
                     variant: 'ghost',
-                    size: 'sm',
                   })}
                 >
                   Pricing
                 </Link>
-                <form
-                  action={async () => {
-                    'use server'
-                    await signIn('google', { redirectTo: '/' })
-                  }}
+                <Link
+                  className={buttonVariants({
+                    variant: 'ghost',
+                  })}
+                  href="/api/auth/signin?callbackUrl=/documents"
                 >
-                  <LoginBtn />
-                </form>
+                  Sign in
+                </Link>
               </>
             ) : (
               <>
@@ -50,7 +47,6 @@ export default async function Navbar() {
                   href="/documents"
                   className={buttonVariants({
                     variant: 'ghost',
-                    size: 'sm',
                   })}
                 >
                   Documents
