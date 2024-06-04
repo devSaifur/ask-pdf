@@ -64,7 +64,6 @@ export function constructMetadata({
     },
     icons,
     metadataBase: new URL('https://ask-pdf-saifur.vercel.app'),
-    themeColor: 'white',
     ...(noIndex && {
       robots: {
         index: false,
