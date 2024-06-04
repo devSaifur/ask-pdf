@@ -1,10 +1,9 @@
 'use client'
 
 import { ChevronLeftIcon, CrossCircledIcon } from '@radix-ui/react-icons'
-import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 
-import { getFileByIdAction } from '~/actions/fileActions'
+import { trpc } from '~/app/_trpc/client'
 
 import { buttonVariants } from '../ui/button'
 import { Icons } from '../ui/icons'
@@ -17,15 +16,16 @@ interface ChatWrapperProps {
 }
 
 export default function ChatWrapper({ fileId }: ChatWrapperProps) {
-  const { data: file } = useQuery({
-    queryKey: ['file'],
-    queryFn: () => getFileByIdAction(fileId),
-    refetchInterval: ({ state }) =>
-      state.data?.uploadStatus === 'success' ||
-      state.data?.uploadStatus === 'failed'
-        ? false
-        : 500,
-  })
+  const { data: file } = trpc.getFile.useQuery(
+    { fileId },
+    {
+      refetchInterval: ({ state }) =>
+        state.data?.uploadStatus === 'success' ||
+        state.data?.uploadStatus === 'failed'
+          ? false
+          : 500,
+    },
+  )
 
   if (!file) return null
 

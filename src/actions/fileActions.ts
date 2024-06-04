@@ -26,17 +26,3 @@ export async function deleteFileAction(id: string) {
     throw err
   }
 }
-
-export async function getFileByIdAction(id: string) {
-  const session = await getSession()
-
-  if (!session?.user?.id) {
-    throw new Error('Unauthorized')
-  }
-
-  try {
-    return await getFileById({ fileId: id, userId: session.user.id })
-  } catch (err) {
-    throw err
-  }
-}

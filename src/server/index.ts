@@ -42,6 +42,24 @@ export const appRouter = router({
 
       return { messages, nextCursor }
     }),
+
+  getFile: protectedProcedure
+    .input(
+      z.object({
+        fileId: z.string(),
+      }),
+    )
+    .query(async ({ input, ctx }) => {
+      const { userId } = ctx
+      const { fileId } = input
+
+      const file = await getFileById({ fileId, userId })
+
+      if (!file) throw new TRPCError({ code: 'NOT_FOUND' })
+
+      return file
+    }),
+
   createStripeSession: protectedProcedure.mutation(async ({ ctx }) => {
     const { userId } = ctx
 

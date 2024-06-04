@@ -5,14 +5,11 @@ import { Toaster } from 'sonner'
 
 import Navbar from '~/components/navbar'
 import Providers from '~/components/providers'
-import { cn } from '~/lib/utils'
+import { cn, constructMetadata } from '~/lib/utils'
 
 import './globals.css'
 
-export const metadata: Metadata = {
-  title: 'Ask PDF',
-  description: 'Ask your pdf questions and get answers with the power of AI',
-}
+export const metadata: Metadata = constructMetadata()
 
 export default function RootLayout({
   children,

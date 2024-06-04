@@ -11,7 +11,7 @@ export default async function Page({ params }: { params: { docId: string } }) {
   const session = await getSession()
 
   if (!session?.user?.id) {
-    redirect(`/sign-in?origin=documents/${docId}`)
+    redirect(`/signin?callbackUrl=/documents/${docId}`)
   }
 
   const file = await getFileById({ fileId: docId, userId: session.user.id })

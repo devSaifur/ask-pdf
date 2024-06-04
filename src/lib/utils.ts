@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from 'clsx'
+import type { Metadata } from 'next'
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
@@ -27,4 +28,48 @@ export function formatBytes(
   return `${(bytes / Math.pow(1024, i)).toFixed(decimals)} ${
     sizeType === 'accurate' ? accurateSizes[i] ?? 'Bytest' : sizes[i] ?? 'Bytes'
   }`
+}
+
+export function constructMetadata({
+  title = 'Ask PDF - Chat with your PDF in seconds',
+  description = 'Ask your pdf questions and get answers with the power of AI',
+  image = '/thumbnail.png',
+  icons = '/favicon.ico',
+  noIndex = false,
+}: {
+  title?: string
+  description?: string
+  image?: string
+  icons?: string
+  noIndex?: boolean
+} = {}): Metadata {
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [
+        {
+          url: image,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image],
+      creator: '@devSaifur',
+    },
+    icons,
+    metadataBase: new URL('https://ask-pdf-saifur.vercel.app'),
+    themeColor: 'white',
+    ...(noIndex && {
+      robots: {
+        index: false,
+        follow: false,
+      },
+    }),
+  }
 }

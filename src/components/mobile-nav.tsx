@@ -17,7 +17,7 @@ export default function MobileNav({ isAuth }: { isAuth: boolean }) {
 
   useEffect(() => {
     if (isOpen) toggleOpen()
-  }, [isOpen])
+  }, [pathname]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const closeOnCurrent = (href: string) => {
     if (pathname === href) {
@@ -41,12 +41,13 @@ export default function MobileNav({ isAuth }: { isAuth: boolean }) {
                   <Link
                     onClick={() => closeOnCurrent('/api/auth/sign-in')}
                     className="flex w-full items-center font-semibold text-green-600"
-                    href="/api/auth/sign-in"
+                    href="/api/auth/signin?callbackUrl=/documents"
                   >
-                    Sign in
+                    Get started
                     <ArrowRightIcon className="ml-2 size-5" />
                   </Link>
                 </li>
+                <li className="my-3 h-px w-full bg-gray-300" />
                 <li>
                   <Link
                     onClick={() => closeOnCurrent('/pricing')}
@@ -61,11 +62,11 @@ export default function MobileNav({ isAuth }: { isAuth: boolean }) {
               <>
                 <li>
                   <Link
-                    onClick={() => closeOnCurrent('/dashboard')}
+                    onClick={() => closeOnCurrent('/documents')}
                     className="flex w-full items-center font-semibold"
-                    href="/dashboard"
+                    href="/documents"
                   >
-                    Dashboard
+                    Documents
                   </Link>
                 </li>
                 <li className="my-3 h-px w-full bg-gray-300" />

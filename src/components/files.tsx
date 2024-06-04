@@ -1,6 +1,5 @@
 'use client'
 
-import { Button } from './ui/button'
 import {
   ChatBubbleIcon,
   PlusIcon,
@@ -12,8 +11,11 @@ import { format } from 'date-fns'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+
 import { deleteFileAction } from '~/actions/fileActions'
 import { TFile } from '~/lib/db/schema'
+
+import { Button } from './ui/button'
 
 export default function Files({ files }: { files: TFile[] }) {
   const router = useRouter()

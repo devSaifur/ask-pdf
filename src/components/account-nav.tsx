@@ -32,8 +32,8 @@ export default async function AccountNav({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="overflow-visible">
-        <Button className="aspect-square h-8 w-8 rounded-full bg-slate-400">
-          <Avatar className="relative h-8 w-8">
+        <Button className="aspect-square size-8 rounded-full bg-slate-400">
+          <Avatar className="relative size-8">
             {imageUrl ? (
               <div className="relative aspect-square h-full w-full">
                 <Image

@@ -80,3 +80,8 @@
 .scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
   border-radius: 7px;
 }
+
+html,
+body {
+  scrollbar-gutter: stable;
+}
