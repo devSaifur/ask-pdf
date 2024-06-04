@@ -15,13 +15,15 @@ import { Dialog, DialogContent, DialogTrigger } from './ui/dialog'
 import { Icons } from './ui/icons'
 import { Progress } from './ui/progress'
 
-const UploadDropzone = () => {
+const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
   const router = useRouter()
 
   const [isUploading, setIsUploading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
 
-  const { startUpload } = useUploadThing('pdfUploader')
+  const { startUpload } = useUploadThing(
+    isSubscribed ? 'proPlanUploader' : 'freePlanUploader',
+  )
 
   const { mutate: startPooling } = useMutation({
     mutationKey: ['upload'],
@@ -101,7 +103,9 @@ const UploadDropzone = () => {
                   <span className="font-semibold">Click to upload</span> or drag
                   and drop
                 </p>
-                <p className="text-xs text-zinc-500">PDF (up to 4MB)</p>
+                <p className="text-xs text-zinc-500">
+                  PDF (up to {isSubscribed ? '16MB' : '4MB'})
+                </p>
               </div>
 
               {acceptedFiles && acceptedFiles.length > 0 && (
@@ -147,7 +151,7 @@ const UploadDropzone = () => {
   )
 }
 
-export default function UploadBtn() {
+export default function UploadBtn({ isSubscribed }: { isSubscribed: boolean }) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -164,7 +168,7 @@ export default function UploadBtn() {
       </DialogTrigger>
 
       <DialogContent>
-        <UploadDropzone />
+        <UploadDropzone isSubscribed={isSubscribed} />
       </DialogContent>
     </Dialog>
   )

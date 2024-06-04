@@ -108,3 +108,9 @@ export async function getUserById(userId: string) {
     where: eq(users.id, userId),
   })
 }
+
+export async function checkFileExists(fileKey: string) {
+  return await db.query.files.findFirst({
+    where: eq(files.key, fileKey),
+  })
+}

@@ -75,7 +75,7 @@ export default async function AccountNav({
 
         <DropdownMenuItem asChild>
           {subscriptionPlan?.isSubscribed ? (
-            <Link href="/dashboard/billing" className="cursor-pointer">
+            <Link href="/documents/billing" className="cursor-pointer">
               Manage Subscription
             </Link>
           ) : (

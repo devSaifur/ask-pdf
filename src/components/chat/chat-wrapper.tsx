@@ -4,6 +4,7 @@ import { ChevronLeftIcon, CrossCircledIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 
 import { trpc } from '~/app/_trpc/client'
+import { PLANS } from '~/config/stripe'
 
 import { buttonVariants } from '../ui/button'
 import { Icons } from '../ui/icons'
@@ -13,9 +14,13 @@ import Messages from './messages'
 
 interface ChatWrapperProps {
   fileId: string
+  isSubscribed: boolean
 }
 
-export default function ChatWrapper({ fileId }: ChatWrapperProps) {
+export default function ChatWrapper({
+  fileId,
+  isSubscribed,
+}: ChatWrapperProps) {
   const { data: file } = trpc.getFile.useQuery(
     { fileId },
     {
@@ -65,21 +70,17 @@ export default function ChatWrapper({ fileId }: ChatWrapperProps) {
         <div className="flex flex-col items-center gap-2">
           <CrossCircledIcon className="size-8 text-red-500" />
           <h3 className="text-xl font-semibold">Too many pages in PDF</h3>
-          {/* <p className='text-zinc-500 text-sm'>
-          Your{' '}
-          <span className='font-medium'>
-            {isSubscribed ? 'Pro' : 'Free'}
-          </span>{' '}
-          plan supports up to{' '}
-          {isSubscribed
-            ? PLANS.find((p) => p.name === 'Pro')
-                ?.pagesPerPdf
-            : PLANS.find((p) => p.name === 'Free')
-                ?.pagesPerPdf}{' '}
-          pages per PDF.
-        </p> */}
+          <p className="text-sm text-zinc-500">
+            Your{' '}
+            <span className="font-medium">{isSubscribed ? 'Pro' : 'Free'}</span>{' '}
+            plan supports up to{' '}
+            {isSubscribed
+              ? PLANS.find((p) => p.name === 'Pro')?.pagesPerPdf
+              : PLANS.find((p) => p.name === 'Free')?.pagesPerPdf}{' '}
+            pages per PDF.
+          </p>
           <Link
-            href="/dashboard"
+            href="/documents"
             className={buttonVariants({
               variant: 'secondary',
               className: 'mt-4',

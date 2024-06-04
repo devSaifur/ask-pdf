@@ -4,12 +4,14 @@ import Files from '~/components/files'
 import UploadBtn from '~/components/upload-btn'
 import getSession from '~/lib/auth/getSession'
 import { getFiles } from '~/lib/data/queries'
+import { getUserSubscriptionPlan } from '~/lib/stripe'
 
 export default async function Documents() {
   const session = await getSession()
+  const subscriptionPlan = await getUserSubscriptionPlan()
 
   if (!session?.user?.id) {
-    redirect('/api/auth/sign-in?callbackUrl=/documents')
+    redirect('/api/auth/signin?callbackUrl=/documents')
   }
 
   const files = await getFiles(session.user.id)
@@ -19,7 +21,7 @@ export default async function Documents() {
       <div className="mt-8 flex flex-col items-center justify-between gap-4 border-b border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-0">
         <h1 className="mb-3 text-5xl font-bold text-gray-900">My Files</h1>
 
-        <UploadBtn />
+        <UploadBtn isSubscribed={subscriptionPlan.isSubscribed} />
       </div>
 
       {/* Display all user files */}
