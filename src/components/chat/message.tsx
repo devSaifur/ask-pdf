@@ -55,15 +55,12 @@ export const Message = forwardRef<HTMLDivElement, MessageProps>(
                 'rounded-bl-none',
             )}
           >
-            {typeof message.text === 'string' ? (
-              <ReactMarkdown
-                className={cn('prose', message.isUserMessage && 'text-zinc-50')}
-              >
-                {message.text}
-              </ReactMarkdown>
-            ) : (
-              message.text
-            )}
+            <ReactMarkdown
+              className={cn('prose', message.isUserMessage && 'text-zinc-50')}
+            >
+              {message.text}
+            </ReactMarkdown>
+
             {message.id !== 'loading-message' && (
               <div
                 className={cn(
