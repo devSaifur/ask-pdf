@@ -12,11 +12,6 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    reactCompiler: {
-      compilationMode: 'all',
-    },
-  },
 }
 
 export default nextConfig
