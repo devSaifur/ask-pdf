@@ -1,5 +1,6 @@
 'use client'
 
+import { createId } from '@paralleldrive/cuid2'
 import { useMutation } from '@tanstack/react-query'
 import { createContext, useRef, useState } from 'react'
 import { toast } from 'sonner'
@@ -25,8 +26,6 @@ interface Props {
   children: React.ReactNode
   fileId: string
 }
-
-const MAGIC_NUMBER_FOR_AI_RESPONSE = 999 // this is a indicator for the AI to respond
 
 export const ChatContextProvider = ({ fileId, children }: Props) => {
   const [message, setMessage] = useState('')
@@ -82,7 +81,7 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
           latestPage.messages = [
             {
               createdAt: new Date().toISOString(),
-              id: oldData.pages.length + 2,
+              id: createId(),
               isUserMessage: true,
               text: message,
             },
@@ -143,9 +142,7 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
               }
 
             let isAiResponseCreated = oldData.pages.some((page) =>
-              page.messages.some(
-                (msg) => msg.id === MAGIC_NUMBER_FOR_AI_RESPONSE,
-              ),
+              page.messages.some((msg) => msg.id === 'ai-response'),
             )
 
             let updatedPages = oldData.pages.map((page) => {
@@ -156,7 +153,7 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
                   updatedMessages = [
                     {
                       createdAt: new Date().toISOString(),
-                      id: MAGIC_NUMBER_FOR_AI_RESPONSE,
+                      id: 'ai-response',
                       isUserMessage: false,
                       text: accResponse,
                     },
@@ -164,7 +161,7 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
                   ]
                 } else {
                   updatedMessages = page.messages.map((msg) => {
-                    if (msg.id === MAGIC_NUMBER_FOR_AI_RESPONSE) {
+                    if (msg.id === 'ai-response') {
                       return {
                         ...msg,
                         text: accResponse,
