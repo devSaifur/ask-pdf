@@ -83,7 +83,7 @@ export async function getFileMessages({
 }: {
   fileId: string
   limit: number
-  cursor?: number
+  cursor?: string
 }) {
   return await db
     .select({
@@ -100,7 +100,7 @@ export async function getFileMessages({
       ),
     )
     .limit(limit)
-    .orderBy(desc(messages.id))
+    .orderBy(desc(messages.createdAt))
 }
 
 export async function getUserById(userId: string) {

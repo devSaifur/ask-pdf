@@ -14,7 +14,7 @@ export const appRouter = router({
     .input(
       z.object({
         limit: z.number().min(1).max(100).nullish(),
-        cursor: z.coerce.number().nullish(),
+        cursor: z.string().nullish(),
         fileId: z.string(),
       }),
     )

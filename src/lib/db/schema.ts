@@ -123,7 +123,9 @@ export const filesRelation = relations(files, ({ one, many }) => ({
 }))
 
 export const messages = sqliteTable('message', {
-  id: integer('id').primaryKey({ autoIncrement: true }),
+  id: text('id')
+    .primaryKey()
+    .$defaultFn(() => createId()),
   text: text('text').notNull(),
   isUserMessage: integer('isUserMessage', { mode: 'boolean' }).notNull(),
   userId: text('createdById')

@@ -39,7 +39,7 @@ CREATE TABLE `file` (
 );
 --> statement-breakpoint
 CREATE TABLE `message` (
-	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`id` text PRIMARY KEY NOT NULL,
 	`text` text NOT NULL,
 	`isUserMessage` integer NOT NULL,
 	`createdById` text NOT NULL,
