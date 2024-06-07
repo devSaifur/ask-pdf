@@ -25,7 +25,7 @@ export function useIntersection<T extends HTMLElement = any>(
 
       observer.current.observe(element)
     },
-    [options],
+    [options?.rootMargin, options?.root, options?.threshold], // eslint-disable-line react-hooks/exhaustive-deps
   )
 
   return { ref, entry }

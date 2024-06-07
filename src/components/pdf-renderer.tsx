@@ -30,7 +30,7 @@ import {
 import { Icons } from './ui/icons'
 import { Input } from './ui/input'
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.mjs`
 
 export default function PdfRenderer({ url }: { url: string }) {
   const [numPages, setNumPages] = useState<number>()
@@ -161,7 +161,7 @@ export default function PdfRenderer({ url }: { url: string }) {
             <Document
               file={url}
               loading={
-                <div className="flex justify-center">
+                <div className="flex items-center justify-center">
                   <Icons.loader className="my-24 size-6 animate-spin" />
                 </div>
               }

@@ -21,8 +21,8 @@ importers:
         specifier: ^0.2.9
         version: 0.2.9(@upstash/vector@1.1.2)(ignore@5.3.1)(lodash@4.17.21)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0)
       '@langchain/google-genai':
-        specifier: ^0.0.16
-        version: 0.0.16(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)(zod@3.23.8)
+        specifier: ^0.0.17
+        version: 0.0.17(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)(zod@3.23.8)
       '@libsql/client':
         specifier: ^0.6.2
         version: 0.6.2
@@ -102,10 +102,10 @@ importers:
         specifier: ^1.1.1
         version: 1.1.1
       react:
-        specifier: ^18
+        specifier: ^18.3.1
         version: 18.3.1
       react-dom:
-        specifier: ^18
+        specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       react-dropzone:
         specifier: ^14.2.3
@@ -1147,8 +1147,8 @@ packages:
     resolution: {integrity: sha512-YB9F0vdi/PcgBLSKtDwQ3gV6w4xVfk4ph0U43Okz2dAapKfBkVVB0rzr/afYUt/WHs864MuaO8uLN64egSDtIA==}
     engines: {node: '>=18'}
 
-  '@langchain/google-genai@0.0.16':
-    resolution: {integrity: sha512-aUHEeY7sTwxNqj7L5scvnOhNLOKPVSvf7HR6p1Y3M7BPyU63fXP7faB+qyuHmibtKU8pj+ApoXPpjRflYKSv4w==}
+  '@langchain/google-genai@0.0.17':
+    resolution: {integrity: sha512-BjUsfbFNxIVM2hkChQgAxUNxrrDc3k0tNLIfkYBX4BnjPEz967crdoFwJlTO6J78UM8LAmiTiEhHDbKLWDLzZg==}
     engines: {node: '>=18'}
 
   '@langchain/openai@0.0.34':
@@ -5050,7 +5050,7 @@ snapshots:
       - langchain
       - openai
 
-  '@langchain/google-genai@0.0.16(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)(zod@3.23.8)':
+  '@langchain/google-genai@0.0.17(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)(zod@3.23.8)':
     dependencies:
       '@google/generative-ai': 0.7.1
       '@langchain/core': 0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)

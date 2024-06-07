@@ -4,12 +4,16 @@ import { forwardRef } from 'react'
 import ReactMarkdown from 'react-markdown'
 
 import { cn } from '~/lib/utils'
-import type { ExtendedMessage } from '~/types'
 
 import { Icons } from '../ui/icons'
 
 interface MessageProps {
-  message: ExtendedMessage
+  message: {
+    id: string | number
+    text: string | JSX.Element
+    isUserMessage: boolean
+    createdAt: string
+  }
   isNextMessageSamePerson: boolean
 }
 
@@ -55,13 +59,19 @@ export const Message = forwardRef<HTMLDivElement, MessageProps>(
                 'rounded-bl-none',
             )}
           >
-            <ReactMarkdown
-              className={cn('prose', message.isUserMessage && 'text-zinc-50')}
-            >
-              {message.text}
-            </ReactMarkdown>
+            {typeof message.text === 'string' ? (
+              <ReactMarkdown
+                className={cn('prose', {
+                  'text-zinc-50': message.isUserMessage,
+                })}
+              >
+                {message.text}
+              </ReactMarkdown>
+            ) : (
+              message.text
+            )}
 
-            {message.id !== 'loading-message' && (
+            {message.id.toString() !== 'loading-message' && (
               <div
                 className={cn(
                   'mt-2 w-full select-none text-right text-xs',

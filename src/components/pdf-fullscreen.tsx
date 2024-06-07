@@ -1,13 +1,14 @@
 'use client'
 
-import { Button } from './ui/button'
-import { Dialog, DialogContent, DialogTrigger } from './ui/dialog'
 import { EnterFullScreenIcon, ReloadIcon } from '@radix-ui/react-icons'
 import { useState } from 'react'
 import { Document, Page } from 'react-pdf'
 import { useResizeDetector } from 'react-resize-detector'
 import SimpleBar from 'simplebar-react'
 import { toast } from 'sonner'
+
+import { Button } from './ui/button'
+import { Dialog, DialogContent, DialogTrigger } from './ui/dialog'
 
 export default function PdfFullscreen({ url }: { url: string }) {
   const [numPages, setNumPages] = useState<number>()
