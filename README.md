@@ -9,6 +9,7 @@ Ask PDF allows you to have conversations with any PDF document. Simply upload yo
 - **Framework:** [Next.js](https://nextjs.org)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com)
 - **Authentication:** [Auth.js](https://authjs.dev)
+- **Database:** [SQLite/Turso](https://turso.tech)
 - **ORM:** [Drizzle ORM](https://orm.drizzle.team)
 - **UI Components:** [shadcn/ui](https://ui.shadcn.com)
 - **File Uploads:** [uploadthing](https://uploadthing.com)

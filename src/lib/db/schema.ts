@@ -1,36 +1,26 @@
 import { createId } from '@paralleldrive/cuid2'
-import { relations } from 'drizzle-orm'
-import {
-  boolean,
-  integer,
-  pgEnum,
-  pgTable,
-  primaryKey,
-  serial,
-  text,
-  timestamp,
-  varchar,
-} from 'drizzle-orm/pg-core'
+import { relations, sql } from 'drizzle-orm'
+import { integer, primaryKey, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 import type { AdapterAccountType } from 'next-auth/adapters'
 
-export const users = pgTable('user', {
+export const users = sqliteTable('user', {
   id: text('id')
     .primaryKey()
     .$defaultFn(() => createId()),
-  name: varchar('name', { length: 100 }),
-  email: varchar('email', { length: 100 }).notNull(),
-  emailVerified: timestamp('emailVerified', { mode: 'date' }),
+  name: text('name', { length: 100 }),
+  email: text('email', { length: 100 }).notNull(),
+  emailVerified: text('emailVerified'),
   image: text('image'),
 
-  stripeCustomerId: varchar('stripe_customer_id', { length: 255 }).unique(),
-  stripeSubscriptionId: varchar('stripe_subscription_id', {
+  stripeCustomerId: text('stripe_customer_id', { length: 255 }).unique(),
+  stripeSubscriptionId: text('stripe_subscription_id', {
     length: 255,
   }).unique(),
-  stripePriceId: varchar('stripe_price_id', { length: 255 }).unique(),
-  stripeCurrentPeriodEnd: timestamp('stripe_current_period_end'),
+  stripePriceId: text('stripe_price_id', { length: 255 }).unique(),
+  stripeCurrentPeriodEnd: text('stripe_current_period_end'),
 })
 
-export const accounts = pgTable(
+export const accounts = sqliteTable(
   'account',
   {
     userId: text('userId')
@@ -54,20 +44,20 @@ export const accounts = pgTable(
   }),
 )
 
-export const sessions = pgTable('session', {
+export const sessions = sqliteTable('session', {
   sessionToken: text('sessionToken').primaryKey(),
   userId: text('userId')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
-  expires: timestamp('expires', { mode: 'date' }).notNull(),
+  expires: integer('expires', { mode: 'timestamp_ms' }).notNull(),
 })
 
-export const verificationTokens = pgTable(
+export const verificationTokens = sqliteTable(
   'verificationToken',
   {
     identifier: text('identifier').notNull(),
     token: text('token').notNull(),
-    expires: timestamp('expires', { mode: 'date' }).notNull(),
+    expires: integer('expires', { mode: 'timestamp_ms' }).notNull(),
   },
   (verificationToken) => ({
     compositePk: primaryKey({
@@ -76,7 +66,7 @@ export const verificationTokens = pgTable(
   }),
 )
 
-export const authenticators = pgTable(
+export const authenticators = sqliteTable(
   'authenticator',
   {
     credentialID: text('credentialID').notNull().unique(),
@@ -87,7 +77,9 @@ export const authenticators = pgTable(
     credentialPublicKey: text('credentialPublicKey').notNull(),
     counter: integer('counter').notNull(),
     credentialDeviceType: text('credentialDeviceType').notNull(),
-    credentialBackedUp: boolean('credentialBackedUp').notNull(),
+    credentialBackedUp: integer('credentialBackedUp', {
+      mode: 'boolean',
+    }).notNull(),
     transports: text('transports'),
   },
   (authenticator) => ({
@@ -102,25 +94,22 @@ export const usersRelation = relations(users, ({ many }) => ({
   messages: many(messages),
 }))
 
-export const uploadStatus = pgEnum('upload_status', [
-  'pending',
-  'processing',
-  'success',
-  'failed',
-])
-
-export const files = pgTable('file', {
-  id: varchar('id', { length: 50 })
+export const files = sqliteTable('file', {
+  id: text('id', { length: 50 })
     .primaryKey()
     .$defaultFn(() => createId()),
-  name: varchar('name', { length: 256 }).notNull(),
-  url: varchar('url', { length: 256 }).notNull(),
-  key: varchar('key', { length: 256 }).notNull(),
+  name: text('name', { length: 256 }).notNull(),
+  url: text('url', { length: 256 }).notNull(),
+  key: text('key', { length: 256 }).notNull(),
   createdById: text('createdById')
     .notNull()
     .references(() => users.id),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  uploadStatus: uploadStatus('upload_status').default('pending'),
+  createdAt: text('created_at')
+    .default(sql`(CURRENT_TIMESTAMP)`)
+    .notNull(),
+  uploadStatus: text('upload_status', {
+    enum: ['pending', 'processing', 'success', 'failed'],
+  }).default('pending'),
 })
 
 export type TFile = typeof files.$inferSelect
@@ -131,17 +120,19 @@ export const filesRelation = relations(files, ({ one, many }) => ({
   messages: many(messages),
 }))
 
-export const messages = pgTable('message', {
-  id: serial('id').primaryKey(),
+export const messages = sqliteTable('message', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
   text: text('text').notNull(),
-  isUserMessage: boolean('isUserMessage').notNull(),
+  isUserMessage: integer('isUserMessage', { mode: 'boolean' }).notNull(),
   userId: text('createdById')
     .notNull()
     .references(() => users.id),
-  fileId: varchar('fileId', { length: 50 }).references(() => files.id, {
+  fileId: text('fileId', { length: 50 }).references(() => files.id, {
     onDelete: 'cascade',
   }),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
+  createdAt: text('created_at')
+    .default(sql`(CURRENT_TIMESTAMP)`)
+    .notNull(),
 })
 
 export type TMessageInsert = typeof messages.$inferInsert
