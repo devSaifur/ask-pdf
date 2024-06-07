@@ -65,7 +65,7 @@ CREATE TABLE `user` (
 	`stripe_customer_id` text(255),
 	`stripe_subscription_id` text(255),
 	`stripe_price_id` text(255),
-	`stripe_current_period_end` text
+	`stripe_current_period_end` integer
 );
 --> statement-breakpoint
 CREATE TABLE `verificationToken` (

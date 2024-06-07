@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "837a65c0-f641-4b85-b064-cef3a52e31ac",
+  "id": "26f86b7c-d70a-4a82-9bb3-d58385b68e19",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "account": {
@@ -465,7 +465,7 @@
         },
         "stripe_current_period_end": {
           "name": "stripe_current_period_end",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false

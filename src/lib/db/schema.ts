@@ -17,7 +17,9 @@ export const users = sqliteTable('user', {
     length: 255,
   }).unique(),
   stripePriceId: text('stripe_price_id', { length: 255 }).unique(),
-  stripeCurrentPeriodEnd: text('stripe_current_period_end'),
+  stripeCurrentPeriodEnd: integer('stripe_current_period_end', {
+    mode: 'timestamp_ms',
+  }),
 })
 
 export const accounts = sqliteTable(
