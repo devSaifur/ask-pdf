@@ -19,10 +19,10 @@ importers:
         version: 3.6.0(react-hook-form@7.51.5(react@18.3.1))
       '@langchain/community':
         specifier: ^0.2.9
-        version: 0.2.9(@upstash/vector@1.1.2)(ignore@5.3.1)(lodash@4.17.21)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0)
+        version: 0.2.9(@upstash/vector@1.1.2)(ignore@5.3.1)(lodash@4.17.21)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0)
       '@langchain/google-genai':
         specifier: ^0.0.17
-        version: 0.0.17(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)(zod@3.23.8)
+        version: 0.0.17(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1)(zod@3.23.8)
       '@libsql/client':
         specifier: ^0.6.2
         version: 0.6.2
@@ -73,7 +73,7 @@ importers:
         version: 1.1.2
       ai:
         specifier: ^3.1.30
-        version: 3.1.30(openai@4.49.0)(react@18.3.1)(solid-js@1.8.17)(svelte@4.2.18)(vue@3.4.27(typescript@5.4.5))(zod@3.23.8)
+        version: 3.1.30(openai@4.49.1)(react@18.3.1)(solid-js@1.8.17)(svelte@4.2.18)(vue@3.4.27(typescript@5.4.5))(zod@3.23.8)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -84,8 +84,8 @@ importers:
         specifier: ^3.6.0
         version: 3.6.0
       drizzle-orm:
-        specifier: ^0.31.1
-        version: 0.31.1(@libsql/client@0.6.2)(@types/react@18.3.3)(react@18.3.1)
+        specifier: ^0.31.2
+        version: 0.31.2(@libsql/client@0.6.2)(@types/react@18.3.3)(react@18.3.1)
       geist:
         specifier: ^1.3.0
         version: 1.3.0(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
@@ -135,8 +135,8 @@ importers:
         specifier: ^3.2.5
         version: 3.2.5(react@18.3.1)
       sonner:
-        specifier: ^1.4.41
-        version: 1.4.41(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^1.5.0
+        version: 1.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       stripe:
         specifier: ^15.10.0
         version: 15.10.0
@@ -169,8 +169,8 @@ importers:
         specifier: ^18.3.0
         version: 18.3.0
       drizzle-kit:
-        specifier: ^0.22.4
-        version: 0.22.4
+        specifier: ^0.22.6
+        version: 0.22.6
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -184,8 +184,8 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       prettier-plugin-tailwindcss:
-        specifier: ^0.6.1
-        version: 0.6.1(@trivago/prettier-plugin-sort-imports@4.3.0(@vue/compiler-sfc@3.4.27)(prettier@3.3.1))(prettier@3.3.1)
+        specifier: ^0.6.2
+        version: 0.6.2(@trivago/prettier-plugin-sort-imports@4.3.0(@vue/compiler-sfc@3.4.27)(prettier@3.3.1))(prettier@3.3.1)
       tailwindcss:
         specifier: ^3.4.4
         version: 3.4.4
@@ -1723,8 +1723,8 @@ packages:
   '@types/lodash-es@4.17.12':
     resolution: {integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==}
 
-  '@types/lodash@4.17.4':
-    resolution: {integrity: sha512-wYCP26ZLxaT3R39kiN2+HcJ4kTd3U1waI/cY7ivWYqFP6pW3ZNpvi6Wd6PHZx7T/t8z0vlkXMg3QYLa7DZ/IJQ==}
+  '@types/lodash@4.17.5':
+    resolution: {integrity: sha512-MBIOHVZqVqgfro1euRDWX7OO0fBVUUMrN6Pwm8LQsz8cWhEpihlvR70ENj3f40j58TNxZaWv2ndSkInykNBBJw==}
 
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
@@ -2318,12 +2318,12 @@ packages:
     resolution: {integrity: sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==}
     engines: {node: '>=6.0.0'}
 
-  drizzle-kit@0.22.4:
-    resolution: {integrity: sha512-jsiYGqHsbsP/GtM26y/bGK7je1ja+1H/RniCt1ovg2E7tMNraw6XdqKcjxHhb8FonCfDDjvwFgouRsZS46vrmA==}
+  drizzle-kit@0.22.6:
+    resolution: {integrity: sha512-TE4mBMeVJvySjYxwKeUOMrzytFSKnpMyp6kBnm+aascu9P+hCMrGvnJhOAO94C3wmt144CoHZQWQCOoP/EFl8A==}
     hasBin: true
 
-  drizzle-orm@0.31.1:
-    resolution: {integrity: sha512-hTbYne2XX3y6sV7WSxcPH6/vNSiQSUG9VZsFI27jBMCN0OT3Ok7ao3pIT5OMAqWkzJCRFgGjAaUeTAZWPgOKag==}
+  drizzle-orm@0.31.2:
+    resolution: {integrity: sha512-QnenevbnnAzmbNzQwbhklvIYrDE8YER8K7kSrAWQSV1YvFCdSQPzj+jzqRdTSsV2cDqSpQ0NXGyL1G9I43LDLg==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
@@ -2333,6 +2333,7 @@ packages:
       '@op-engineering/op-sqlite': '>=2'
       '@opentelemetry/api': ^1.4.1
       '@planetscale/database': '>=1'
+      '@tidbcloud/serverless': '*'
       '@types/better-sqlite3': '*'
       '@types/pg': '*'
       '@types/react': '>=18'
@@ -2366,6 +2367,8 @@ packages:
       '@opentelemetry/api':
         optional: true
       '@planetscale/database':
+        optional: true
+      '@tidbcloud/serverless':
         optional: true
       '@types/better-sqlite3':
         optional: true
@@ -3319,8 +3322,8 @@ packages:
   mdast-util-phrasing@4.1.0:
     resolution: {integrity: sha512-TqICwyvJJpBwvGAMZjj4J2n0X8QWp21b9l0o7eXyVJ25YNWYbJDVIyD1bZXE6WtV6RmKJVYmQAKWa0zWOABz2w==}
 
-  mdast-util-to-hast@13.1.0:
-    resolution: {integrity: sha512-/e2l/6+OdGp/FB+ctrJ9Avz71AN/GRH3oi/3KAx/kMnoUsD6q0woXlDT8lLEeViVKE7oZxE7RXzvO3T8kF2/sA==}
+  mdast-util-to-hast@13.2.0:
+    resolution: {integrity: sha512-QGYKEuUsYT9ykKBCMOEDLsU5JRObWQusAolFMeko/tYPufNkRffBAQjIE+99jbA87xv6FgmjLtwjh9wBWajwAA==}
 
   mdast-util-to-markdown@2.1.0:
     resolution: {integrity: sha512-SR2VnIEdVNCJbP6y7kVTJgPLifdr8WEU440fQec7qHoHOUz/oJ2jmNRqdDQ3rbiStOXb2mCDGTuwsK5OPUgYlQ==}
@@ -3623,8 +3626,8 @@ packages:
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
 
-  openai@4.49.0:
-    resolution: {integrity: sha512-/UkrBSej5ejZ4vnOFoeFefX7erjp4k3+xoLKkswjLEvgBU9QtCnOUgsfpvHkzTzgDXpqPMCzyQHQXWsgiq2xPw==}
+  openai@4.49.1:
+    resolution: {integrity: sha512-bsFSNhhTNon+g6r4UYPKGLi+PlfP1G9TJGSkZS5nZx+PTwW2YUTlfxXxpOKrPab5auIXJdlYpC/g/wkHGR1xug==}
     hasBin: true
 
   openapi-types@12.1.3:
@@ -3783,8 +3786,8 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier-plugin-tailwindcss@0.6.1:
-    resolution: {integrity: sha512-AnbeYZu0WGj+QgKciUgdMnRxrqcxltleZPgdwfA5104BHM3siBLONN/HLW1yS2HvzSNkzpQ/JAj+LN0jcJO+0w==}
+  prettier-plugin-tailwindcss@0.6.2:
+    resolution: {integrity: sha512-eFefm4cg+1c2B57+H274Qm//CTWBdtQN9ansl0YTP/8TC8x3bugCTQSS/e4FC5Ctl9djhTzsbcMrZ7x2/abIow==}
     engines: {node: '>=14.21.3'}
     peerDependencies:
       '@ianvs/prettier-plugin-sort-imports': '*'
@@ -4108,8 +4111,8 @@ packages:
       solid-js: ^1.2
       swr-store: ^0.10
 
-  sonner@1.4.41:
-    resolution: {integrity: sha512-uG511ggnnsw6gcn/X+YKkWPo5ep9il9wYi3QJxHsYe7yTZ4+cOd1wuodOUmOpFuXL+/RE3R04LczdNCDygTDgQ==}
+  sonner@1.5.0:
+    resolution: {integrity: sha512-FBjhG/gnnbN6FY0jaNnqZOMmB73R+5IiyYAw8yBj7L54ER7HB3fOSE5OFiQiE2iXWxeXKvg6fIP4LtVppHEdJA==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
@@ -5003,16 +5006,16 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@langchain/community@0.2.9(@upstash/vector@1.1.2)(ignore@5.3.1)(lodash@4.17.21)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0)':
+  '@langchain/community@0.2.9(@upstash/vector@1.1.2)(ignore@5.3.1)(lodash@4.17.21)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0)':
     dependencies:
-      '@langchain/core': 0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)
-      '@langchain/openai': 0.1.2(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))
+      '@langchain/core': 0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1)
+      '@langchain/openai': 0.1.2(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))
       binary-extensions: 2.3.0
       expr-eval: 2.0.2
       flat: 5.0.2
       js-yaml: 4.1.0
-      langchain: 0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0)
-      langsmith: 0.1.30(@langchain/core@0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0))(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)
+      langchain: 0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0)
+      langsmith: 0.1.30(@langchain/core@0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1))(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1)
       uuid: 9.0.1
       zod: 3.23.8
       zod-to-json-schema: 3.23.0(zod@3.23.8)
@@ -5032,13 +5035,13 @@ snapshots:
       - peggy
       - pyodide
 
-  '@langchain/core@0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)':
+  '@langchain/core@0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1)':
     dependencies:
       ansi-styles: 5.2.0
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.12
-      langsmith: 0.1.30(@langchain/core@0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0))(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)
+      langsmith: 0.1.30(@langchain/core@0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1))(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1)
       ml-distance: 4.0.1
       mustache: 4.2.0
       p-queue: 6.6.2
@@ -5050,41 +5053,41 @@ snapshots:
       - langchain
       - openai
 
-  '@langchain/google-genai@0.0.17(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)(zod@3.23.8)':
+  '@langchain/google-genai@0.0.17(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1)(zod@3.23.8)':
     dependencies:
       '@google/generative-ai': 0.7.1
-      '@langchain/core': 0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)
+      '@langchain/core': 0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1)
       zod-to-json-schema: 3.23.0(zod@3.23.8)
     transitivePeerDependencies:
       - langchain
       - openai
       - zod
 
-  '@langchain/openai@0.0.34(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))':
+  '@langchain/openai@0.0.34(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))':
     dependencies:
-      '@langchain/core': 0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)
+      '@langchain/core': 0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1)
       js-tiktoken: 1.0.12
-      openai: 4.49.0
+      openai: 4.49.1
       zod: 3.23.8
       zod-to-json-schema: 3.23.0(zod@3.23.8)
     transitivePeerDependencies:
       - encoding
       - langchain
 
-  '@langchain/openai@0.1.2(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))':
+  '@langchain/openai@0.1.2(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))':
     dependencies:
-      '@langchain/core': 0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)
+      '@langchain/core': 0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1)
       js-tiktoken: 1.0.12
-      openai: 4.49.0
+      openai: 4.49.1
       zod: 3.23.8
       zod-to-json-schema: 3.23.0(zod@3.23.8)
     transitivePeerDependencies:
       - encoding
       - langchain
 
-  '@langchain/textsplitters@0.0.3(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)':
+  '@langchain/textsplitters@0.0.3(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1)':
     dependencies:
-      '@langchain/core': 0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)
+      '@langchain/core': 0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1)
       js-tiktoken: 1.0.12
     transitivePeerDependencies:
       - langchain
@@ -5646,9 +5649,9 @@ snapshots:
 
   '@types/lodash-es@4.17.12':
     dependencies:
-      '@types/lodash': 4.17.4
+      '@types/lodash': 4.17.5
 
-  '@types/lodash@4.17.4': {}
+  '@types/lodash@4.17.5': {}
 
   '@types/mdast@4.0.4':
     dependencies:
@@ -5845,7 +5848,7 @@ snapshots:
     dependencies:
       humanize-ms: 1.2.1
 
-  ai@3.1.30(openai@4.49.0)(react@18.3.1)(solid-js@1.8.17)(svelte@4.2.18)(vue@3.4.27(typescript@5.4.5))(zod@3.23.8):
+  ai@3.1.30(openai@4.49.1)(react@18.3.1)(solid-js@1.8.17)(svelte@4.2.18)(vue@3.4.27(typescript@5.4.5))(zod@3.23.8):
     dependencies:
       '@ai-sdk/provider': 0.0.10
       '@ai-sdk/provider-utils': 0.0.13(zod@3.23.8)
@@ -5861,7 +5864,7 @@ snapshots:
       swrv: 1.0.4(vue@3.4.27(typescript@5.4.5))
       zod-to-json-schema: 3.22.5(zod@3.23.8)
     optionalDependencies:
-      openai: 4.49.0
+      openai: 4.49.1
       react: 18.3.1
       solid-js: 1.8.17
       svelte: 4.2.18
@@ -6277,7 +6280,7 @@ snapshots:
     dependencies:
       esutils: 2.0.3
 
-  drizzle-kit@0.22.4:
+  drizzle-kit@0.22.6:
     dependencies:
       '@esbuild-kit/esm-loader': 2.6.5
       esbuild: 0.19.12
@@ -6285,7 +6288,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.31.1(@libsql/client@0.6.2)(@types/react@18.3.3)(react@18.3.1):
+  drizzle-orm@0.31.2(@libsql/client@0.6.2)(@types/react@18.3.3)(react@18.3.1):
     optionalDependencies:
       '@libsql/client': 0.6.2
       '@types/react': 18.3.3
@@ -7157,17 +7160,17 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0):
+  langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0):
     dependencies:
-      '@langchain/core': 0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)
-      '@langchain/openai': 0.0.34(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))
-      '@langchain/textsplitters': 0.0.3(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)
+      '@langchain/core': 0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1)
+      '@langchain/openai': 0.0.34(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))
+      '@langchain/textsplitters': 0.0.3(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1)
       binary-extensions: 2.3.0
       js-tiktoken: 1.0.12
       js-yaml: 4.1.0
       jsonpointer: 5.0.1
       langchainhub: 0.0.11
-      langsmith: 0.1.30(@langchain/core@0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0))(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)
+      langsmith: 0.1.30(@langchain/core@0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1))(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1)
       ml-distance: 4.0.1
       openapi-types: 12.1.3
       p-retry: 4.6.2
@@ -7185,7 +7188,7 @@ snapshots:
 
   langchainhub@0.0.11: {}
 
-  langsmith@0.1.30(@langchain/core@0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0))(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0):
+  langsmith@0.1.30(@langchain/core@0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1))(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1):
     dependencies:
       '@types/uuid': 9.0.8
       commander: 10.0.1
@@ -7193,9 +7196,9 @@ snapshots:
       p-retry: 4.6.2
       uuid: 9.0.1
     optionalDependencies:
-      '@langchain/core': 0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.0)
-      langchain: 0.2.3(ignore@5.3.1)(openai@4.49.0)(pdf-parse@1.1.1)(ws@8.17.0)
-      openai: 4.49.0
+      '@langchain/core': 0.2.6(langchain@0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0))(openai@4.49.1)
+      langchain: 0.2.3(ignore@5.3.1)(openai@4.49.1)(pdf-parse@1.1.1)(ws@8.17.0)
+      openai: 4.49.1
 
   language-subtag-registry@0.3.23: {}
 
@@ -7326,7 +7329,7 @@ snapshots:
       '@types/mdast': 4.0.4
       unist-util-is: 6.0.0
 
-  mdast-util-to-hast@13.1.0:
+  mdast-util-to-hast@13.2.0:
     dependencies:
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
@@ -7702,7 +7705,7 @@ snapshots:
     dependencies:
       wrappy: 1.0.2
 
-  openai@4.49.0:
+  openai@4.49.1:
     dependencies:
       '@types/node': 18.19.34
       '@types/node-fetch': 2.6.11
@@ -7871,7 +7874,7 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-tailwindcss@0.6.1(@trivago/prettier-plugin-sort-imports@4.3.0(@vue/compiler-sfc@3.4.27)(prettier@3.3.1))(prettier@3.3.1):
+  prettier-plugin-tailwindcss@0.6.2(@trivago/prettier-plugin-sort-imports@4.3.0(@vue/compiler-sfc@3.4.27)(prettier@3.3.1))(prettier@3.3.1):
     dependencies:
       prettier: 3.3.1
     optionalDependencies:
@@ -7925,7 +7928,7 @@ snapshots:
       devlop: 1.1.0
       hast-util-to-jsx-runtime: 2.3.0
       html-url-attributes: 3.0.0
-      mdast-util-to-hast: 13.1.0
+      mdast-util-to-hast: 13.2.0
       react: 18.3.1
       remark-parse: 11.0.0
       remark-rehype: 11.1.0
@@ -8047,7 +8050,7 @@ snapshots:
     dependencies:
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
-      mdast-util-to-hast: 13.1.0
+      mdast-util-to-hast: 13.2.0
       unified: 11.0.4
       vfile: 6.0.1
 
@@ -8215,7 +8218,7 @@ snapshots:
       solid-js: 1.8.17
       swr-store: 0.10.6
 
-  sonner@1.4.41(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  sonner@1.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
