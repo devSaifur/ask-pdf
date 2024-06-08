@@ -33,6 +33,8 @@ export const appRouter = router({
         cursor: cursor ? cursor : undefined,
       })
 
+      console.log('messages', messages)
+
       let nextCursor: typeof cursor | undefined = undefined
 
       if (messages.length > limit) {

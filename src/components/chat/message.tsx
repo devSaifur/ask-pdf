@@ -19,8 +19,6 @@ interface MessageProps {
 
 export const Message = forwardRef<HTMLDivElement, MessageProps>(
   ({ message, isNextMessageSamePerson }, ref) => {
-    console.log('I rendered')
-
     return (
       <div
         ref={ref}

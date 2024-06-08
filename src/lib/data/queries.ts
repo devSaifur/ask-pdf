@@ -1,6 +1,6 @@
 'use server'
 
-import { and, asc, desc, eq, lte } from 'drizzle-orm'
+import { and, asc, desc, eq, sql } from 'drizzle-orm'
 import 'server-only'
 
 import { db } from '../db'
@@ -85,6 +85,10 @@ export async function getFileMessages({
   limit: number
   cursor?: string
 }) {
+  const cursorMessage = cursor
+    ? await db.query.messages.findFirst({ where: eq(messages.id, cursor) })
+    : null
+
   return await db
     .select({
       id: messages.id,
@@ -96,7 +100,9 @@ export async function getFileMessages({
     .where(
       and(
         eq(messages.fileId, fileId),
-        cursor ? lte(messages.id, cursor) : undefined,
+        cursorMessage
+          ? sql`(${messages.createdAt} <= ${cursorMessage.createdAt})`
+          : undefined,
       ),
     )
     .limit(limit)
