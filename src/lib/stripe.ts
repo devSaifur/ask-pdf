@@ -7,7 +7,7 @@ import getSession from './auth/getSession'
 import { getUserById } from './data/queries'
 
 export const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
-  apiVersion: '2024-04-10',
+  apiVersion: '2024-06-20',
   typescript: true,
 })
 
