@@ -3,7 +3,7 @@
 import 'server-only'
 
 import getSession from '~/lib/auth/getSession'
-import { deleteFile, getFileById, getFileByKey } from '~/lib/data/queries'
+import { deleteFile,  getFileByKey } from '~/lib/data/queries'
 
 export async function getFileByKeyAction(key: string) {
   const session = await getSession()
