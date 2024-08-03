@@ -1,12 +1,13 @@
-import { createId } from '@paralleldrive/cuid2'
 import { relations, sql } from 'drizzle-orm'
 import { integer, primaryKey, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 import type { AdapterAccountType } from 'next-auth/adapters'
 
+import { generateId } from '../id'
+
 export const users = sqliteTable('user', {
   id: text('id')
     .primaryKey()
-    .$defaultFn(() => createId()),
+    .$defaultFn(() => generateId()),
   name: text('name', { length: 100 }),
   email: text('email', { length: 100 }).notNull(),
   emailVerified: text('emailVerified'),
@@ -99,7 +100,7 @@ export const usersRelation = relations(users, ({ many }) => ({
 export const files = sqliteTable('file', {
   id: text('id', { length: 50 })
     .primaryKey()
-    .$defaultFn(() => createId()),
+    .$defaultFn(() => generateId()),
   name: text('name', { length: 256 }).notNull(),
   url: text('url', { length: 256 }).notNull(),
   key: text('key', { length: 256 }).notNull(),
@@ -125,7 +126,7 @@ export const filesRelation = relations(files, ({ one, many }) => ({
 export const messages = sqliteTable('message', {
   id: text('id')
     .primaryKey()
-    .$defaultFn(() => createId()),
+    .$defaultFn(() => generateId()),
   text: text('text').notNull(),
   isUserMessage: integer('isUserMessage', { mode: 'boolean' }).notNull(),
   userId: text('createdById')
@@ -134,9 +135,7 @@ export const messages = sqliteTable('message', {
   fileId: text('fileId', { length: 50 }).references(() => files.id, {
     onDelete: 'cascade',
   }),
-  createdAt: text('created_at')
-    .default(sql`(CURRENT_TIMESTAMP)`)
-    .notNull(),
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull(),
 })
 
 export type TMessageInsert = typeof messages.$inferInsert

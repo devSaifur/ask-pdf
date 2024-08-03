@@ -1,12 +1,12 @@
 'use client'
 
-import { createId } from '@paralleldrive/cuid2'
 import { useMutation } from '@tanstack/react-query'
 import { createContext, useRef, useState } from 'react'
 import { toast } from 'sonner'
 
 import { trpc } from '~/app/_trpc/client'
 import { INFINITE_QUERY_LIMIT } from '~/config'
+import { generateId } from '~/lib/id'
 
 type StreamResponse = {
   addMessage: () => void
@@ -37,11 +37,8 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
   const { mutate: sendMessage } = useMutation({
     mutationKey: ['SendMessage'],
     mutationFn: async ({ message }: { message: string }) => {
-      const res = await fetch('/api/message', {
+      const res = await fetch('/api/chat', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({ fileId, message }),
       })
 
@@ -81,7 +78,7 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
           latestPage.messages = [
             {
               createdAt: new Date().toLocaleDateString(),
-              id: createId(),
+              id: generateId(),
               isUserMessage: true,
               text: message,
             },
@@ -106,6 +103,8 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
       }
     },
     onSuccess: async (stream) => {
+      setIsLoading(false)
+
       if (!stream) {
         return toast.error('Something went wrong while sending the message', {
           description: 'Please refresh the page and try again.',
@@ -121,8 +120,7 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
       while (!done) {
         const { value, done: doneReading } = await reader.read()
         if (doneReading) {
-          done = true
-          continue
+          done = doneReading
         }
         const chunk = decoder.decode(value)
 

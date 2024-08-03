@@ -1,16 +1,16 @@
 import { PersonIcon } from '@radix-ui/react-icons'
 import { format } from 'date-fns'
 import { forwardRef } from 'react'
-import ReactMarkdown from 'react-markdown'
 
 import { cn } from '~/lib/utils'
 
+import { MemoizedReactMarkdown } from '../markdown'
 import { Icons } from '../ui/icons'
 
 interface MessageProps {
   message: {
     id: string | number
-    text: string | JSX.Element
+    text: string | React.JSX.Element
     isUserMessage: boolean
     createdAt: string
   }
@@ -60,13 +60,13 @@ export const Message = forwardRef<HTMLDivElement, MessageProps>(
             )}
           >
             {typeof message.text === 'string' ? (
-              <ReactMarkdown
+              <MemoizedReactMarkdown
                 className={cn('prose', {
                   'text-zinc-50': message.isUserMessage,
                 })}
               >
                 {message.text}
-              </ReactMarkdown>
+              </MemoizedReactMarkdown>
             ) : (
               message.text
             )}
@@ -78,7 +78,7 @@ export const Message = forwardRef<HTMLDivElement, MessageProps>(
                   message.isUserMessage ? 'text-blue-300' : 'text-zinc-500',
                 )}
               >
-                {format(message.createdAt, 'HH:mm')}
+                {format(new Date(message.createdAt), 'h:mm:aaa')}
               </div>
             )}
           </div>

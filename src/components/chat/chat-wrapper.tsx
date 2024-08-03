@@ -21,7 +21,7 @@ export default function ChatWrapper({
   fileId,
   isSubscribed,
 }: ChatWrapperProps) {
-  const { data: file } = trpc.getFile.useQuery(
+  const { data, isLoading } = trpc.getFile.useQuery(
     { fileId },
     {
       refetchInterval: ({ state }) =>
@@ -32,23 +32,24 @@ export default function ChatWrapper({
     },
   )
 
-  if (!file) return null
+  if (!data) return null
 
-  const Loading = () => (
-    <div className="relative flex min-h-full flex-col justify-between gap-2 divide-y divide-zinc-200 bg-zinc-50">
-      <div className="mb-28 flex flex-1 flex-col items-center justify-center">
-        <div className="flex flex-col items-center gap-2">
-          <Icons.loader className="size-8 animate-spin text-blue-500" />
-          <h3 className="text-xl font-semibold">Loading...</h3>
-          <p className="text-sm text-zinc-500">
-            We&apos;re preparing your PDF.
-          </p>
+  if (isLoading)
+    return (
+      <div className="relative flex min-h-full flex-col justify-between gap-2 divide-y divide-zinc-200 bg-zinc-50">
+        <div className="mb-28 flex flex-1 flex-col items-center justify-center">
+          <div className="flex flex-col items-center gap-2">
+            <Icons.loader className="size-8 animate-spin text-blue-500" />
+            <h3 className="text-xl font-semibold">Loading...</h3>
+            <p className="text-sm text-zinc-500">
+              We&apos;re preparing your PDF.
+            </p>
+          </div>
         </div>
-      </div>
 
-      <ChatInput isDisabled />
-    </div>
-  )
+        <ChatInput isDisabled />
+      </div>
+    )
 
   const Processing = () => (
     <div className="relative flex min-h-full flex-col justify-between gap-2 divide-y divide-zinc-200 bg-zinc-50">
@@ -97,10 +98,10 @@ export default function ChatWrapper({
   )
 
   const Success = () => (
-    <ChatContextProvider fileId={file.id}>
+    <ChatContextProvider fileId={fileId}>
       <div className="relative flex min-h-full flex-col justify-between gap-2 divide-y divide-zinc-200 bg-zinc-50">
         <div className="mb-28 flex flex-1 flex-col justify-between">
-          <Messages fileId={file.id} />
+          <Messages fileId={fileId} />
         </div>
 
         <ChatInput />
@@ -108,8 +109,7 @@ export default function ChatWrapper({
     </ChatContextProvider>
   )
 
-  if (file.uploadStatus === 'pending') return <Loading />
-  if (file.uploadStatus === 'processing') return <Processing />
-  if (file.uploadStatus === 'failed') return <Failed />
-  if (file.uploadStatus === 'success') return <Success />
+  if (data.uploadStatus === 'processing') return <Processing />
+  if (data.uploadStatus === 'failed') return <Failed />
+  if (data.uploadStatus === 'success') return <Success />
 }

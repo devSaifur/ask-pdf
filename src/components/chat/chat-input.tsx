@@ -23,6 +23,7 @@ export default function ChatInput({ isDisabled }: { isDisabled?: boolean }) {
           <div className="relative flex w-full flex-grow flex-col p-4">
             <div className="relative">
               <Textarea
+                ref={textareaRef}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault()
@@ -44,7 +45,6 @@ export default function ChatInput({ isDisabled }: { isDisabled?: boolean }) {
                   addMessage()
                   textareaRef.current?.focus()
                 }}
-                type="submit"
                 disabled={isLoading || isDisabled}
                 className="absolute bottom-1.5 right-[8px]"
                 aria-label="send message"

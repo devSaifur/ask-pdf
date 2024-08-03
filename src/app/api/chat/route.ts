@@ -35,6 +35,7 @@ export const POST = auth(async function POST(req) {
     isUserMessage: true,
     userId: user.id,
     fileId,
+    createdAt: new Date(),
   })
 
   const embeddings = new GoogleGenerativeAIEmbeddings({
@@ -91,6 +92,7 @@ export const POST = auth(async function POST(req) {
         isUserMessage: false,
         userId: user.id as string,
         fileId,
+        createdAt: new Date(),
       })
     },
   })
