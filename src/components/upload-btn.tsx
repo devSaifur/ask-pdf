@@ -96,7 +96,10 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
           className="h-64 rounded-lg border border-dashed border-gray-300"
         >
           <div className="flex h-full w-full items-center justify-center">
-            <label className="flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-lg bg-gray-50 hover:bg-gray-100">
+            <label
+              htmlFor="dropzone-file"
+              className="flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-lg bg-gray-50 hover:bg-gray-100"
+            >
               <div className="flex flex-col items-center justify-center pb-6 pt-5">
                 <UploadIcon className="mb-2 size-6 text-zinc-500" />
                 <p className="mb-2 text-sm text-zinc-700">

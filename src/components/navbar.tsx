@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Suspense } from 'react'
 
 import getSession from '~/lib/auth/getSession'
 
@@ -19,47 +20,49 @@ export default async function Navbar() {
             Ask PDF
           </Link>
 
-          <MobileNav isAuth={!!user} />
+          <Suspense fallback={null}>
+            <MobileNav isAuth={!!user} />
 
-          <div className="hidden items-center space-x-4 sm:flex">
-            {!user ? (
-              <>
-                <Link
-                  href="/pricing"
-                  className={buttonVariants({
-                    variant: 'ghost',
-                  })}
-                >
-                  Pricing
-                </Link>
-                <Link
-                  className={buttonVariants({
-                    variant: 'ghost',
-                  })}
-                  href="/api/auth/signin?callbackUrl=/documents"
-                >
-                  Sign in
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link
-                  href="/documents"
-                  className={buttonVariants({
-                    variant: 'ghost',
-                  })}
-                >
-                  Documents
-                </Link>
+            <div className="hidden items-center space-x-4 sm:flex">
+              {!user ? (
+                <>
+                  <Link
+                    href="/pricing"
+                    className={buttonVariants({
+                      variant: 'ghost',
+                    })}
+                  >
+                    Pricing
+                  </Link>
+                  <Link
+                    className={buttonVariants({
+                      variant: 'ghost',
+                    })}
+                    href="/login"
+                  >
+                    Sign in
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/documents"
+                    className={buttonVariants({
+                      variant: 'ghost',
+                    })}
+                  >
+                    Documents
+                  </Link>
 
-                <AccountNav
-                  name={user.name || 'Your Account'}
-                  email={user.email ?? ''}
-                  imageUrl={user.image ?? ''}
-                />
-              </>
-            )}
-          </div>
+                  <AccountNav
+                    name={user.name || 'Your Account'}
+                    email={user.email ?? ''}
+                    imageUrl={user.image ?? ''}
+                  />
+                </>
+              )}
+            </div>
+          </Suspense>
         </div>
       </MaxWidthWrapper>
     </nav>

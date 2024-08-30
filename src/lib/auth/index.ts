@@ -7,6 +7,10 @@ import { env } from '~/env'
 import { db } from '../db'
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  pages: {
+    signIn: '/login',
+    signOut: '/logout',
+  },
   providers: [
     Google({
       clientId: env.AUTH_GOOGLE_ID,
