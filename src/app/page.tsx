@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { buttonVariants } from '~/components/ui/button'
 import MaxWidthWrapper from '~/components/ui/max-width-wrapper'
 
-export default async function Home() {
+export default function Home() {
   return (
     <>
       <MaxWidthWrapper className="mb-12 mt-28 flex flex-col items-center justify-center text-center sm:mt-40">
