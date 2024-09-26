@@ -23,7 +23,7 @@ export const appRouter = router({
       const { fileId, cursor } = input
       const limit = input.limit ?? INFINITE_QUERY_LIMIT
 
-      const file = await getFileById({ fileId, userId })
+      const file = await getFileById(fileId, userId)
 
       if (!file) throw new TRPCError({ code: 'NOT_FOUND' })
 
@@ -53,7 +53,7 @@ export const appRouter = router({
       const { userId } = ctx
       const { fileId } = input
 
-      const file = await getFileById({ fileId, userId })
+      const file = await getFileById(fileId, userId)
 
       if (!file) throw new TRPCError({ code: 'NOT_FOUND' })
 

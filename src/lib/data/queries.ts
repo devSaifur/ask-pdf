@@ -18,25 +18,13 @@ export async function deleteFile(fileId: string) {
   await db.delete(files).where(eq(files.id, fileId))
 }
 
-export async function getFileById({
-  fileId,
-  userId,
-}: {
-  fileId: string
-  userId: string
-}) {
-  return db.query.files.findFirst({
+export async function getFileById(fileId: string, userId: string) {
+  return await db.query.files.findFirst({
     where: and(eq(files.id, fileId), eq(files.createdById, userId)),
   })
 }
 
-export async function getFileByKey({
-  key,
-  userId,
-}: {
-  key: string
-  userId: string
-}) {
+export async function getFileByKey(key: string, userId: string) {
   return await db.query.files.findFirst({
     where: and(eq(files.key, key), eq(files.createdById, userId)),
   })
@@ -108,13 +96,9 @@ export async function getFileMessages({
 }
 
 export async function getUserById(userId: string) {
-  return await db.query.users.findFirst({
-    where: eq(users.id, userId),
-  })
+  return await db.query.users.findFirst({ where: eq(users.id, userId) })
 }
 
 export async function checkFileExists(fileKey: string) {
-  return await db.query.files.findFirst({
-    where: eq(files.key, fileKey),
-  })
+  return await db.query.files.findFirst({ where: eq(files.key, fileKey) })
 }

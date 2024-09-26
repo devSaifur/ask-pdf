@@ -13,13 +13,19 @@ export async function getFileByKeyAction(key: string) {
   }
 
   try {
-    return await getFileByKey({ key, userId: session.user.id })
+    return await getFileByKey(key, session.user.id)
   } catch (err) {
     throw err
   }
 }
 
 export async function deleteFileAction(id: string) {
+  const session = await getSession()
+
+  if (!session?.user?.id) {
+    throw new Error('Unauthorized')
+  }
+
   try {
     await deleteFile(id)
   } catch (err) {

@@ -38,7 +38,7 @@ export default async function Navbar() {
                     className={buttonVariants({
                       variant: 'ghost',
                     })}
-                    href="/login"
+                    href="/api/auth/signin?callbackUrl=/documents"
                   >
                     Sign in
                   </Link>

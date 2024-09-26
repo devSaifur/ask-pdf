@@ -22,7 +22,7 @@ export const POST = auth(async function POST(req) {
 
   const { message, fileId } = SendMessageValidator.parse(body)
 
-  const file = await getFileById({ fileId, userId: user.id })
+  const file = await getFileById(fileId, user.id)
 
   if (!file) {
     return new Response(JSON.stringify({ error: 'File not found' }), {
@@ -97,5 +97,5 @@ export const POST = auth(async function POST(req) {
     },
   })
 
-  return aiResponse.toAIStreamResponse()
+  return aiResponse.toDataStreamResponse()
 })

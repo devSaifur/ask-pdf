@@ -31,7 +31,8 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
     retry: true,
     retryDelay: 1000,
     onSuccess: (file) => {
-      if (!file) return toast.error('Its a fucking success error')
+      if (!file)
+        return toast.error('Something went wrong while uploading the file')
 
       router.push(`/documents/${file.id}`)
     },
@@ -76,9 +77,7 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
           return toast.error('Something went wrong while uploading the file')
         }
 
-        const [fileResponse] = res
-
-        const key = fileResponse.key
+        const [{ key }] = res
 
         if (!key) {
           return toast.error('Something went wrong while uploading the file')
@@ -140,12 +139,7 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
                 </div>
               )}
 
-              <input
-                {...getInputProps()}
-                type="file"
-                id="dropzone-file"
-                className="hidden"
-              />
+              <input {...getInputProps()} />
             </label>
           </div>
         </div>

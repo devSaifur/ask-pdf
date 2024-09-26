@@ -4,24 +4,25 @@ import { format } from 'date-fns'
 import { toast } from 'sonner'
 
 import { trpc } from '~/app/_trpc/client'
-import type { getUserSubscriptionPlan } from '~/lib/stripe'
-
-import { Button } from './ui/button'
+import { Button } from '~/components/ui/button'
 import {
   Card,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from './ui/card'
-import { Icons } from './ui/icons'
-import MaxWidthWrapper from './ui/max-width-wrapper'
+} from '~/components/ui/card'
+import { Icons } from '~/components/ui/icons'
+import MaxWidthWrapper from '~/components/ui/max-width-wrapper'
+import type { getUserSubscriptionPlan } from '~/lib/stripe'
 
-interface BillingFormProps {
+interface BillingClientPageProps {
   subscriptionPlan: Awaited<ReturnType<typeof getUserSubscriptionPlan>>
 }
 
-export default function BillingForm({ subscriptionPlan }: BillingFormProps) {
+export default function BillingClientPage({
+  subscriptionPlan,
+}: BillingClientPageProps) {
   const { mutate: createStripeSession, isPending } =
     trpc.createStripeSession.useMutation({
       onSuccess: ({ url }) => {

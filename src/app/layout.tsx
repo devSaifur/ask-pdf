@@ -22,7 +22,7 @@ export default function RootLayout({
         <body
           className={cn('grainy min-h-screen antialiased', GeistSans.className)}
         >
-          <Toaster />
+          <Toaster richColors />
           <Navbar />
           {children}
         </body>
