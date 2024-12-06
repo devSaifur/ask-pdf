@@ -11,7 +11,7 @@ import {
 } from '../db/schema'
 
 export async function getFiles(userId: string) {
-  return await db.select().from(files).where(eq(files.createdById, userId))
+  return db.select().from(files).where(eq(files.createdById, userId))
 }
 
 export async function deleteFile(fileId: string) {
@@ -19,13 +19,13 @@ export async function deleteFile(fileId: string) {
 }
 
 export async function getFileById(fileId: string, userId: string) {
-  return await db.query.files.findFirst({
+  return db.query.files.findFirst({
     where: and(eq(files.id, fileId), eq(files.createdById, userId)),
   })
 }
 
 export async function getFileByKey(key: string, userId: string) {
-  return await db.query.files.findFirst({
+  return db.query.files.findFirst({
     where: and(eq(files.key, key), eq(files.createdById, userId)),
   })
 }
@@ -40,7 +40,7 @@ export async function createMessage(value: TMessageInsert) {
 }
 
 export async function getPrevMessage(fileId: string, userId: string) {
-  return await db
+  return db
     .select()
     .from(messages)
     .where(and(eq(messages.fileId, fileId), eq(messages.userId, userId)))
@@ -75,7 +75,7 @@ export async function getFileMessages({
     ? await db.query.messages.findFirst({ where: eq(messages.id, cursor) })
     : null
 
-  return await db
+  return db
     .select({
       id: messages.id,
       text: messages.text,
@@ -96,9 +96,9 @@ export async function getFileMessages({
 }
 
 export async function getUserById(userId: string) {
-  return await db.query.users.findFirst({ where: eq(users.id, userId) })
+  return db.query.users.findFirst({ where: eq(users.id, userId) })
 }
 
 export async function checkFileExists(fileKey: string) {
-  return await db.query.files.findFirst({ where: eq(files.key, fileKey) })
+  return db.query.files.findFirst({ where: eq(files.key, fileKey) })
 }

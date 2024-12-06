@@ -56,7 +56,7 @@ export const POST = auth(async function POST(req) {
     content: msg.text,
   }))
 
-  const aiResponse = await streamText({
+  const aiResponse = streamText({
     model: google('models/gemini-1.5-flash-latest'),
     system: '',
     messages: [

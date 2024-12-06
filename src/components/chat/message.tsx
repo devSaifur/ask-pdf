@@ -22,6 +22,7 @@ export const Message = forwardRef<HTMLDivElement, MessageProps>(
     return (
       <div
         ref={ref}
+        key={message.id}
         className={cn('flex items-end', message.isUserMessage && 'justify-end')}
       >
         <div

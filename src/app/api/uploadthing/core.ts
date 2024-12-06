@@ -65,7 +65,7 @@ async function onUploadComplete({
 
     const pageLevelDocs = await loader.load()
 
-    const pagesAmt = pageLevelDocs.length // depending on page number do stuff on stripe
+    const pagesAmt = pageLevelDocs.length
 
     const { subscriptionPlan } = metadata
 

@@ -52,13 +52,10 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
       backupMessage.current = message
       setMessage('')
 
-      // cancel any outgoing requests
       await utils.getFileMessages.cancel()
 
-      // snapshot the previous messages
       const prevMessages = utils.getFileMessages.getInfiniteData()
 
-      // optimistically insert the value
       utils.getFileMessages.setInfiniteData(
         {
           fileId,
@@ -77,7 +74,7 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
 
           latestPage.messages = [
             {
-              createdAt: new Date().toLocaleDateString(),
+              createdAt: new Date().toISOString(),
               id: generateId(),
               isUserMessage: true,
               text: message,
@@ -114,19 +111,18 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
       const decoder = new TextDecoder()
       let done = false
 
-      // accumulate the messages
       let accResponse = ''
 
       while (!done) {
         const { value, done: doneReading } = await reader.read()
-        if (doneReading) {
-          done = doneReading
-        }
+
+        done = doneReading
+        
         const chunk = decoder.decode(value)
 
         accResponse += chunk
 
-        // append the chunk to the actual message
+        // Incrementally update the AI response
         utils.getFileMessages.setInfiniteData(
           {
             fileId,
@@ -139,35 +135,25 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
                 pageParams: [],
               }
 
-            let isAiResponseCreated = oldData.pages.some((page) =>
-              page.messages.some((msg) => msg.id === 'ai-response'),
-            )
-
             let updatedPages = oldData.pages.map((page) => {
               if (page === oldData.pages[0]) {
-                let updatedMessages = []
-
-                if (!isAiResponseCreated) {
-                  updatedMessages = [
-                    {
-                      createdAt: new Date().toISOString(),
-                      id: 'ai-response',
-                      isUserMessage: false,
-                      text: accResponse,
-                    },
-                    ...page.messages,
-                  ]
-                } else {
-                  updatedMessages = page.messages.map((msg) => {
-                    if (msg.id === 'ai-response') {
-                      return {
-                        ...msg,
+                let updatedMessages = page.messages.some(
+                  (msg) => msg.id === 'ai-response',
+                )
+                  ? page.messages.map((msg) =>
+                      msg.id === 'ai-response'
+                        ? { ...msg, text: accResponse }
+                        : msg,
+                    )
+                  : [
+                      {
+                        createdAt: new Date().toISOString(),
+                        id: 'ai-response',
+                        isUserMessage: false,
                         text: accResponse,
-                      }
-                    }
-                    return msg
-                  })
-                }
+                      },
+                      ...page.messages,
+                    ]
 
                 return {
                   ...page,
