@@ -1,4 +1,5 @@
 import { and, asc, desc, eq, sql } from 'drizzle-orm'
+import { unstable_cacheTag as cacheTag, revalidateTag } from 'next/cache'
 import 'server-only'
 
 import { db } from '../db'
@@ -11,28 +12,34 @@ import {
 } from '../db/schema'
 
 export async function getFiles(userId: string) {
+  'use cache'
+  cacheTag('files')
   return db.select().from(files).where(eq(files.createdById, userId))
 }
 
 export async function deleteFile(fileId: string) {
+  revalidateTag('files')
   await db.delete(files).where(eq(files.id, fileId))
 }
 
 export async function getFileById(fileId: string, userId: string) {
+  'use cache'
+  cacheTag('file', fileId)
   return db.query.files.findFirst({
     where: and(eq(files.id, fileId), eq(files.createdById, userId)),
   })
 }
 
 export async function getFileByKey(key: string, userId: string) {
+  'use cache'
+  cacheTag('file', key)
   return db.query.files.findFirst({
     where: and(eq(files.key, key), eq(files.createdById, userId)),
   })
 }
 
 export async function addFile(file: TFileInsert) {
-  const [createdFile] = await db.insert(files).values(file).returning()
-  return createdFile
+  return (await db.insert(files).values(file).returning()).at(0)
 }
 
 export async function createMessage(value: TMessageInsert) {
@@ -40,6 +47,8 @@ export async function createMessage(value: TMessageInsert) {
 }
 
 export async function getPrevMessage(fileId: string, userId: string) {
+  'use cache'
+  cacheTag('message', fileId)
   return db
     .select()
     .from(messages)
@@ -96,9 +105,13 @@ export async function getFileMessages({
 }
 
 export async function getUserById(userId: string) {
+  'use cache'
+  cacheTag('user')
   return db.query.users.findFirst({ where: eq(users.id, userId) })
 }
 
 export async function checkFileExists(fileKey: string) {
+  'use cache'
+  cacheTag('file', fileKey)
   return db.query.files.findFirst({ where: eq(files.key, fileKey) })
 }

@@ -1,6 +1,6 @@
-/** @type {import('next').NextConfig} */
+import type { NextConfig } from 'next'
 
-const nextConfig = {
+const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
@@ -12,6 +12,9 @@ const nextConfig = {
     config.resolve.alias.canvas = false
     config.resolve.alias.encoding = false
     return config
+  },
+  experimental: {
+    dynamicIO: true,
   },
 }
 

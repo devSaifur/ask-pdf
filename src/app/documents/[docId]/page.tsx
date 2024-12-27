@@ -5,8 +5,12 @@ import PdfRenderer from '~/components/pdf-renderer'
 import getSession from '~/lib/auth/getSession'
 import { getFileById } from '~/lib/data/queries'
 
-export default async function Page({ params }: { params: { docId: string } }) {
-  const { docId } = params
+interface PageProps {
+  params: Promise<{ docId: string }>
+}
+
+export default async function Page({ params }: PageProps) {
+  const { docId } = await params
 
   const session = await getSession()
 
@@ -17,7 +21,7 @@ export default async function Page({ params }: { params: { docId: string } }) {
   const file = await getFileById(docId, session.user.id)
 
   if (!file) {
-    notFound()
+    return notFound()
   }
 
   const isSubscribed = file.uploadStatus === 'success'
