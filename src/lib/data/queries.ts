@@ -30,11 +30,11 @@ export async function getFileById(fileId: string, userId: string) {
   })
 }
 
-export async function getFileByKey(key: string, userId: string) {
+export async function getFileByKey(key: string) {
   'use cache'
   cacheTag('file', key)
   return db.query.files.findFirst({
-    where: and(eq(files.key, key), eq(files.createdById, userId)),
+    where: eq(files.key, key),
   })
 }
 
@@ -108,10 +108,4 @@ export async function getUserById(userId: string) {
   'use cache'
   cacheTag('user')
   return db.query.users.findFirst({ where: eq(users.id, userId) })
-}
-
-export async function checkFileExists(fileKey: string) {
-  'use cache'
-  cacheTag('file', fileKey)
-  return db.query.files.findFirst({ where: eq(files.key, fileKey) })
 }

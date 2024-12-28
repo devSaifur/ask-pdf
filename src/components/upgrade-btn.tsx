@@ -1,18 +1,27 @@
 'use client'
 
 import { ArrowRightIcon } from '@radix-ui/react-icons'
+import { useMutation } from '@tanstack/react-query'
+import { toast } from 'sonner'
 
-import { trpc } from '~/app/_trpc/client'
+import { api } from '~/lib/api-rpc'
 
 import { Button } from './ui/button'
 
 export default function UpgradeBtn() {
-  const { mutate: createStripeSession, isPending } =
-    trpc.createStripeSession.useMutation({
-      onSuccess: ({ url }) => {
-        window.location.href = url ?? '/documents/billing'
-      },
-    })
+  const { mutate: createStripeSession, isPending } = useMutation({
+    mutationFn: async () => {
+      const res = await api.payment['create-checkout-session'].$post()
+      if (!res.ok) {
+        toast.error('Failed to create checkout session')
+        throw new Error('Failed to create checkout session')
+      }
+      return res.json()
+    },
+    onSuccess: ({ url }) => {
+      window.location.href = url ?? '/documents/billing'
+    },
+  })
 
   return (
     <Button

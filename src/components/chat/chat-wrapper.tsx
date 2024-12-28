@@ -1,10 +1,11 @@
 'use client'
 
 import { ChevronLeftIcon, CrossCircledIcon } from '@radix-ui/react-icons'
+import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 
-import { trpc } from '~/app/_trpc/client'
 import { PLANS } from '~/config/stripe'
+import { api } from '~/lib/api-rpc'
 
 import { buttonVariants } from '../ui/button'
 import { Icons } from '../ui/icons'
@@ -21,20 +22,29 @@ export default function ChatWrapper({
   fileId,
   isSubscribed,
 }: ChatWrapperProps) {
-  const { data, isLoading } = trpc.getFile.useQuery(
-    { fileId },
-    {
-      refetchInterval: ({ state }) =>
-        state.data?.uploadStatus === 'success' ||
-        state.data?.uploadStatus === 'failed'
-          ? false
-          : 500,
+  const { data, isPending } = useQuery({
+    queryKey: ['file', fileId],
+    queryFn: async () => {
+      const res = await api.file.$get({
+        query: {
+          fileId,
+        },
+      })
+      if (!res.ok) {
+        throw new Error('Failed to fetch file')
+      }
+      return res.json()
     },
-  )
+    refetchInterval: ({ state }) =>
+      state.data?.uploadStatus === 'success' ||
+      state.data?.uploadStatus === 'failed'
+        ? false
+        : 500,
+  })
 
   if (!data) return null
 
-  if (isLoading)
+  if (isPending)
     return (
       <div className="relative flex min-h-full flex-col justify-between gap-2 divide-y divide-zinc-200 bg-zinc-50">
         <div className="mb-28 flex flex-1 flex-col items-center justify-center">

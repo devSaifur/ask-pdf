@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import Stripe from 'stripe'
 
 import { PLANS } from '~/config/stripe'
@@ -11,11 +12,10 @@ export const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
   typescript: true,
 })
 
-export async function getUserSubscriptionPlan() {
-  const session = await getSession()
-  const user = session?.user
+export const getUserSubscriptionPlan = cache(async () => {
+  const userId = (await getSession())?.user?.id
 
-  if (!user || !user.id) {
+  if (!userId) {
     return {
       ...PLANS[0],
       isSubscribed: false,
@@ -24,7 +24,7 @@ export async function getUserSubscriptionPlan() {
     }
   }
 
-  const dbUser = await getUserById(user.id)
+  const dbUser = await getUserById(userId)
 
   if (!dbUser) {
     return {
@@ -61,4 +61,4 @@ export async function getUserSubscriptionPlan() {
     isSubscribed,
     isCanceled,
   }
-}
+})

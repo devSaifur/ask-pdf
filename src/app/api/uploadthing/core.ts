@@ -9,7 +9,7 @@ import { env } from '~/env'
 import getSession from '~/lib/auth/getSession'
 import {
   addFile,
-  checkFileExists,
+  getFileByKey,
   updateFileOnError,
   updateFileOnSuccess,
 } from '~/lib/data/queries'
@@ -41,7 +41,7 @@ async function onUploadComplete({
     name: string
   }
 }) {
-  const isFileExists = await checkFileExists(file.key)
+  const isFileExists = await getFileByKey(file.key)
 
   if (isFileExists) return
 
@@ -57,6 +57,9 @@ async function onUploadComplete({
     uploadStatus: 'processing',
   })
 
+  if (!createdFile) {
+    throw new UploadThingError('Failed to create file')
+  }
   try {
     const res = await fetch(file.url)
     const blob = await res.blob()

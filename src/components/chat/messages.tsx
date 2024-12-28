@@ -1,30 +1,37 @@
 'use client'
 
 import { EnvelopeOpenIcon } from '@radix-ui/react-icons'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { useContext, useEffect, useRef } from 'react'
 
-import { trpc } from '~/app/_trpc/client'
-import { INFINITE_QUERY_LIMIT } from '~/config'
+import { Icons } from '~/components/ui/icons'
+import { Skeleton } from '~/components/ui/skeleton'
 import { useIntersection } from '~/hooks/use-intersection'
+import { api } from '~/lib/api-rpc'
 
-import { Icons } from '../ui/icons'
-import { Skeleton } from '../ui/skeleton'
 import { ChatContext } from './chat-context'
 import { Message } from './message'
 
 export default function Messages({ fileId }: { fileId: string }) {
   const { isLoading: isAiThinking } = useContext(ChatContext)
 
-  const { data, fetchNextPage, isLoading } =
-    trpc.getFileMessages.useInfiniteQuery(
-      {
-        fileId,
-        limit: INFINITE_QUERY_LIMIT,
-      },
-      {
-        getNextPageParam: (lastPage) => lastPage?.nextCursor,
-      },
-    )
+  const { data, fetchNextPage, isLoading } = useInfiniteQuery({
+    queryKey: ['file', fileId],
+    queryFn: async ({ pageParam }: { pageParam?: string }) => {
+      const res = await api.file['file-message'].$get({
+        query: {
+          fileId,
+          cursor: pageParam ? String(pageParam) : undefined,
+        },
+      })
+      if (!res.ok) {
+        throw new Error('Failed to fetch file')
+      }
+      return res.json()
+    },
+    getNextPageParam: (lastPage) => lastPage?.nextCursor,
+    initialPageParam: undefined,
+  })
 
   const messages = data?.pages.flatMap((page) => page.messages)
 

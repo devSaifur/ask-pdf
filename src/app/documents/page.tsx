@@ -6,14 +6,16 @@ import getSession from '~/lib/auth/getSession'
 import { getFiles } from '~/lib/data/queries'
 import { getUserSubscriptionPlan } from '~/lib/stripe'
 
+const SIGN_IN_URL = '/api/auth/signin?callbackUrl=/documents'
+
 export default async function Documents() {
   const session = await getSession()
-  const subscriptionPlan = await getUserSubscriptionPlan()
 
   if (!session?.user?.id) {
-    redirect('/api/auth/signin?callbackUrl=/documents')
+    redirect(SIGN_IN_URL)
   }
 
+  const subscriptionPlan = await getUserSubscriptionPlan()
   const files = await getFiles(session.user.id)
 
   return (

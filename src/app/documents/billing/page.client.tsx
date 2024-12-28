@@ -1,9 +1,9 @@
 'use client'
 
+import { useMutation } from '@tanstack/react-query'
 import { format } from 'date-fns'
 import { toast } from 'sonner'
 
-import { trpc } from '~/app/_trpc/client'
 import { Button } from '~/components/ui/button'
 import {
   Card,
@@ -14,6 +14,7 @@ import {
 } from '~/components/ui/card'
 import { Icons } from '~/components/ui/icons'
 import MaxWidthWrapper from '~/components/ui/max-width-wrapper'
+import { api } from '~/lib/api-rpc'
 import type { getUserSubscriptionPlan } from '~/lib/stripe'
 
 interface BillingClientPageProps {
@@ -23,20 +24,19 @@ interface BillingClientPageProps {
 export default function BillingClientPage({
   subscriptionPlan,
 }: BillingClientPageProps) {
-  const { mutate: createStripeSession, isPending } =
-    trpc.createStripeSession.useMutation({
-      onSuccess: ({ url }) => {
-        if (!url) {
-          return toast.error(
-            'Something went wrong while creating the session',
-            {
-              description: 'Please refresh the page and try again.',
-            },
-          )
-        }
-        window.location.href = url
-      },
-    })
+  const { mutate: createStripeSession, isPending } = useMutation({
+    mutationFn: async () => {
+      const res = await api.payment['create-checkout-session'].$post()
+      if (!res.ok) {
+        toast.error('Failed to create checkout session')
+        throw new Error('Failed to create checkout session')
+      }
+      return res.json()
+    },
+    onSuccess: ({ url }) => {
+      window.location.href = url
+    },
+  })
 
   return (
     <MaxWidthWrapper className="max-w-5xl">

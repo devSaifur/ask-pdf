@@ -7,11 +7,11 @@ import { useState } from 'react'
 import Dropzone from 'react-dropzone'
 import { toast } from 'sonner'
 
-import { getFileByKeyAction } from '~/actions/fileActions'
+import { api } from '~/lib/api-rpc'
 import { useUploadThing } from '~/lib/uploadthing'
 
 import { Button } from './ui/button'
-import { Dialog, DialogContent, DialogTrigger } from './ui/dialog'
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from './ui/dialog'
 import { Icons } from './ui/icons'
 import { Progress } from './ui/progress'
 
@@ -27,7 +27,17 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
 
   const { mutate: startPooling } = useMutation({
     mutationKey: ['upload'],
-    mutationFn: getFileByKeyAction,
+    mutationFn: async (fileKey: string) => {
+      const res = await api.file.$get({
+        query: {
+          fileKey,
+        },
+      })
+      if (!res.ok) {
+        throw new Error('Failed to fetch file')
+      }
+      return res.json()
+    },
     retry: true,
     retryDelay: 1000,
     onSuccess: (file) => {
@@ -149,18 +159,12 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
 }
 
 export default function UploadBtn({ isSubscribed }: { isSubscribed: boolean }) {
-  const [isOpen, setIsOpen] = useState(false)
-
   return (
-    <Dialog
-      open={isOpen}
-      onOpenChange={(visible) => {
-        if (!visible) {
-          setIsOpen(visible)
-        }
-      }}
-    >
-      <DialogTrigger onClick={() => setIsOpen(true)} asChild>
+    <Dialog>
+      <DialogTitle aria-label="Upload a PDF" className="sr-only">
+        Upload a PDF
+      </DialogTitle>
+      <DialogTrigger asChild>
         <Button>Upload PDF</Button>
       </DialogTrigger>
 
