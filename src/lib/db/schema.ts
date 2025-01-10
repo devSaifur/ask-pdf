@@ -7,7 +7,7 @@ import { generateId } from '~/lib/id'
 export const users = sqliteTable('user', {
   id: text()
     .primaryKey()
-    .$defaultFn(() => generateId()),
+    .$default(() => generateId()),
   name: text({ length: 100 }),
   email: text({ length: 100 }).notNull(),
   emailVerified: text(),
@@ -100,7 +100,7 @@ export const usersRelation = relations(users, ({ many }) => ({
 export const files = sqliteTable('file', {
   id: text({ length: 50 })
     .primaryKey()
-    .$defaultFn(() => generateId()),
+    .$default(() => generateId()),
   name: text({ length: 256 }).notNull(),
   url: text({ length: 256 }).notNull(),
   key: text({ length: 256 }).notNull(),
@@ -128,7 +128,7 @@ export const filesRelation = relations(files, ({ one, many }) => ({
 export const messages = sqliteTable('message', {
   id: text('id')
     .primaryKey()
-    .$defaultFn(() => generateId()),
+    .$default(() => generateId()),
   text: text().notNull(),
   isUserMessage: integer({ mode: 'boolean' }).notNull(),
   userId: text()

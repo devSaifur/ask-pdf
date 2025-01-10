@@ -2,7 +2,8 @@ import { and, asc, desc, eq, sql } from 'drizzle-orm'
 import { unstable_cacheTag as cacheTag, revalidateTag } from 'next/cache'
 import 'server-only'
 
-import { db } from '../db'
+import { db } from '~/lib/db'
+
 import {
   TFileInsert,
   TMessageInsert,
@@ -14,18 +15,18 @@ import {
 export async function getFiles(userId: string) {
   'use cache'
   cacheTag('files')
-  return db.select().from(files).where(eq(files.createdById, userId))
+  return await db.select().from(files).where(eq(files.createdById, userId))
 }
 
 export async function deleteFile(fileId: string) {
-  revalidateTag('files')
   await db.delete(files).where(eq(files.id, fileId))
+  revalidateTag('files')
 }
 
 export async function getFileById(fileId: string, userId: string) {
   'use cache'
   cacheTag('file', fileId)
-  return db.query.files.findFirst({
+  return await db.query.files.findFirst({
     where: and(eq(files.id, fileId), eq(files.createdById, userId)),
   })
 }
@@ -33,13 +34,14 @@ export async function getFileById(fileId: string, userId: string) {
 export async function getFileByKey(key: string) {
   'use cache'
   cacheTag('file', key)
-  return db.query.files.findFirst({
+  return await db.query.files.findFirst({
     where: eq(files.key, key),
   })
 }
 
 export async function addFile(file: TFileInsert) {
   const [createdFile] = await db.insert(files).values(file).returning()
+  revalidateTag('files')
   return createdFile
 }
 
@@ -50,7 +52,7 @@ export async function createMessage(value: TMessageInsert) {
 export async function getPrevMessage(fileId: string, userId: string) {
   'use cache'
   cacheTag('message', fileId)
-  return db
+  return await db
     .select()
     .from(messages)
     .where(and(eq(messages.fileId, fileId), eq(messages.userId, userId)))
@@ -85,7 +87,7 @@ export async function getFileMessages({
     ? await db.query.messages.findFirst({ where: eq(messages.id, cursor) })
     : null
 
-  return db
+  return await db
     .select({
       id: messages.id,
       text: messages.text,
@@ -108,5 +110,5 @@ export async function getFileMessages({
 export async function getUserById(userId: string) {
   'use cache'
   cacheTag('user')
-  return db.query.users.findFirst({ where: eq(users.id, userId) })
+  return await db.query.users.findFirst({ where: eq(users.id, userId) })
 }

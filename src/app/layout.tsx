@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Geist } from 'next/font/google'
 import { connection } from 'next/server'
-import { Suspense } from 'react'
 import 'simplebar-react/dist/simplebar.min.css'
 import { Toaster } from 'sonner'
 

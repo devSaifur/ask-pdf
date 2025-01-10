@@ -20,13 +20,14 @@ import { Button } from './ui/button'
 export default function Files({ files }: { files: TFile[] }) {
   const router = useRouter()
 
-  const { isPending, mutate: deleteFile } = useMutation({
+  const { mutate: deleteFile, isPending } = useMutation({
     mutationFn: deleteFileAction,
-    onSuccess: () => {
-      router.refresh()
-    },
-    onError: () => {
-      toast.error('Something went wrong while deleting the file')
+    onSuccess: ({ error }) => {
+      if (error) {
+        toast.error('Something went wrong while deleting the file')
+      } else {
+        router.refresh()
+      }
     },
   })
 
@@ -65,7 +66,7 @@ export default function Files({ files }: { files: TFile[] }) {
               onClick={() => deleteFile(file.id)}
               size="sm"
               variant="destructive"
-              className="opacity-75 transition-all hover:opacity-100"
+              className="opacity-90 transition-all hover:opacity-100"
               disabled={isPending}
             >
               {isPending ? (

@@ -81,7 +81,8 @@
   border-radius: 7px;
 }
 
-html,
-body {
+html {
   scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  overflow-y: scroll;
 }

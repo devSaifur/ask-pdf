@@ -3,7 +3,7 @@
 import 'server-only'
 
 import getSession from '~/lib/auth/getSession'
-import { deleteFile, getFileByKey } from '~/lib/data/queries'
+import { deleteFile } from '~/lib/data/queries'
 
 export async function deleteFileAction(id: string) {
   const session = await getSession()
@@ -14,7 +14,8 @@ export async function deleteFileAction(id: string) {
 
   try {
     await deleteFile(id)
+    return { error: null }
   } catch (err) {
-    throw err
+    return { error: err }
   }
 }

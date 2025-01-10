@@ -17,7 +17,7 @@ export default function Navbar() {
             Ask PDF
           </Link>
 
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Skeleton />}>
             <DynamicNav />
           </Suspense>
         </div>
@@ -73,5 +73,14 @@ async function DynamicNav() {
         )}
       </div>
     </>
+  )
+}
+
+function Skeleton() {
+  return (
+    <div className="hidden animate-pulse items-center space-x-4 sm:flex">
+      <div className="h-10 w-16 rounded bg-gray-200"></div>
+      <div className="h-10 w-16 rounded bg-gray-200"></div>
+    </div>
   )
 }

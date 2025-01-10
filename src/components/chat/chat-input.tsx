@@ -5,13 +5,9 @@ import { useContext, useRef } from 'react'
 
 import { Button } from '../ui/button'
 import { Textarea } from '../ui/textarea'
-import { ChatContext } from './chat-context'
 
 export default function ChatInput({ isDisabled }: { isDisabled?: boolean }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
-
-  const { isLoading, addMessage, handleInputChange, message } =
-    useContext(ChatContext)
 
   return (
     <div className="absolute bottom-0 left-0 w-full">
@@ -27,12 +23,10 @@ export default function ChatInput({ isDisabled }: { isDisabled?: boolean }) {
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault()
-                    addMessage()
+
                     textareaRef.current?.focus()
                   }
                 }}
-                onChange={handleInputChange}
-                value={message}
                 autoFocus
                 rows={1}
                 maxRows={4}
@@ -42,10 +36,9 @@ export default function ChatInput({ isDisabled }: { isDisabled?: boolean }) {
 
               <Button
                 onClick={() => {
-                  addMessage()
                   textareaRef.current?.focus()
                 }}
-                disabled={isLoading || isDisabled}
+                disabled={isDisabled}
                 className="absolute bottom-1.5 right-[8px]"
                 aria-label="send message"
               >

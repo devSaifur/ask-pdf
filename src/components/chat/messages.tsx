@@ -2,19 +2,14 @@
 
 import { EnvelopeOpenIcon } from '@radix-ui/react-icons'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { useContext, useEffect, useRef } from 'react'
+import { useRef } from 'react'
 
 import { Icons } from '~/components/ui/icons'
 import { Skeleton } from '~/components/ui/skeleton'
 import { useIntersection } from '~/hooks/use-intersection'
 import { api } from '~/lib/api-rpc'
 
-import { ChatContext } from './chat-context'
-import { Message } from './message'
-
 export default function Messages({ fileId }: { fileId: string }) {
-  const { isLoading: isAiThinking } = useContext(ChatContext)
-
   const { data, fetchNextPage, isLoading } = useInfiniteQuery({
     queryKey: ['file', fileId],
     queryFn: async ({ pageParam }: { pageParam?: string }) => {
@@ -46,11 +41,6 @@ export default function Messages({ fileId }: { fileId: string }) {
     ),
   }
 
-  const combinedMessages = [
-    ...(isAiThinking ? [loadingMessage] : []),
-    ...(messages ?? []),
-  ]
-
   const lastMessageRef = useRef<HTMLDivElement>(null)
 
   const { ref, entry } = useIntersection({
@@ -58,39 +48,15 @@ export default function Messages({ fileId }: { fileId: string }) {
     threshold: 1,
   })
 
-  useEffect(() => {
-    if (entry?.isIntersecting) {
-      fetchNextPage()
-    }
-  }, [entry, fetchNextPage])
+  // useEffect(() => {
+  //   if (entry?.isIntersecting) {
+  //     fetchNextPage()
+  //   }
+  // }, [entry, fetchNextPage])
 
   return (
     <div className="scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch flex max-h-[calc(100dvh-3.5rem-7rem)] flex-1 flex-col-reverse gap-4 overflow-y-auto border-zinc-200 p-3">
-      {combinedMessages && combinedMessages.length > 0 ? (
-        combinedMessages.map((message, i) => {
-          const isNextMessageSamePerson =
-            combinedMessages[i - 1]?.isUserMessage ===
-            combinedMessages[i]?.isUserMessage
-
-          if (i === combinedMessages.length - 1) {
-            return (
-              <Message
-                ref={ref}
-                message={message}
-                isNextMessageSamePerson={isNextMessageSamePerson}
-                key={message.id}
-              />
-            )
-          } else
-            return (
-              <Message
-                message={message}
-                isNextMessageSamePerson={isNextMessageSamePerson}
-                key={message.id}
-              />
-            )
-        })
-      ) : isLoading ? (
+      {isLoading ? (
         <div className="flex w-full flex-col gap-2">
           <Skeleton className="h-16" />
           <Skeleton className="h-16" />

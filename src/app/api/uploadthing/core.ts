@@ -55,20 +55,13 @@ async function onUploadComplete({
 
   console.log('file url', file.url)
 
-  const [addFileError, createdFile] = await catchError(
-    addFile({
-      name: file.name,
-      url: file.url,
-      key: file.key,
-      createdById: metadata.userId,
-      uploadStatus: 'processing',
-    }),
-  )
-
-  if (addFileError) {
-    console.error('Error adding file to database:', addFileError)
-    throw new UploadThingError(addFileError.message)
-  }
+  const createdFile = await addFile({
+    name: file.name,
+    url: file.url,
+    key: file.key,
+    createdById: metadata.userId,
+    uploadStatus: 'processing',
+  })
 
   try {
     const res = await fetch(file.url)

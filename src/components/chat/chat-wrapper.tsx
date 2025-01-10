@@ -9,7 +9,6 @@ import { api } from '~/lib/api-rpc'
 
 import { buttonVariants } from '../ui/button'
 import { Icons } from '../ui/icons'
-import { ChatContextProvider } from './chat-context'
 import ChatInput from './chat-input'
 import Messages from './messages'
 
@@ -108,15 +107,13 @@ export default function ChatWrapper({
   )
 
   const Success = () => (
-    <ChatContextProvider fileId={fileId}>
-      <div className="relative flex min-h-full flex-col justify-between gap-2 divide-y divide-zinc-200 bg-zinc-50">
-        <div className="mb-28 flex flex-1 flex-col justify-between">
-          <Messages fileId={fileId} />
-        </div>
-
-        <ChatInput />
+    <div className="relative flex min-h-full flex-col justify-between gap-2 divide-y divide-zinc-200 bg-zinc-50">
+      <div className="mb-28 flex flex-1 flex-col justify-between">
+        <Messages fileId={fileId} />
       </div>
-    </ChatContextProvider>
+
+      <ChatInput />
+    </div>
   )
 
   if (data.uploadStatus === 'processing') return <Processing />
