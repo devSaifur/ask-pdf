@@ -74,14 +74,3 @@ export function constructMetadata({
     }),
   }
 }
-
-export async function catchError<T>(
-  promise: Promise<T>,
-): Promise<[undefined, T] | [Error]> {
-  try {
-    const result = await promise
-    return [undefined, result] as [undefined, T]
-  } catch (err) {
-    return [err] as [Error]
-  }
-}

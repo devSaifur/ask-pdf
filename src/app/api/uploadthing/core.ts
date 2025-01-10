@@ -15,7 +15,6 @@ import {
 } from '~/lib/data/queries'
 import { getUserSubscriptionPlan } from '~/lib/stripe'
 import { index } from '~/lib/upstashVector'
-import { catchError } from '~/lib/utils'
 
 const f = createUploadthing()
 
