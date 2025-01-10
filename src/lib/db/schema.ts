@@ -2,23 +2,23 @@ import { relations, sql } from 'drizzle-orm'
 import { integer, primaryKey, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 import type { AdapterAccountType } from 'next-auth/adapters'
 
-import { generateId } from '../id'
+import { generateId } from '~/lib/id'
 
 export const users = sqliteTable('user', {
-  id: text('id')
+  id: text()
     .primaryKey()
     .$defaultFn(() => generateId()),
-  name: text('name', { length: 100 }),
-  email: text('email', { length: 100 }).notNull(),
-  emailVerified: text('emailVerified'),
-  image: text('image'),
+  name: text({ length: 100 }),
+  email: text({ length: 100 }).notNull(),
+  emailVerified: text(),
+  image: text(),
 
-  stripeCustomerId: text('stripe_customer_id', { length: 255 }).unique(),
-  stripeSubscriptionId: text('stripe_subscription_id', {
+  stripeCustomerId: text({ length: 255 }).unique(),
+  stripeSubscriptionId: text({
     length: 255,
   }).unique(),
-  stripePriceId: text('stripe_price_id', { length: 255 }).unique(),
-  stripeCurrentPeriodEnd: integer('stripe_current_period_end', {
+  stripePriceId: text({ length: 255 }).unique(),
+  stripeCurrentPeriodEnd: integer({
     mode: 'timestamp_ms',
   }),
 })
@@ -26,19 +26,19 @@ export const users = sqliteTable('user', {
 export const accounts = sqliteTable(
   'account',
   {
-    userId: text('userId')
+    userId: text()
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
-    type: text('type').$type<AdapterAccountType>().notNull(),
-    provider: text('provider').notNull(),
-    providerAccountId: text('providerAccountId').notNull(),
-    refresh_token: text('refresh_token'),
-    access_token: text('access_token'),
-    expires_at: integer('expires_at'),
-    token_type: text('token_type'),
-    scope: text('scope'),
-    id_token: text('id_token'),
-    session_state: text('session_state'),
+    type: text().$type<AdapterAccountType>().notNull(),
+    provider: text().notNull(),
+    providerAccountId: text().notNull(),
+    refresh_token: text(),
+    access_token: text(),
+    expires_at: integer(),
+    token_type: text(),
+    scope: text(),
+    id_token: text(),
+    session_state: text(),
   },
   (account) => ({
     compoundKey: primaryKey({
@@ -48,19 +48,19 @@ export const accounts = sqliteTable(
 )
 
 export const sessions = sqliteTable('session', {
-  sessionToken: text('sessionToken').primaryKey(),
-  userId: text('userId')
+  sessionToken: text().primaryKey(),
+  userId: text()
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
-  expires: integer('expires', { mode: 'timestamp_ms' }).notNull(),
+  expires: integer({ mode: 'timestamp_ms' }).notNull(),
 })
 
 export const verificationTokens = sqliteTable(
   'verificationToken',
   {
-    identifier: text('identifier').notNull(),
-    token: text('token').notNull(),
-    expires: integer('expires', { mode: 'timestamp_ms' }).notNull(),
+    identifier: text().notNull(),
+    token: text().notNull(),
+    expires: integer({ mode: 'timestamp_ms' }).notNull(),
   },
   (verificationToken) => ({
     compositePk: primaryKey({
@@ -72,18 +72,18 @@ export const verificationTokens = sqliteTable(
 export const authenticators = sqliteTable(
   'authenticator',
   {
-    credentialID: text('credentialID').notNull().unique(),
-    userId: text('userId')
+    credentialID: text().notNull().unique(),
+    userId: text()
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
-    providerAccountId: text('providerAccountId').notNull(),
-    credentialPublicKey: text('credentialPublicKey').notNull(),
-    counter: integer('counter').notNull(),
-    credentialDeviceType: text('credentialDeviceType').notNull(),
-    credentialBackedUp: integer('credentialBackedUp', {
+    providerAccountId: text().notNull(),
+    credentialPublicKey: text().notNull(),
+    counter: integer().notNull(),
+    credentialDeviceType: text().notNull(),
+    credentialBackedUp: integer({
       mode: 'boolean',
     }).notNull(),
-    transports: text('transports'),
+    transports: text(),
   },
   (authenticator) => ({
     compositePK: primaryKey({
@@ -98,21 +98,23 @@ export const usersRelation = relations(users, ({ many }) => ({
 }))
 
 export const files = sqliteTable('file', {
-  id: text('id', { length: 50 })
+  id: text({ length: 50 })
     .primaryKey()
     .$defaultFn(() => generateId()),
-  name: text('name', { length: 256 }).notNull(),
-  url: text('url', { length: 256 }).notNull(),
-  key: text('key', { length: 256 }).notNull(),
-  createdById: text('createdById')
+  name: text({ length: 256 }).notNull(),
+  url: text({ length: 256 }).notNull(),
+  key: text({ length: 256 }).notNull(),
+  createdById: text()
     .notNull()
     .references(() => users.id),
-  createdAt: text('created_at')
+  createdAt: text()
     .default(sql`(CURRENT_TIMESTAMP)`)
     .notNull(),
-  uploadStatus: text('upload_status', {
+  uploadStatus: text({
     enum: ['pending', 'processing', 'success', 'failed'],
-  }).default('pending'),
+  })
+    .default('pending')
+    .notNull(),
 })
 
 export type TFile = typeof files.$inferSelect
@@ -127,15 +129,15 @@ export const messages = sqliteTable('message', {
   id: text('id')
     .primaryKey()
     .$defaultFn(() => generateId()),
-  text: text('text').notNull(),
-  isUserMessage: integer('isUserMessage', { mode: 'boolean' }).notNull(),
-  userId: text('createdById')
+  text: text().notNull(),
+  isUserMessage: integer({ mode: 'boolean' }).notNull(),
+  userId: text()
     .notNull()
     .references(() => users.id),
-  fileId: text('fileId', { length: 50 }).references(() => files.id, {
+  fileId: text({ length: 50 }).references(() => files.id, {
     onDelete: 'cascade',
   }),
-  createdAt: integer('created_at', { mode: 'timestamp' }).notNull(),
+  createdAt: integer({ mode: 'timestamp' }).notNull(),
 })
 
 export type TMessageInsert = typeof messages.$inferInsert

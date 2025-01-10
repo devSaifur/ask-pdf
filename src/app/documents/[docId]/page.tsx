@@ -1,4 +1,5 @@
 import { notFound, redirect } from 'next/navigation'
+import { Suspense } from 'react'
 
 import ChatWrapper from '~/components/chat/chat-wrapper'
 import PdfRenderer from '~/components/pdf-renderer'
@@ -36,7 +37,9 @@ export default async function Page({ params }: PageProps) {
         </div>
 
         <div className="flex-[0.75] shrink-0 border-t border-gray-200 lg:w-96 lg:border-l lg:border-t-0">
-          <ChatWrapper fileId={docId} isSubscribed={isSubscribed} />
+          <Suspense fallback={<div>Loading chat wrapper skeleton</div>}>
+            <ChatWrapper fileId={docId} isSubscribed={isSubscribed} />
+          </Suspense>
         </div>
       </div>
     </div>

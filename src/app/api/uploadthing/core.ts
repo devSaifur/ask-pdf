@@ -15,6 +15,7 @@ import {
 } from '~/lib/data/queries'
 import { getUserSubscriptionPlan } from '~/lib/stripe'
 import { index } from '~/lib/upstashVector'
+import { catchError } from '~/lib/utils'
 
 const f = createUploadthing()
 
@@ -25,7 +26,11 @@ async function middleware() {
     throw new UploadThingError('Unauthorized')
   }
 
+  console.log('session', session.user)
+
   const subscriptionPlan = await getUserSubscriptionPlan()
+
+  console.log('subscriptionPlan', subscriptionPlan)
 
   return { userId: session.user.id, subscriptionPlan }
 }
@@ -41,6 +46,7 @@ async function onUploadComplete({
     name: string
   }
 }) {
+  console.log('onUploadComplete', metadata, file)
   const isFileExists = await getFileByKey(file.key)
 
   if (isFileExists) return
@@ -49,17 +55,21 @@ async function onUploadComplete({
 
   console.log('file url', file.url)
 
-  const createdFile = await addFile({
-    name: file.name,
-    url: file.url,
-    key: file.key,
-    createdById: metadata.userId,
-    uploadStatus: 'processing',
-  })
+  const [addFileError, createdFile] = await catchError(
+    addFile({
+      name: file.name,
+      url: file.url,
+      key: file.key,
+      createdById: metadata.userId,
+      uploadStatus: 'processing',
+    }),
+  )
 
-  if (!createdFile) {
-    throw new UploadThingError('Failed to create file')
+  if (addFileError) {
+    console.error('Error adding file to database:', addFileError)
+    throw new UploadThingError(addFileError.message)
   }
+
   try {
     const res = await fetch(file.url)
     const blob = await res.blob()

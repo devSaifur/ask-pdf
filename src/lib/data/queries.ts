@@ -39,7 +39,8 @@ export async function getFileByKey(key: string) {
 }
 
 export async function addFile(file: TFileInsert) {
-  return (await db.insert(files).values(file).returning()).at(0)
+  const [createdFile] = await db.insert(files).values(file).returning()
+  return createdFile
 }
 
 export async function createMessage(value: TMessageInsert) {
